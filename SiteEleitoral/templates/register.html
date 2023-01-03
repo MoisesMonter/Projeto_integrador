@@ -16,18 +16,18 @@
             <img src="{% static 'img/login/logo.svg'%}"/>
 
         </div>
-        <div class ='login_division'>
+        <div class ='register_division'>
             <h1>Cadastre-se aqui</h1>
             <h2>Preencha suas informações a baixo</h2>
-            <div class="login_user_info">
+            <div class="register_user_info">
                 <form action="{% url 'register' %}" method="post">{% csrf_token %}
-                    {{form}}
+                    {{form.ID_Academico}}
                     <input type="submit" value="Cadastrar">
                     
                 </form>
             </div>
 
-            <div class="login_user_buttons">
+            <div class="register_user_buttons">
                 <div><p>Confitme aqui</p><button>Confirm Register</button></div>
 
             </div>
@@ -49,25 +49,33 @@
 </div>
 
 <div id="user_register">
-    <div class="register_main">
-        <div class ='register_logo'>
-            <h2>SEVIF</h2>
+    <div class="register_main" style="padding-left: 150px; padding-right: 90px;">
+        <div >
+            <h2 style=" padding-left: 150px;">SEVIF</h2>
             
-            <h1>SISTEMA ELEITORAL & VOTAÇÃO DO IFRN</h1>
+            <h1 >SISTEMA ELEITORAL & VOTAÇÃO DO IFRN</h1>
 
-            <img src="{% static 'img/login/logo.svg'%}"/>
+            <img style=" padding-left: 150px; height: 50px; " src="{% static 'img/login/logo.svg'%}"/>
 
         </div>
-        <div class ='login_division'>
+        <div class ='register_division'>
             <h1>Cadastre-se aqui</h1>
             <h2>Preencha suas informações a baixo</h2>
-            <div class="login_user_info">
+            <div class="register_user_info">
                 <form action="{% url 'register' %}" method="post">{%csrf_token%}
-                    <table>
-                    {{form.as_table}}
-                    
+                    <table style=" margin-left: 150px;  ">
+                        <table  >{{form.Id_Academico.label}}<br>{{form.Id_Academico}}</table><br>
+                        <table>{{form.Nome.label}}<br>{{form.Nome}}</table><br>
+                        <table>{{form.CPF.label}}<br>{{form.CPF}}</table><br>
+                        <table>{{form.Genero.label}}<br>{{form.Genero}}</table><br>
+                        <table>{{form.email.label}}<br>{{form.email}}</table><br>
+                        <table><label>Digite Sua Senha</label><br>{{senha.Senha}}</table><br>
+                        <table><label>Repita a Senha</label><br>{{form.Senha}}</table><br>
+                        <table><input type="submit" value="Cadastrar"></table><br>
                     </table>
-                    <input type="submit" value="Cadastrar">
+           
+                    </table>
+                    
                 </form>
                 <!--<form>
                     <label for="id_academico">ID Academico:</label><br>

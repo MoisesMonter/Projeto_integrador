@@ -55,9 +55,6 @@
 
 /*Tela Pequena*/
 @media (max-width: 1144px){
-    .errorlist{
-        display: none;
-    }
     div.register_division li{
         display:none;
         list-style-type: none;

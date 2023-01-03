@@ -1,7 +1,7 @@
 from distutils.command.upload import upload
 from django.db import models
 # Create your models here.
-
+from django import forms
 Sexo_Choices = (
     ('M','Masculino'),
     ('F','Feminino'),
