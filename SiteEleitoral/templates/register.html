@@ -2,6 +2,8 @@
 {%load static%}
 
 {%block info%}
+
+
 <div id="breadcrumb">
     <p>SEFIV/<a>Register</a></p>
 </div>
@@ -69,7 +71,7 @@
                         <table>{{form.CPF.label}}<br>{{form.CPF}}</table><br>
                         <table>{{form.Genero.label}}<br>{{form.Genero}}</table><br>
                         <table>{{form.email.label}}<br>{{form.email}}</table><br>
-                        <table><label>Digite Sua Senha</label><br>{{senha.Senha}}</table><br>
+                        <table><label>Digite Sua Senha</label><br>{{form.Senha2}}</table><br>{{label}}
                         <table><label>Repita a Senha</label><br>{{form.Senha}}</table><br>
                         <table><input type="submit" value="Cadastrar"></table><br>
                     </table>

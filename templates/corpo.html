@@ -15,10 +15,21 @@
     <link href="{% static 'css/login.css' %}" rel ="stylesheet">
     <link href="{% static 'css/register.css' %}" rel="stylesheet">
     <link href="{% static 'css/suport_site.css' %}" rel="stylesheet">
-
+    <!-- CSS -->
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    
+
+        <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+
+
+    
+    
+    
     {%endblock%}
-    <title>SEVIF</title>
+
 </head>
 
 {%if x == 1 %} <!--logado-->
@@ -33,7 +44,7 @@
             </div>
 
             <div>
-                <p><!--Buscar--></p>
+
             </div>
             
         </div>
@@ -155,12 +166,15 @@
     
     </div>
 
+    <!-- JavaScript -->
 
 </body>
 
 
 {%else %}<!--offline-->
+
 <body>
+    
     <div id="navbar_login">
 
         <div class="header_main">
@@ -172,7 +186,6 @@
             <div>
                 <p><!--Buscar--></p>
             </div>
-            
         </div>
         
         <main>
@@ -297,12 +310,23 @@
     
     </div>
 
+    <!-- JavaScript -->
 
 </body>
 
 
 {%endif%}
 
-
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<script>
+    {% for flash in messages %}
+        alertify.set('notifier','position', 'top-right');
+        alertify.success('{{flash}}');
+    {% endfor %}
+</script>
 
 </html>
+
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <title>SEVIF</title>

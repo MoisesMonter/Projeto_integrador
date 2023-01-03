@@ -4,7 +4,8 @@ from django.contrib.auth import authenticate,logout
 from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from .forms import FormUser,Senha_padrao
+from django.contrib import messages
+from .forms import FormUser
 from Users.models import User as Usuario
 # Create your views here.
 def Home(request):
@@ -16,22 +17,46 @@ def Register(request):
     x= int(1)
     if request.method == "GET":
         form = FormUser()
-        Senha= Senha_padrao
-        return render(request,'register.html',{'x': x,'form':form,'senha':Senha})
+        return render(request,'register.html',{'x': x,'form':form})
     else:
         form = FormUser(request.POST)
-        if form.is_valid():
-            '''usuario = form.save()
-            user = User.objects.create_user(form.object(Id), email=email, password=senha)
-            user.save()'''
-            senha = request.POST['Senha']
-            return HttpResponse(f"{senha}")
-            '''return render(request,'login.html',{'x': x,'form':form})'''
+        Senha1= request.POST.get('Senha')
+        Senha2= request.POST.get('Senha2')
+        if Senha1 == Senha2:
+            if form.is_valid():
+                username = request.POST.get('Id_Academico')
+                email = request.POST.get('email') 
+                password = request.POST.get('password')   
+                user = User.objects.create_user(username=username, email=email, password=password)
+                user.save()
+                form.save()
+                messages.success(request,"Conta Criada com Sucesso")
+                return render(request,'login.html',{'x': x,'form':form})
+            else:
+                label= "senha repetida"
+                return render(request,'register.html',{'x':  x,'form':form,'label':label})
         else:
-            return render(request,'register.html',{'x': x,'form':form})
+            
+            messages.success(request,"Campos repetidos ou atraso no cadastro")
+            return render(request,'register.html',{'x':  x,'form':form})
 
+def Login(request):
+    if str(request.user) != 'AnonymousUser':
+        print(request.user)
+        return render(request,"home.html")
+    if request.method == "GET":
+        return render(request,"login.html")
+    else:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-
+        user = authenticate(request, username =username,password=password)
+        print("user = " + str(user)) #always returns None
+        if user: # se não for falso
+            login_django(request,user)
+            return render(request,'home.html')
+        else:
+            return render(request,'login.html')
 
 def About_us(request):
     x= int(1)
@@ -41,10 +66,19 @@ def ListaEleicoes(request):
     x= int(1)
     return render(request,'lista_eleicoes.html',{'x': x})
 
-def Login(request):
-    x= int(1)
-    return render(request,'login.html',{'x': x})
+
 
 def Suport(request):
     x= int(1)
     return render(request,'suport_site.html',{'x': x})
+
+
+
+def plataforma(request):
+    log_out = request.POST.get('logout')
+    print(log_out)
+    if log_out == 'LogOut':
+        logout(request)
+        return render(request,'login.html')
+    if request.user.is_authenticated:
+        return render(request,'home.html')
