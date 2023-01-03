@@ -16,17 +16,19 @@ def login_logout(request):
 
 def Home(request):
     x =str(request.user) == 'AnonymousUser'
-    if str(request.user) != 'AnonymousUser':
+    if x:
+        pass
+    else:
         try:
             
-            usuario_logado= "ola mundo"#Usuario.objects.filter(Id_Academico = str(request.user)).get(Nome)
+            usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
             #user_all_info=[str(x) for x in User.objects.filter(username__contains="0")] quando letra tá maiuscula
-            return render(request,"home.html",{'x':True},'usuario_logado',usuario_logado)
+            #usuario_logado = usuario_logado.bojects.filter(Id_Academico = str(request.user))
+            #return HttpResponse(f"{usuario_logado[0:2]}")
+            return render(request,"home.html",{'x':True,'usuario_logado':usuario_logado})
         except:
-        
+            
             return render(request,"home.html",{'x':True})
-    else:
-        return render(request,"home.html",{'x':False})
 
 
 
@@ -35,13 +37,13 @@ def Register(request):
     if str(request.user) != 'AnonymousUser':
         try:
             
-            usuario_logado= Usuario.objects.filter(Id_Academico = str(request.user))
+            usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
             #user_all_info=[str(x) for x in User.objects.filter(username__contains="0")] quando letra tá maiuscula
-            #login_url = usuario_logado.all()
-            #return HttpResponse(f"{login_url}")
+            #usuario_logado = usuario_logado.bojects.filter(Id_Academico = str(request.user))
+            #return HttpResponse(f"{usuario_logado[0:2]}")
             return render(request,"home.html",{'x':True,'usuario_logado':usuario_logado})
         except:
-        
+            
             return render(request,"home.html",{'x':True})
     if request.method == "GET":
         form = FormUser()
@@ -103,6 +105,25 @@ def Suport(request):
 
 
 
+def Config(request):
+    x =str(request.user) == 'AnonymousUser'
+    if x:
+        return render(request,"config.html",{'x':False})
+    else:
+        try:
+            
+            usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
+            #user_all_info=[str(x) for x in User.objects.filter(username__contains="0")] quando letra tá maiuscula
+            #usuario_logado = usuario_logado.bojects.filter(Id_Academico = str(request.user))
+            #return HttpResponse(f"{usuario_logado[0:2]}")
+            return render(request,"config.html",{'x':True,'usuario_logado':usuario_logado})
+        except:
+            
+            return render(request,"config.html",{'x':True})
+
+
+
+
 def plataforma(request):
     log_out = request.POST.get('logout')
     print(log_out)
@@ -111,3 +132,6 @@ def plataforma(request):
         return render(request,'login.html')
     if request.user.is_authenticated:
         return render(request,'home.html')
+
+
+

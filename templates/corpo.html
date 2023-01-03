@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {%block styles%}
+    
     <script defer src="javascript.js"></script>
     <script defer src="{% static 'js/javascript.js' %}"></script>
     
@@ -15,6 +16,7 @@
     <link href="{% static 'css/login.css' %}" rel ="stylesheet">
     <link href="{% static 'css/register.css' %}" rel="stylesheet">
     <link href="{% static 'css/suport_site.css' %}" rel="stylesheet">
+    <link href="{% static 'css/config.css' %}" rel="stylesheet">
     <!-- CSS -->
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
     
@@ -40,7 +42,7 @@
         <div class="header_main">
         <div class="header_login">
             <div >
-                <a>Seja bem vindo(a), {{usuario_logado}}<br><a href="../login">Log Out</a></a>
+                <a>Seja bem vindo(a), {{usuario_logado.Nome}}<br><a href="../login">Log Out</a></a>
             </div>
 
             <div>
@@ -74,6 +76,7 @@
                                         <a href="../lista_eleicoes">Participando</a><br>
                                         <a href="../login">Gerar uma Eleição</a><br>
                                         <a href="../about_us">Sobre Nós</a><br>
+                                        <a href="../configuração"> Configurações</a><br>
                                         <a href="../login">Log Out</a><br>
                                         </li>
                     </ul>
@@ -112,7 +115,7 @@
                 <ul>
                     <br>
                     <li class="list_login">
-                        <a >Nome usuario</a>
+                        <a href="../configuração"> Configurações</a>
                     </li>
                     <li class="list_login"><a href=../login>Log Out</a></li>
                     <br>
