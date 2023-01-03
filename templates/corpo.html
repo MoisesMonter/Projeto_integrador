@@ -40,7 +40,7 @@
         <div class="header_main">
         <div class="header_login">
             <div >
-                <a>Seja bem vindo(a), Nome de Usuário<br><a href="../login">Log Out</a></a>
+                <a>Seja bem vindo(a), {{usuario_logado}}<br><a href="../login">Log Out</a></a>
             </div>
 
             <div>
@@ -319,10 +319,10 @@
 
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script>
-    {% for flash in messages %}
+        {% for information in messages %}
         alertify.set('notifier','position', 'top-right');
-        alertify.success('{{flash}}');
-    {% endfor %}
+        alertify.success('{{information}}');
+        {% endfor %}
 </script>
 
 </html>

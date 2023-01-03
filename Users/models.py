@@ -1,5 +1,6 @@
 from distutils.command.upload import upload
 from django.db import models
+from django import forms
 # Create your models here.
 from django import forms
 Sexo_Choices = (
@@ -8,15 +9,19 @@ Sexo_Choices = (
 )
 
 class User(models.Model):
-    Id_Academico = models.IntegerField(unique=True,primary_key=True)
+    Id_Academico = models.CharField(max_length=15,unique=True,primary_key=True)
     Nome = models.CharField(max_length=50,null = False)
     CPF = models.IntegerField(unique=True)
     Genero =models.CharField(max_length=1,choices=Sexo_Choices)
     email = models.EmailField(blank=True,null=True)
     Senha = models.CharField(max_length=50)
-    Foto=models.ImageField(upload_to="BD_User_img/")
-    def __str__(self) -> str:
-        return super().__str__()
+    Foto=models.ImageField(upload_to="BD_User_img/",null=True,blank=True)
+    
+    def __str__(self):
+        return self.Id_Academico
+
+
+
 
 
 class Election(models.Model):
