@@ -20,3 +20,7 @@ class FormUser(forms.ModelForm):
         fields = ['Id_Academico','Nome','CPF','Genero','email','Senha']
         #exclude = ['']
     
+'''class FormImagem(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['Foto']'''

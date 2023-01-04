@@ -127,3 +127,9 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 #CSRF_FAILURE_VIEW = 'usuario.views.csrf'
+
+
+
+STATIC_ROOT = Path.joinpath(BASE_DIR, 'staticfiles')
+MEDIA_URL = 'media/'
+MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media')

@@ -12,4 +12,4 @@ urlpatterns = [
     path('configuração/',views.Config,name='config'),
     path('configuração/alterarpassword',views.configkey,name='configkey'),
     path('configuração/deletarconta',views.configdel,name='configdel'),
-]   
+]
