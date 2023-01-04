@@ -116,12 +116,104 @@ def Config(request):
             #user_all_info=[str(x) for x in User.objects.filter(username__contains="0")] quando letra tá maiuscula
             #usuario_logado = usuario_logado.bojects.filter(Id_Academico = str(request.user))
             #return HttpResponse(f"{usuario_logado[0:2]}")
-            return render(request,"config.html",{'x':True,'usuario_logado':usuario_logado})
-        except:
+            atual_cpf = str(usuario_logado.CPF)
+            cpf_usuario=''
+            for x in range (0,11,1):
+                cpf_usuario += atual_cpf[x]
+                if x ==2 or x == 5:
+                    cpf_usuario +='.'
+                elif x == 8:
+                    cpf_usuario+='-'
+            senha_usuario = ''.join(['*' for x  in range(0,len(str(usuario_logado.Senha)),1)])
+            #return HttpResponse(f'{str(senha_usuario)}')
+            if request.method == 'POST':
+                if request.POST.get('info') =='1':
+
+                        print('\n\n\n','img','\n\n\n')
+                if request.POST.get('info') =='2':
+                        password_local=request.POST.get('password')
+                        password_new=request.POST.get('n_password')
+                        password_rep=request.POST.get('r_password')
+                        if password_new ==password_rep:
+                            if password_local == usuario_logado.Senha:
+                                messages.success(request,"Senha atualizada com Sucesso")
+                            else:
+                                messages.success(request,"Essa não é sua senha Atual")
+                        else:
+                            messages.success(request,"Novas Senhas não combinam")
+                            messages.success(request,"Tente novamente.")
+                            return render(request,"config.html",{'x':True,'usuario_logado':usuario_logado,'senha_usuario':str(senha_usuario),'cpf_usuario':cpf_usuario})
+            return render(request,"config.html",{'x':True,'usuario_logado':usuario_logado,'senha_usuario':str(senha_usuario),'cpf_usuario':cpf_usuario})    
             
-            return render(request,"config.html",{'x':True})
+        except:
+
+            return render(request,"config.html",{'x':True,'usuario_logado':usuario_logado,'senha_usuario':str(senha_usuario),'cpf_usuario':cpf_usuario})    
+    
+def configkey(request):
+    x =str(request.user) == 'AnonymousUser'
+    if x:
+        return render(request,"config_keyword.html",{'x':False})
+    else:
+        try:
+            usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
+            senha_usuario = ''.join(['*' for x  in range(0,len(str(usuario_logado.Senha)),1)])
+            
+            if request.method == 'POST':
+                if request.POST.get('info') =='1':
+
+                        print('\n\n\n','img','\n\n\n')
+                if request.POST.get('info') =='2':
+                        password_local=request.POST.get('password')
+                        password_new=request.POST.get('n_password')
+                        password_rep=request.POST.get('r_password')
+                        if password_new ==password_rep:
+                            if password_local == usuario_logado.Senha:
+                                messages.success(request,"Senha atualizada com Sucesso")
+                            else:
+                                messages.success(request,"Essa não é sua senha Atual")
+                        else:
+                            messages.success(request,"Novas Senhas não combinam")
+                            messages.success(request,"Tente novamente.")
+                            return render(request,"config_keyword.html",{'x':True,'usuario_logado':usuario_logado,'senha_usuario':str(senha_usuario)})
+            return render(request,"config_keyword.html",{'x':True,'usuario_logado':usuario_logado,'senha_usuario':str(senha_usuario)})    
+            
+        except:
+
+            return render(request,"config_keyword.html",{'x':True,'usuario_logado':usuario_logado,'senha_usuario':str(senha_usuario)})    
+    
 
 
+def configdel(request):
+    x =str(request.user) == 'AnonymousUser'
+    if x:
+        return render(request,"config_del.html",{'x':False})
+    else:
+        try:
+            usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
+            senha_usuario = ''.join(['*' for x  in range(0,len(str(usuario_logado.Senha)),1)])
+            
+            if request.method == 'POST':
+                if request.POST.get('info') =='1':
+
+                        print('\n\n\n','img','\n\n\n')
+                if request.POST.get('info') =='2':
+                        password_local=request.POST.get('password')
+                        password_new=request.POST.get('n_password')
+                        password_rep=request.POST.get('r_password')
+                        if password_new ==password_rep:
+                            if password_local == usuario_logado.Senha:
+                                messages.success(request,"Senha atualizada com Sucesso")
+                            else:
+                                messages.success(request,"Essa não é sua senha Atual")
+                        else:
+                            messages.success(request,"Novas Senhas não combinam")
+                            messages.success(request,"Tente novamente.")
+                            return render(request,"config_del.html",{'x':True,'usuario_logado':usuario_logado,'senha_usuario':str(senha_usuario)})
+            return render(request,"config_del.html",{'x':True,'usuario_logado':usuario_logado,'senha_usuario':str(senha_usuario)})    
+            
+        except:
+
+            return render(request,"config_del.html",{'x':True,'usuario_logado':usuario_logado,'senha_usuario':str(senha_usuario)})    
 
 
 def plataforma(request):

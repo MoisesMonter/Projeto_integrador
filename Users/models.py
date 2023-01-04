@@ -11,7 +11,7 @@ Sexo_Choices = (
 class User(models.Model):
     Id_Academico = models.CharField(max_length=15,unique=True,primary_key=True)
     Nome = models.CharField(max_length=50,null = False)
-    CPF = models.IntegerField(unique=True)
+    CPF = models.CharField(max_length=11,unique=True,null=False)
     Genero =models.CharField(max_length=1,choices=Sexo_Choices)
     email = models.EmailField(blank=True,null=True)
     Senha = models.CharField(max_length=50)

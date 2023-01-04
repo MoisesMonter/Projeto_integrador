@@ -8,6 +8,8 @@ urlpatterns = [
     path('lista_eleicoes/',views.ListaEleicoes,name='lista_eleicoes'),
     path('login/',views.Login,name='login'),
     path('register/',views.Register,name='register'),
-    path('suport_site/',views.Suport,name='Suport'),
-    path('configuração/',views.Config,name='Config'),
-]
+    path('suport_site/',views.Suport,name='suport'),
+    path('configuração/',views.Config,name='config'),
+    path('configuração/alterarpassword',views.configkey,name='configkey'),
+    path('configuração/deletarconta',views.configdel,name='configdel'),
+]   

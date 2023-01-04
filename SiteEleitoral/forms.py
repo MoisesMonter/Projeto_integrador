@@ -8,9 +8,13 @@ class FormLogin(forms.Form):
 
 class FormUser(forms.ModelForm):
     #password
-    Id_Academico = forms.IntegerField(label="Seu ID Academico")
-    Senha = forms.CharField(min_length=6,max_length=50,widget=forms.PasswordInput())
-    Senha2 = forms.CharField(label="Repita Senha",min_length=6,max_length=50,widget=forms.PasswordInput())
+    Id_Academico =forms.CharField(required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'off','pattern':'[0-9]+', 'placeholder':'Enter numbers Only'}))
+    Nome =  forms.CharField(label='Nome completo',required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'placeholder':'Thaysa Fernandes'}))
+    CPF =forms.CharField(label='Seu CPF',min_length=11,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'off','pattern':'[0-9]+', 'placeholder':'Enter numbers Only '}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control','autocomplete':'on','placeholder':'EmailUsuario@outlook.com'}))
+    Senha = forms.CharField(min_length=6,max_length=50,widget=forms.PasswordInput(attrs={'class':'form-control','autocomplete':'off','placeholder':'******'}))
+    Senha2 = forms.CharField(label="Repita Senha",min_length=6,max_length=50,widget=forms.PasswordInput(attrs={'class':'form-control','autocomplete':'off','placeholder':'******'}))
+    
     class Meta:
         model = User
         fields = ['Id_Academico','Nome','CPF','Genero','email','Senha']

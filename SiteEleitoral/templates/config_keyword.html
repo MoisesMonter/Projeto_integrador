@@ -1,4 +1,3 @@
-
 {%extends 'corpo.html'%}
 
 {% load static %}
@@ -6,68 +5,9 @@
 {%block info1%}
 
 <div id="breadcrumb">
-    <p href="../">SEFIV/<a href="">Configurações</a></p>
-    </div>
-<div id="1">
-<div id="configuracao"> 
-    <form action="{% url 'config' %}" method="post" id="1" autocomplete="off">{%csrf_token%}
-    <input style="display:none" id="info" name="info" value="1">
-    
-        <div>
-        <img scr="https://cdn.pixabay.com/photo/2016/07/15/04/43/open-doors-1518244_960_720.png"/>
-    </div>  
-    <div>
-        {%if usuario_logado.Genero == 'M'%}
-            <h2>Seja Bem vindo {{usuario_logado.Nome}}</h2> 
-        {%elif usuario_logado.Genero == 'F'%}
-            <h2>Seja Bem vinda {{usuario_logado.Nome}}</h2> 
-        {%endif%}
-    </div>
-    <div>
-        
-    </div>
-    
-
-
-    <ul>
-        <li>
-            <label>Id Acadêmico<br>
-            <input style='align-items: center; color: aliceblue;'type="text" value= {{usuario_logado.Id_Academico}} disabled></label>
-        </li>
-        <li>
-            <label>CPF<br>
-            <input style='align-items: center; color: aliceblue;'type="text" value= {{cpf_usuario}} pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" disabled></label>
-        </li>
-        <li>
-            <label>E-mail<br>
-            <input style='align-items: center; color: aliceblue;'type="text" value= {{usuario_logado.email}} disabled></label>
-        </li>
-        <li>
-            <label>Senha<br>
-            <input style='align-items: center; color: rgb(0, 0, 0);'type="password" placeholder={{senha_usuario}}  id="password" name="password"></label>
-        </li><br>
-        <li><label>Salvar alterações?<br>
-            <input type="submit" value="Salvar"></label><br></li>
-            
-    </ul>
-    <br>
-    </form>
-    <div id="li_conf">
-        <div style='align-items: center; background-color:aliceblue; width: 14ex; border-radius:6px; margin-bottom: 5px;'>   
-            <a href="../configuração/alterarpassword" style='align-items: center; color: rgb(0, 0, 0); padding-left: 5px;'>Editar Senha</a><br>
-        </div>
-    
-        <div style='align-items: center; background-color: black; width: 14ex; border-radius: 5px; margin-bottom: 5px;'>
-            <a href="../configuração/deletarconta" style='align-items: center; color: rgb(255, 0, 0); padding-left: 5px;'>Excluir Conta</a><br>
-        </div>
+    <p href="../">SEFIV/<a href ='../configuração/'>Configurações/<a >Alterar Password</a>
     </div>
 
-</div>
-
-
-</div>
-<!--
-<div id="2">
 <div id="configuracao"> 
     <h1>EDITAR SENHA</h1>
     <div>
@@ -92,25 +32,25 @@
             <input style='align-items: center; color: rgb(0, 0, 0);'type="password" placeholder={{senha_usuario}}  id="r_password" name="r_password"></label>
         </li><br>
         <li><label>Salvar alterações?<br>
-            <input type="submit" value="Salvar" href="../configuração/#2"></label><br></li>
+            <input type="submit" value="Salvar"></label><br></li>
             
     </ul><br>
     
     <div id="li_conf">
         <div style='align-items: center; background-color:aquamarine; width: 14ex; border-radius:6px; margin-bottom: 5px;'>   
-            <a href="../configuração/alterarpassword" style='align-items: center; color: rgb(0, 0, 0); padding-left: 8px;'>Editar Foto</a><br>
+            <a href="../configuração/" style='align-items: center; color: rgb(0, 0, 0); padding-left: 8px;'>Voltar</a><br>
         </div>
     
         <div style='align-items: center; background-color: black; width: 14ex; border-radius: 5px; margin-bottom: 5px;'>
-            <a href="#4" style='align-items: center; color: rgb(255, 0, 0); padding-left: 5px;'>Excluir Conta</a><br>
+            <a href="../configuração/deletarconta" style='align-items: center; color: rgb(255, 0, 0); padding-left: 5px;'>Excluir Conta</a><br>
         </div>
     </div>
 
 </div>
-</div>
 
 
 
+<!--
 <div id="3">
     <div id="configuracao"> 
         <h1>APAGAR CONTA</h1>

@@ -7,7 +7,11 @@ div#breadcrumb P{
 div#breadcrumb a:hover{
     cursor: pointer;
 }
-
+.main_home body {
+    margin-top: 150px;
+    background-color: #100e17;
+    font-family: 'Open Sans', sans-serif;
+  }
 a{ color: inherit; 
     text-decoration: none;} 
 /*Tela Pequena*/
