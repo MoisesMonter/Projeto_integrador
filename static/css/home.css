@@ -1,8 +1,4 @@
-.main_home body {
-  margin-top: 150px;
-  background-color: #100e17;
-  font-family: 'Open Sans', sans-serif;
-}
+
 
 @media (min-width: 1144px){
   .main_home  .container {
