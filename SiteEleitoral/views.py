@@ -157,7 +157,7 @@ def configkey(request):
         return render(request,"configkey.html",{'x':False})
     else:
         try:
-            usuario_logado= Usuario.objects.get(Id_Academico = '20211094040006')
+            usuario_logado= Usuario.objects.get(Id_Academico = request.user)
             senha_usuario = ''.join(['*' for x  in range(0,len(str(usuario_logado.Senha)),1)])
             
             if request.method == 'POST':
