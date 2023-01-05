@@ -20,7 +20,8 @@ class FormUser(forms.ModelForm):
         fields = ['Id_Academico','Nome','CPF','Genero','email','Senha']
         #exclude = ['']
     
-'''class FormImagem(forms.ModelForm):
+class FormImagem(forms.ModelForm):
+    Senha = forms.CharField(min_length=6,max_length=50,widget=forms.PasswordInput(attrs={'class':'form-control','autocomplete':'off','placeholder':'******'}))
     class Meta:
         model = User
-        fields = ['Foto']'''
+        fields = ['Foto']

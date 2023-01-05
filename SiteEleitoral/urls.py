@@ -10,6 +10,6 @@ urlpatterns = [
     path('register/',views.Register,name='register'),
     path('suport_site/',views.Suport,name='suport'),
     path('configuração/',views.Config,name='config'),
-    path('configuração/alterarpassword',views.configkey,name='configkey'),
-    path('configuração/deletarconta',views.configdel,name='configdel'),
+    path('configuração/alterarpassword/',views.configkey,name='configkey'),
+    path('configuração/deletarconta/',views.configdel,name='configdel'),
 ]

@@ -8,14 +8,13 @@
 <div id="breadcrumb">
     <p href="../">SEFIV/<a href="">Configurações</a></p>
     </div>
-<div id="1">
+
 <div id="configuracao"> 
-    <form action="{% url 'config' %}" method="post" id="1" autocomplete="off">{%csrf_token%}
-    <input style="display:none" id="info" name="info" value="1">
-    
+  
+    <form id="autoincrement">
         <div>
-            <img src={{usuario_logado.Foto}}>
-    </div>  
+            <img src='../media/{{usuario_logado.Foto}}'>
+    </div>
     <div>
         {%if usuario_logado.Genero == 'M'%}
             <h2>Seja Bem vindo {{usuario_logado.Nome}}</h2> 
@@ -26,11 +25,12 @@
     <div>
         
     </div>
-    
 
+    
 
     <ul>
         <li>
+            
             <label>Id Acadêmico<br>
             <input style='align-items: center; color: aliceblue;'type="text" value= {{usuario_logado.Id_Academico}} disabled></label>
         </li>
@@ -43,13 +43,22 @@
             <input style='align-items: center; color: aliceblue;'type="text" value= {{usuario_logado.email}} disabled></label>
         </li>
         <li>
-            <label>Senha<br>
-            <input style='align-items: center; color: rgb(0, 0, 0);'type="password" placeholder={{senha_usuario}}  id="password" name="password"></label>
-        </li><br>
-        <li><label>Salvar alterações?<br>
-            <input type="submit" value="Salvar"></label><br></li>
             
+            
+        </li><br>
     </ul>
+    </form>
+    <form action="{% url 'config' %}" id="img" method="post" autocomplete="off">{%csrf_token%}
+        <div id="CaixaFoto">
+            <!--{{form}}-->
+
+            {{form.Foto.label}}<br>
+            {{form.Foto}}<br>
+            {{form.Senha.label}}<br>
+            {{form.Senha}}<br><br>
+        </div> 
+    <input type="submit" value="Salvar"></label><br></li>
+
     <br>
     </form>
     <div id="li_conf">
@@ -62,7 +71,6 @@
         </div>
     </div>
 
-</div>
 
 
 </div>
