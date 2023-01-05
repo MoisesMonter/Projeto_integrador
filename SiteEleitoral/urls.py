@@ -1,6 +1,9 @@
 from django.urls import path
 from . import views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('',views.Register,name='register'),
     path('home/',views.Home, name='home'),
@@ -10,6 +13,9 @@ urlpatterns = [
     path('register/',views.Register,name='register'),
     path('suport_site/',views.Suport,name='suport'),
     path('configuração/',views.Config,name='config'),
-    path('configuração/alterarpassword/',views.configkey,name='configkey'),
-    path('configuração/deletarconta/',views.configdel,name='configdel'),
+    path('alterarpassword/',views.configkey,name='configkey'),
+    path('deletarconta/',views.configdel,name='configdel'),
+    path('logout/',views.Logout,name='Logout')
 ]
+if settings.DEBUG:     
+     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

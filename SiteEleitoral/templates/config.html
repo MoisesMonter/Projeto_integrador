@@ -10,10 +10,10 @@
     </div>
 
 <div id="configuracao"> 
-  
-    <form id="autoincrement">
+    <form action="{% url 'config' %}" id="autoincrement" method="post" enctype="multipart/form-data" autocomplete="off">{%csrf_token%}
+
         <div>
-            <img src='../media/{{usuario_logado.Foto}}'>
+            <img src='{{usuario_logado.Foto.url}}'>
     </div>
     <div>
         {%if usuario_logado.Genero == 'M'%}
@@ -47,118 +47,30 @@
             
         </li><br>
     </ul>
-    </form>
-    <form action="{% url 'config' %}" id="img" method="post" autocomplete="off">{%csrf_token%}
-        <div id="CaixaFoto">
+    
+    
+        
             <!--{{form}}-->
 
-            {{form.Foto.label}}<br>
-            {{form.Foto}}<br>
-            {{form.Senha.label}}<br>
-            {{form.Senha}}<br><br>
-        </div> 
-    <input type="submit" value="Salvar"></label><br></li>
+    <table>{{form.as_ul}}</table>
+        
+    <table><input type="submit" value="Salvar"></table><br>
 
-    <br>
+    
     </form>
     <div id="li_conf">
         <div style='align-items: center; background-color:aliceblue; width: 14ex; border-radius:6px; margin-bottom: 5px;'>   
-            <a href="../configuração/alterarpassword" style='align-items: center; color: rgb(0, 0, 0); padding-left: 5px;'>Editar Senha</a><br>
+            <a href="../alterarpassword" style='align-items: center; color: rgb(0, 0, 0); padding-left: 5px;'>Editar Senha</a><br>
         </div>
     
         <div style='align-items: center; background-color: black; width: 14ex; border-radius: 5px; margin-bottom: 5px;'>
-            <a href="../configuração/deletarconta" style='align-items: center; color: rgb(255, 0, 0); padding-left: 5px;'>Excluir Conta</a><br>
+            <a href="../deletarconta" style='align-items: center; color: rgb(255, 0, 0); padding-left: 5px;'>Excluir Conta</a><br>
         </div>
     </div>
 
 
 
 </div>
-<!--
-<div id="2">
-<div id="configuracao"> 
-    <h1>EDITAR SENHA</h1>
-    <div>
-        <h3>Então... {{usuario_logado.Nome}}</h3>
-        <h4>Para então podermos alterar sua senha<br><h5>Preencha Corrtamente os campos abaixo</h5></h4>
-    </div>
-    <form action="{% url 'config' %}" method="post" id="2" autocomplete="off">{%csrf_token%}
-    <input style="display:none" id="info" name="info" value="2">    
-
-    <ul>
-
-        <li>
-            <label>Digite sua antiga Senha<br>
-            <input style='align-items: center; color: rgb(0, 0, 0);'type="password" placeholder={{senha_usuario}}  id="password" name="password" ></label>
-        </li><br>
-        <li>
-            <label>Nova Senha<br>
-            <input style='align-items: center; color: rgb(0, 0, 0);'type="password" placeholder={{senha_usuario}}  id="n_password" name="n_password"></label>
-        </li><br>
-        <li>
-            <label>Repita a Nova Senha<br>
-            <input style='align-items: center; color: rgb(0, 0, 0);'type="password" placeholder={{senha_usuario}}  id="r_password" name="r_password"></label>
-        </li><br>
-        <li><label>Salvar alterações?<br>
-            <input type="submit" value="Salvar" href="../configuração/#2"></label><br></li>
-            
-    </ul><br>
-    
-    <div id="li_conf">
-        <div style='align-items: center; background-color:aquamarine; width: 14ex; border-radius:6px; margin-bottom: 5px;'>   
-            <a href="../configuração/alterarpassword" style='align-items: center; color: rgb(0, 0, 0); padding-left: 8px;'>Editar Foto</a><br>
-        </div>
-    
-        <div style='align-items: center; background-color: black; width: 14ex; border-radius: 5px; margin-bottom: 5px;'>
-            <a href="#4" style='align-items: center; color: rgb(255, 0, 0); padding-left: 5px;'>Excluir Conta</a><br>
-        </div>
-    </div>
-
-</div>
-</div>
-
-
-
-<div id="3">
-    <div id="configuracao"> 
-        <h1>APAGAR CONTA</h1>
-        <div style="align-items: center;">
-            
-            <h2 style="margin-left:20px ;">Lamentamos estar partindo tão cedo {{usuario_logado.Nome}} 😢
-            <h3 style="margin-left:20px ;">Para então podermos apagar de forma segura<h5 style="margin-left:20px ;">Preencha Corrtamente os campos abaixo</h5><h3></h2>
-        </div>
-        <form action="{% url 'config' %}" method="post"  id="3" autocomplete="off">{%csrf_token%}
-            <input style="display:none" id="info1" name="info1" value="3">    
-    
-        <ul>
-            <li>
-                <label>Digite sua antiga Senha<br>
-                <input style='align-items: center; color: rgb(0, 0, 0);'type="password" placeholder={{senha_usuario}}  value=""></label>
-            </li><br>
-            <li>
-                <label>Você tem ceteza disso?<br>
-                    <input type="checkbox" style="border-radius: 50%;" ></label>
-            </li>
-            <li><label>VocêApagar sua conta?<br>
-                <input type="submit" id="info1" name="info1" value="Salvar"></label><br></li>
-                
-        </ul><br>
-        
-        <div id="li_conf">
-            
-            <div style='align-items: center; background-color:aquamarine; width: 14ex; border-radius:6px; margin-bottom: 5px;'>   
-                <a href="#1" style='align-items: center; color: rgb(0, 0, 0); padding-left: 8px;'>Editar Foto</a><br>
-            </div>
-
-            <div style='align-items: center; background-color:aliceblue; width: 14ex; border-radius:6px; margin-bottom: 5px;'>   
-            <a href="#2" style='align-items: center; color: rgb(0, 0, 0); padding-left: 5px;'>Editar Senha</a><br>
-        </div>
-        </div>
-    
-    </div>
-    </div>
-
--->
 {%endblock%}
 {%block info%}
 
