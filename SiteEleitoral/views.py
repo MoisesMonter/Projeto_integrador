@@ -120,6 +120,8 @@ def Suport(request):
 
 
 def Config(request):
+    if str(request.user) == 'AnonymousUser':
+        return render(request,"config.html",{'x':False})
     if str(request.user) != 'AnonymousUser':
         usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
         atual_cpf = str(usuario_logado.CPF)
@@ -237,3 +239,7 @@ def plataforma(request):
 
 
 
+def gerareleicao(request):
+    x =str(request.user) == 'AnonymousUser'
+    if x == True:
+        pass
