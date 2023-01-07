@@ -3,8 +3,77 @@
 {%load static%}
 
 {%block info1%}
+<link href="{% static 'css/config.css' %" rel="stylesheet">
 
-<a>ola eleitor</a>
+
+<div id="breadcrumb">
+    <p href="../">SEFIV/<a href="">Gerar uma Eleição</a></p>
+    </div>
+
+<div id="gerareleicao"> 
+    
+    <div>
+        <h1>Formulário para uma nova candidatura</h1><br>
+    </div>
+    <div class="texto_persona">
+        <div class="candidato_texto">
+            <form style="display:flex; flex-direction:column; align-items:center;"  action ="{% url 'gerarumaeleicao' %}" id="123" method="post"> {% csrf_token%}
+                <ul>
+                    <li>{{form1.Titulo.label}}<br>
+                        {{form1.Titulo}}</li>
+                    <li>{{form1.Descricao.label}}<br>
+                        {{form1.Descricao}}</li>
+                    <li>{{form1.select_day.label}}<br>
+                        {{form1.select_day}}</li>
+                    <li>
+                        <input type="submit" value="Cadastrar"></table><br>
+                    </li>
+                </ul>
+
+                
+            </form>
+    
+        </div>
+        <div>
+            <div>
+                <form action ="{% url 'gerarumaeleicao' %}" id='usuarios'method="post">{% csrf_token%}
+                <ul>
+                    <li>{{form2.Gerando_Candidato.label}}<br>
+                        {{form2.Gerando_Candidato}}</li>
+                </ul>
+                <input type="submit" value="Gerar Candidato"></table><br>
+
+                </form>
+            </div>
+            <div>
+                <form action ="{% url 'gerarumaeleicao' %}" id='candidato_Apagar'method="post">{% csrf_token%}
+                <label for="Lista_Candidato">Candidatos</label><br>
+                
+                {% if len >= 1 %}
+                    <ul>
+                    {%for lc in lista_candidatos %}
+                            <br><li>
+                            <label >{{lc}}</label>
+                            <input type="checkbox" id="{{lc}}" name="{{lc}}"></li><br>
+                    {% endfor %}
+                    <li><input type="submit" value="Apagar"></li>
+                    </ul><br>
+                {% endif %}
+                
+            </div>
+        </div>
+    </div>
 
 
+</div>
+
+{%endblock%}
+
+
+{%block info%}
+<div style="margin:10%; display: flex; flex-direction:column; justify-content:center; align-items: center; flex-wrap: wrap;">
+    <h1 style="font-size: 50px;">PAGINA NÃO ENCONTRADA</h1>
+    <h3 style="font-size: 25px; ">Você precisa estar logado para acessar o conteúdo dessa pagina</h3>
+    <a style="font-size: 20px; color:brown;" href="../login">Clique aqui para voltar logar na sua conta</a>
+    </div>
 {%endblock%}

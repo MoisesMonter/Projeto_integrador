@@ -15,7 +15,9 @@ urlpatterns = [
     path('configuração/',views.Config,name='config'),
     path('alterarpassword/',views.configkey,name='configkey'),
     path('deletarconta/',views.configdel,name='configdel'),
-    path('logout/',views.Logout,name='Logout')
+    path('logout/',views.Logout,name='Logout'),
+
+    path('gerarumaeleicao',views.gerarumaeleicao, name='gerarumaeleicao'),
 ]
 if settings.DEBUG:     
      urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

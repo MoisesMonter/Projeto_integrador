@@ -1,0 +1,64 @@
+
+div#gerareleicao{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items: center;
+    width: 800px;
+    height: 400px;
+    height: auto;
+    background-color:hsl(0, 0%, 14%);
+    /*color:red;*/
+    border-radius: 5px;
+    border: #ffffff;
+    border-color: aliceblue;
+    margin-left: 15%;
+    margin-bottom: 5%;
+    padding-bottom: 8%;
+    
+}
+
+.texto_persona{
+    margin-left: 30px;
+    gap: 15px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap ;
+}
+
+.candidato_texto{
+    padding-right: 10px;
+}
+
+div#gerareleicao ul li{
+list-style-type: none;
+}
+form#img{
+margin-left: 100px;
+}
+div#gerareleicao img{
+margin-top: 5ex;
+margin-left: 8ex;
+border-radius: 50%;
+width: 15ex;
+height: 15ex;
+
+}
+input#id_Foto{
+
+background-color: #232323;
+color: #23232300;
+}
+
+div#li_conf{
+display: flex;
+flex-direction: row;
+gap: 5px;
+
+}
+div#gerareleicao h1{
+
+    text-align: center;
+    align-items: center;
+}

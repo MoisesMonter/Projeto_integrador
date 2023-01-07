@@ -1,5 +1,5 @@
 from django import forms
-from Users.models import User
+from Users.models import User,Data_Election
 
 
 class FormLogin(forms.Form):
@@ -32,3 +32,21 @@ class FormImagem(forms.ModelForm):
                 'Foto': forms.FileInput(attrs= {'style':'color:#2e303300;','class':'form-control', 'required': False,})
 
             }
+
+class Formulario_part1(forms.Form):
+    Titulo = forms.CharField(label='Titulo',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'placeholder':'Titulo da Eleição'}))
+    Descricao = forms.CharField(label="Descrição",max_length=300,widget=forms.Textarea(attrs={"rows":"5",'placeholder':'Resuma em 300 linhas',"data-ls-module":"charCounter"}))
+    select_day = forms.ChoiceField(label='Selecione quantos dias', choices=(('1',1),('2',2),('3',3),('4',4),(5,'5'),(6,'6'),('7',7),('8',8),('9',9),('10',10),('11',11),('12',12),('13',13),('14',14),('15',15)))
+    #Data = forms.DateField(label='Data',widget=forms.DateInput(format='%d-%m-%Y',attrs={'type':'date',}),input_formats=('%d-%m-%Y'))
+
+class Formulario_part2(forms.Form):
+    Gerando_Candidato = forms.CharField(label='Gerar Candidato',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'placeholder':'Nome do Candidato'}))
+
+
+
+class Dados_Aprofundados_Eleicao(forms.ModelForm):
+
+    class Meta:
+        model =Data_Election
+
+        fields =['N_Eleicao','Candidatos','Votos']

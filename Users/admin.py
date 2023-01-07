@@ -8,7 +8,9 @@ admin.site.register(User)
 admin.site.register(Activity_User)
 
 admin.site.register(Election)
+
+
 admin.site.register(Data_Election)
 admin.site.register(Interaction_User)
 
-admin.site.register(Activity_Report)
+admin.site.register(Activity_Report)    

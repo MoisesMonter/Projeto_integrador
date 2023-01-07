@@ -6,11 +6,13 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
-from .forms import FormUser,FormLogin,FormImagem
+from .forms import FormUser,FormLogin,FormImagem,Formulario_part1,Formulario_part2
 from Users.models import User as Usuario
+from Users.models import Election,Data_Election
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm  
 # Create your views here.
+import datetime,re
 
 def Logout(request):
     logout(request)
@@ -95,6 +97,7 @@ def Login(request):
 
 
 def About_us(request):
+    print(request)
     x =str(request.user) == 'AnonymousUser'
     if x:
         return render(request,'about_us.html',{'x': False})
@@ -109,6 +112,199 @@ def ListaEleicoes(request):
 
 
 
+lista_candidatos = {}
+requisições={}
+def global_info(login,info,info_local,manipulacao,login_end):
+    global lista_candidatos
+
+    if info != None and info != '' and len(info) >0:
+        try:
+            info_local = lista_candidatos[login]
+            if manipulacao == True: #caso seja necessario apagar
+                info_local.remove(info)
+            else:#caso contrario apenas incremente
+                info_local.append(info)
+                lista_candidatos[login]=info_local
+        except:
+            info_local.append(info)
+            lista_candidatos[login]=info_local
+    return lista_candidatos
+
+def gerarumaeleicao(request):
+    x =str(request.user) == 'AnonymousUser'
+    if x == True:
+        return render(request,"gerarumaeleicao.html",{'x':False})  
+
+    else:
+
+        usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
+        lista_candidatos={}
+        lista_candidatos = global_info(usuario_logado.Id_Academico,'',[],False,False)
+
+        if request.method =='GET':
+            lista_candidatos = global_info(usuario_logado.Id_Academico,request.POST.get('__Candidato__'),[],False,False)
+            return render(request,"gerarumaeleicao.html",{'x':True,'form1':Formulario_part1,'form2':Formulario_part2,'usuario_logado':usuario_logado,'lista_candidatos':[],'len':0})      
+        
+        if Formulario_part2(request.POST).is_valid():
+            candidato = request.POST.get('Gerando_Candidato')
+            lista_candidatos = global_info(usuario_logado.Id_Academico,candidato,[],False,False)
+
+            #form1 =  Formulario_part1(request.POST)
+        if Formulario_part1(request.POST).is_valid(): 
+            titulo = request.POST.get('Titulo')
+            descricao = request.POST.get('Descricao')
+            dias = datetime.timedelta(int(request.POST.get('select_day')))
+            data = datetime.datetime.now()
+            
+            try:
+                lista =lista_candidatos[usuario_logado.Id_Academico]
+            except:
+                lista=[]
+
+            if len(lista) >1:
+                try:##Informando o Ultimo ID de todos elementos da Eleição
+                    for info in Election.objects.all():
+                        id_end = info
+                    id_end =  int(re.sub('[^0-9]',' ', str(id_end)))+1
+                    formulario_eleicao =Election(N_Eleicao= id_end,Usuario =  usuario_logado,Titulo = titulo,Data = data,End_Data = data+dias, Descricao=descricao, Ativo=True,Disponibilizar=False)
+                    formulario_eleicao.save()
+                    for eleitor in lista:
+                        formulario_aprofundado_eleicao= Data_Election(N_Eleicao = formulario_eleicao,Candidatos=eleitor,Votos=0)    
+                        formulario_aprofundado_eleicao.save()
+                    
+                    
+                    messages.success(request,f"{titulo} Criada com sucesso!")
+                except:
+                    id_end = 0
+            else:
+                messages.success(request,"Tenha no Mínimo mais de 1 Candidato")
+
+            
+            #formulario_eleicao =Election(N_Eleicao= id_end,Usuario =  usuario_logado,Titulo = titulo,Data = data,End_Data = data+dias, Descricao=descricao, Ativo=True,Disponibilizar=False)
+            #formulario_eleicao.save()
+            '''formulario_eleicao.Usuario = request.user
+            formulario_eleicao.Titulo = request.POST.get('Titulo')
+            formulario_eleicao.Descricao= request.POST.get('Texto')
+            formulario_eleicao.Data = datetime.datetime.now()
+            formulario_eleicao = GerarUmaEleicao(Usuario=  request.user,)
+            print('\n\n\n',formulario_eleicao.Usuario,'\n',
+                            formulario_eleicao.Titulo,'\n',
+                            formulario_eleicao.Descricao,'\n',
+                            formulario_eleicao.Data)
+            eleicao_criada = formulario_eleicao.save()'''
+        if request.method == 'POST':
+            lista_candidatos = global_info(usuario_logado.Id_Academico,'',[],False,False)
+            try:
+                lista =lista_candidatos[usuario_logado.Id_Academico]
+            except:
+                lista=[]
+            #print(lista)
+            try:
+                cont = 0
+                for x in lista:
+                    #print(x,end='> ')
+                    if str(request.POST.get(str(x))) == "on":
+                        lista_candidatos = global_info(usuario_logado.Id_Academico,x,[],True,False)
+                    cont+=1
+
+            except:
+                pass
+        return render(request,"gerarumaeleicao.html",{'x':True,'form1':Formulario_part1,'form2':Formulario_part2,'usuario_logado':usuario_logado,'lista_candidatos':lista,'len':len(lista)})   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
 def Suport(request):
     x =str(request.user) == 'AnonymousUser'
     if x:
@@ -238,8 +434,3 @@ def plataforma(request):
         return render(request,'home.html')
 
 
-
-def gerareleicao(request):
-    x =str(request.user) == 'AnonymousUser'
-    if x == True:
-        pass
