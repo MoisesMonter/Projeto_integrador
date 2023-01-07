@@ -29,20 +29,18 @@ class User(models.Model):
         return self.Id_Academico
 
 
-
-
-
 class Election(models.Model):
-    N_Eleicao = models.IntegerField(unique=True,primary_key=True)
+    N_Eleicao = models.IntegerField(unique=True,primary_key=True,auto_created=True)
     Usuario = models.ForeignKey(User,on_delete=models.CASCADE)
     Titulo = models.CharField(max_length=30, null = False)
-    Data = models.DateField()
+    Data = models.DateField(null= True)
+    End_Data = models.DateField(null= True)
     Descricao = models.CharField(max_length=150,null = True)
     Ativo = models.BooleanField()
     Disponibilizar= models.BooleanField()
 
-    def __str__(self) -> str:
-        return super().__str__()
+    def __str__(self):
+        return  str(self.N_Eleicao)
 
 class Activity_Report(models.Model):
     Usuario = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -66,12 +64,12 @@ class Activity_User(models.Model):
         return super().__str__()
 
 class Data_Election(models.Model):
-    N_Eleicao = models.ForeignKey(Election,on_delete=models.CASCADE)
+    N_Eleicao = models.ForeignKey(Election,on_delete=models.CASCADE,unique=False)
     Candidatos = models.CharField(max_length=50,unique=True)
     Votos = models.IntegerField(null = False)
 
-    def __str__(self) -> str:
-        return super().__str__()
+    def __str__(self):
+        return str(self.N_Eleicao)
 
 class Interaction_User(models.Model):
     Usuario = models.ForeignKey(User, on_delete=models.CASCADE)
