@@ -108,29 +108,84 @@ def About_us(request):
 
 
 def ListaEleicoes(request):
-    usuario_logado= 'AnonymousUser'
-    info = ações_Usuarios(usuario_logado,'sim').global_list(request)
+
+    
     x =str(request.user) == 'AnonymousUser'
     if x:
-        return render(request,"lista_eleicoes.html",{'x':False})
+
+        info = ações_Usuarios(str(request.user),'sim').global_list(request)
+        enviar_para_Urna = Formularios_Para_Votar(request.POST)
+        aux = request.POST.get('Form1')
+        aux2 = str(request.POST.get('local_urna'))
+        if aux != None and aux2 !=None:
+            print(aux,aux2)
+            aux = ações_Usuarios(str(request.user),'sim').global_list_urna(request,aux2,'Lista_Eleicoes',True)
+
+        print(aux2)        
+        return render(request,"lista_eleicoes.html",{'x':False,'TheList':info,'Urna':enviar_para_Urna})
     else:
         usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
         info = ações_Usuarios(usuario_logado.Id_Academico,'sim').global_list(request)
+        enviar_para_Urna = Formularios_Para_Votar(request.POST)
+
+
         if request.method == 'GET':
 
-            return render(request,"lista_eleicoes.html",{'x':True,'usuario_logado':usuario_logado,'TheList':info})
+            return render(request,"lista_eleicoes.html",{'x':True,'usuario_logado':usuario_logado,'TheList':info,'Urna':enviar_para_Urna})
         
+            
         if request.method =='POST':
+            aux = request.POST.get('Form2')
+            aux2 = request.POST.get('local_urna')
+            if aux2 !=None:
+                print(aux,aux2)
+                ações_Usuarios(str(request.user),'sim').global_list_urna(request,aux2,'lista_eleicoes',True)
+                return Urna(request)
+            print(aux)
             usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
             
-            
+            return render(request,"lista_eleicoes.html",{'x':True,'usuario_logado':usuario_logado,'TheList':info,'Urna':enviar_para_Urna})
             
         ''' for Number in range(0,int(todas_eleicoes),1):
         print(Number)'''
-
-
-        return render(request,"lista_eleicoes.html",{'x':True,'TheList':info})
+        return render(request,"lista_eleicoes.html",{'x':True,'usuario_logado':usuario_logado,'TheList':info,'Urna':enviar_para_Urna})
  
+
+
+
+def Urna(request):
+    x =str(request.user) == 'AnonymousUser'
+    if x:
+        return render(request,"Urna.html",{'x':False})
+    else:
+        usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
+        formularios = Formularios_Para_Votar(request.POST)
+        info_Rapida = ações_Usuarios(str(request.user),'sim').global_list_urna(request,'','',False)
+        print(info_Rapida)
+        info_eleicao = Election.objects.get(N_Eleicao = info_Rapida[0])
+        info_candidatos = ações_Usuarios(str(request.user),info_Rapida[1]).lista_candidatos(request,info_Rapida[0])
+    
+        print(request.POST.get('Eleicao'))
+        try:
+            
+  
+            if request.method =='GET':
+                print(request.POST.get('Eleicao'))
+                return render(request,"Urna.html",{'x':True,'local':info_Rapida[1],'Eleitoral':info_eleicao,'form_1':0,'formularios':formularios,'usuario_logado':usuario_logado})
+            if request.method =='POST':
+                print(request.POST.get('Eleicao'))
+                print('\n\n',request.POST.get('Form1'),request.POST.get('Form2'))
+                form = 0
+                if request.POST.get('Form1') != None:
+                    form = 1
+                else:
+                    form = 0
+                print(form)
+                return render(request,"Urna.html",{'x':True,'local':info_Rapida[1],'Eleitoral':info_eleicao,'form_1':0,'formularios':formularios,'usuario_logado':usuario_logado})
+                
+        except:
+            print(formularios.Form1)
+            return render(request,"Urna.html",{'x':True,'local':info_Rapida[1],'Eleitoral':info_eleicao,'form_1':0,'formularios':formularios,'usuario_logado':usuario_logado})
 
 
 def gerarumaeleicao(request):
@@ -160,6 +215,7 @@ def gerarumaeleicao(request):
         
         if Formulario_part2(request.POST).is_valid():
             candidato = request.POST.get('Gerando_Candidato')
+            
             lista_candidatos = ações_Usuarios(usuario_logado.Id_Academico,'sim').global_info(request,candidato,[],False,False)
 
             #form1 =  Formulario_part1(request.POST)
@@ -274,33 +330,6 @@ def gerarumaeleicao(request):
 
 
 
-
-def Urna(request):
-    x =str(request.user) == 'AnonymousUser'
-    if x:
-        return render(request,"Urna.html",{'x':False})
-    else:
-        usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
-        formularios = Formularios_Para_Votar(request.POST)
-        try:
-            
-  
-            if request.method =='GET':
-
-                return render(request,"Urna.html",{'x':True,'form_1':0,'formularios':formularios,'usuario_logado':usuario_logado})
-            if request.method =='POST':
-                print('\n\n',request.POST.get('Form1'),request.POST.get('Form2'))
-                form = 0
-                if request.POST.get('Form1') != None:
-                    form = 1
-                else:
-                    form = 0
-                print(form)
-                return render(request,"Urna.html",{'x':True,'form_1':form,'formularios':formularios,'usuario_logado':usuario_logado})
-                
-        except:
-            print(formularios.Form1)
-            return render(request,"Urna.html",{'x':True,'form_1':0,'formularios':formularios,'usuario_logado':usuario_logado})
 
 
         
@@ -440,10 +469,12 @@ def plataforma(request):
 class ações_Usuarios():
     gerando_lista_candidatos = {}
     gerando_informacoes_candidatura = {}
+    local_atual_eleicao = {}
     requisições={}
     def __init__(self,login,pagina_atual):
         global gerando_lista_candidatos
         global gerando_informacoes_candidatura
+        global local_atual_eleicao
         self.login = login
         self.pagina_atual = pagina_atual
 
@@ -503,7 +534,7 @@ class ações_Usuarios():
 
         info = []
         for location in range(1,id_end+1,1):
-            print(location)
+            #print(location)
             eleicao = Election.objects.get(N_Eleicao = location)
             Nome = Usuario.objects.get(Id_Academico = eleicao.Usuario_id)
             if eleicao.Ativo == True:
@@ -511,5 +542,46 @@ class ações_Usuarios():
             else:
                 Ativo ='Inativo'
             info.append([eleicao.N_Eleicao,Nome.Nome,eleicao.Titulo,eleicao.End_Data,Ativo,'Link'])
-            print('\n\n\n\n',info)
+            #print('\n\n\n\n',info)
         return info
+
+    def global_list_urna(self,request,eleicao,qual_lista,modificar):
+        try:
+            self.limpar_memoria("apagar_lista_texto")
+        except:
+            pass
+        try:
+            self.limpar_memoria( "apagar_lista_candiatos")
+        except:
+            pass
+        if self.login not in self.local_atual_eleicao:
+            self.local_atual_eleicao[self.login]= ['','']
+        info_local=[]
+        if modificar == True:
+            info_local = self.local_atual_eleicao[self.login]
+            info_local[0]=eleicao
+            info_local[1]=qual_lista
+            self.local_atual_eleicao[self.login]=info_local
+
+
+        return self.local_atual_eleicao[self.login]
+
+    def lista_candidatos(self,request,lista_candidatos):
+        print('\n\nxxx',lista_candidatos)
+        eleicao = Election.objects.get(N_Eleicao = lista_candidatos)
+        #eleicao = Election.values_list(N_Eleicao = lista_candidatos)
+        eleitores = Data_Election.objects.filter(N_Eleicao = eleicao.pk).all()
+        #print(dir(eleitores),'xxxxx\n\n\n')
+
+        #print(dir(Election))
+        #print(dir(x))
+        info_see = []
+        info_more =[]
+        for info in eleitores.values():##Informando o Ultimo ID de todos elementos da Eleição
+            print([info['N_Eleicao_id'],info['Candidatos'],info[ 'N_Candidato'],info['Votos']])
+            info_more.append([info['N_Eleicao_id'],info['Candidatos'],info[ 'N_Candidato'],info['Votos']])
+            info_see.append([info['Candidatos'],info[ 'N_Candidato']])
+        print(info_see)
+           
+        #id_end =  int(re.sub('[^0-9]',' ', str(id_end)))
+        return info_see,info_more
