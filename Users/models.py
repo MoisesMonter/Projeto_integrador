@@ -39,8 +39,11 @@ class Election(models.Model):
     Ativo = models.BooleanField()
     Disponibilizar= models.BooleanField()
 
-    def __str__(self):
-        return  str(self.N_Eleicao)
+    def __str__(self) -> str:
+        return super().__str__()
+
+    '''def __str__(self):
+        return  str(self.N_Eleicao)'''
 
 class Activity_Report(models.Model):
     Usuario = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -69,8 +72,11 @@ class Data_Election(models.Model):
     N_Candidato = models.IntegerField()
     Votos = models.IntegerField(null = False)
 
-    def __str__(self):
-        return str(self.N_Eleicao)
+
+    def __str__(self) -> str:
+        return super().__str__()
+    '''def __str__(self):
+        return str(self.N_Eleicao)'''
 
 class Interaction_User(models.Model):
     Usuario = models.ForeignKey(User, on_delete=models.CASCADE)

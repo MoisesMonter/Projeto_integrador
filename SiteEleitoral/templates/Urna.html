@@ -7,7 +7,13 @@
 
 
 <div id="breadcrumb">
-    <p href="../">SEFIV/<a href="">Urna Nº0000</a></p>
+    <p href="../">SEFIV/<a href="../{{local}}">
+        {% if local == 'lista_eleicoes' %}
+        Lista de Eleições/
+        {% else %}
+        Minha Lista de Eleições/
+        {% endif %}
+        <a href="">Urna Nº0000</a></p>
 
     </div>
 {% if form_1 != 1 %}
@@ -15,20 +21,10 @@
 
     <nav style="font-size:20px; text-align: center;">
             <ul>
-                    <li><h1 >ELEIÇÃO Nº0000</h1></li>  
-                    <li><h4>TITULO DA ELEIÇÃO</h4></li><br>
-                    <li><a href="../" style="font-size:15px; color:brown;">Voltar para o início</a></li><br>
-                    <li><p>path('',views.Register,name='register'),
-                        path('home/',views.Home, name='home'),
-                        path('about_us/',views.About_us,name='about_us'),
-                        path('lista_eleicoes/',views.ListaEleicoes,name='lista_eleicoes'),
-                        path('login/',views.Login,name='login'),
-                        path('register/',views.Register,name='register'),
-                        path('suport_site/',views.Suport,name='suport'),
-                        path('configuração/',views.Config,name='config'),
-                        path('alterarpassword/',views.configkey,name='configkey'),
-                        path('deletarconta/',views.configdel,name='configdel'),
-                        path('logout/',views.Logout,name='Logout'),
+                    <li><h1 >ELEIÇÃO Nº {{Eleitoral.N_Eleicao}}</h1></li>  
+                    <li><h4>{{Eleitoral.Titulo}}</h4></li><br>
+                    <li><a href="../{{local}}" style="font-size:15px; color:brown;">Voltar para o início</a></li><br>
+                    <li><p>{{Eleitoral.Descricao}}
                     </p></li>
             </ul>
     </nav>
