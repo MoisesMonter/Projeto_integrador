@@ -230,15 +230,9 @@ def gerarumaeleicao(request):
             
             lista_informacoes = ações_Usuarios(usuario_logado.Id_Academico,'sim').global_info2(request,titulo,descricao,True)
             lista_candidatos = ações_Usuarios(usuario_logado.Id_Academico,'sim').global_info(request,'',[],True,False)
-            print(lista_informacoes[0])
-            print(lista_candidatos[1])
             dias = datetime.timedelta(int(request.POST.get('select_day')))
             data = datetime.datetime.now()
-            titulo = lista_informacoes[0]
-            descricao = lista_informacoes[1]
 
-
-            print(data)
 
             
             if len(titulo) >0:
@@ -265,7 +259,7 @@ def gerarumaeleicao(request):
                         lista_candidatos = ações_Usuarios(usuario_logado.Id_Academico,'sim').global_info(request,'Null',[],True,False)
                         print(lista_numero)
                         print(lista_candidatos)
-                        
+                        print(lista_informacoes)
                         for eleitor,n_eleitoral in zip(lista_candidatos,lista_numero):
                             formulario_aprofundado_eleicao= Data_Election(N_Eleicao = formulario_eleicao,Candidatos=eleitor,N_Candidato = n_eleitoral,Votos=0)    
                             formulario_aprofundado_eleicao.save()
@@ -275,6 +269,7 @@ def gerarumaeleicao(request):
                         for eleitor,n_eleitoral in zip(lista_candidatos,lista_numero):
                             formulario_aprofundado_eleicao= Data_Election(N_Eleicao = formulario_eleicao,Candidatos=eleitor,N_Candidato = n_eleitoral,Votos=0)    
                             formulario_aprofundado_eleicao.save()
+                        messages.success(request,f"{titulo} Criada com sucesso!")    
                     ações_Usuarios(str(usuario_logado.Id_Academico),'sim').limpar_memoria(request,"apagar_lista_texto")
                     lista_informacoes = []
                     ações_Usuarios(str(usuario_logado.Id_Academico),'sim').limpar_memoria(request,"apagar_lista_candiatos")

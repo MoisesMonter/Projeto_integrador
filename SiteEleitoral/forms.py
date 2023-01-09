@@ -36,7 +36,7 @@ class FormImagem(forms.ModelForm):
 
 class Select_day(forms.Form):#formulario para finalizar cadastro de eleições
     select_day = forms.ChoiceField(label='Selecione quantos dias', choices=(('1',1),('2',2),('3',3),('4',4),(5,'5'),(6,'6'),('7',7),('8',8),('9',9),('10',10),('11',11),('12',12),('13',13),('14',14),('15',15)))
-
+    Form_Form = forms.CharField(label='Titulo',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'placeholder':'Titulo da Eleição', 'value':"Doe",'style':'display:None;'}))
 
 class Formulario_part1(forms.Form):
     Titulo = forms.CharField(label='Titulo',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'placeholder':'Titulo da Eleição'}))

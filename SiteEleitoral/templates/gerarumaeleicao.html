@@ -64,32 +64,35 @@
             </div>
             <div>
                 <form action ="{% url 'gerarumaeleicao' %}" id='usuarios'method="post">{% csrf_token%}
+                    {{select_day.Form_Form}}
                 <ul>
                     <li>{{form2.Gerando_Candidato.label}}<br>
                         {{form2.Gerando_Candidato}}</li>
                 </ul>
                 <input type="submit" value="Gerar Candidato"></table><br>
-
+                
             <!--input pegando titulo e descrição na div abaixo  -->
             </div>
             
         </div>
         <div class="candidato_texto">
             
-                <ul>    {% if '{{form1_2.0}}' > 1 %}
+                <ul>    {% if form1_2.0 > 1 %}
                         <input type="text" class="form-control" autocomplete="on" placeholder="Titulo da Eleição"  name="Formulario1" id="Formulario1"><br>
                         {% else %}
                         <input type="text" class="form-control" autocomplete="on" placeholder="Titulo da Eleição" name="Formulario1" id="Formulario1" value = '{{form1_2.0}}'><br>
                         {% endif %}
-                        {% if '{{form1_2.1}}' > 1 %}
+                        {% if form1_2.1 > 1 %}
                         <textarea type="textarea" rows="5" placeholder='Resuma em 300 linhas' data-ls-module="charCounter"  name="Formulario2" id="Formulario2"></textarea>
                         {% else %}
                         <textarea type="textarea" rows="5" placeholder='Resuma em 300 linhas' data-ls-module="charCounter"  name="Formulario2" id="Formulario2">{{form1_2.1}}</textarea>
                         {% endif %}
+                        
+                    
                     </form>
-                    {{form1_2.0}}
+                    
                     <li>
-                    <form style="display:flex; flex-direction:column; align-items:center;"  action ="{% url 'gerarumaeleicao' %}" id="123" method="post"> {% csrf_token%}    
+                    <form style="display:flex; flex-direction:column; align-items:center;"  action ="{% url 'gerarumaeleicao' %}" method="post"> {% csrf_token%}    
                         {{select_day.select_day.label}}<br>
                         {{select_day.select_day}}</li>
                     <li>
