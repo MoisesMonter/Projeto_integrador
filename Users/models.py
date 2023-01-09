@@ -55,20 +55,9 @@ class Activity_Report(models.Model):
     def __str__(self) -> str:
         return super().__str__()
 
-class Activity_User(models.Model):
-    Usuario = models.ForeignKey(User,on_delete=models.CASCADE)
-    Participacao = models.ForeignKey(Election,on_delete=models.CASCADE)
-    Report = models.ForeignKey(Activity_Report,on_delete=models.CASCADE)
-    Horario = models.DateField()
-
-    Disponibilizar= models.BooleanField()
-
-    def __str__(self) -> str:
-        return super().__str__()
-
 class Data_Election(models.Model):
     N_Eleicao = models.ForeignKey(Election,on_delete=models.CASCADE,unique=False)
-    Candidatos = models.CharField(max_length=50,unique=True)
+    Candidatos = models.CharField(max_length=50)
     N_Candidato = models.IntegerField()
     Votos = models.IntegerField(null = False)
 
