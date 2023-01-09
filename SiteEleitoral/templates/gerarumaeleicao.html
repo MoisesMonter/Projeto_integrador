@@ -64,7 +64,7 @@
             </div>
             <div>
                 <form action ="{% url 'gerarumaeleicao' %}" id='usuarios'method="post">{% csrf_token%}
-                    {{select_day.Form_Form}}
+                    {{select_day.Form_Form.label}}
                 <ul>
                     <li>{{form2.Gerando_Candidato.label}}<br>
                         {{form2.Gerando_Candidato}}</li>
