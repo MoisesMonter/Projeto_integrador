@@ -161,31 +161,36 @@ def Urna(request):
         usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
         formularios = Formularios_Para_Votar(request.POST)
         info_Rapida = ações_Usuarios(str(request.user),'sim').global_list_urna(request,'','',False)
-        print(info_Rapida)
         info_eleicao = Election.objects.get(N_Eleicao = info_Rapida[0])
-        info_candidatos = ações_Usuarios(str(request.user),info_Rapida[1]).lista_candidatos(request,info_Rapida[0])
-    
-        print(request.POST.get('Eleicao'))
+        
+        info_candidatos,info_candidatos_apurados = ações_Usuarios(str(request.user),info_Rapida[1]).lista_candidatos(request,info_Rapida[0])
+        print(info_candidatos)
+        #print(request.POST.get('Eleicao'))
         try:
             
   
             if request.method =='GET':
-                print(request.POST.get('Eleicao'))
-                return render(request,"Urna.html",{'x':True,'local':info_Rapida[1],'Eleitoral':info_eleicao,'form_1':0,'formularios':formularios,'usuario_logado':usuario_logado})
+                print(info_Rapida)
+
+                info_candidatos,info_candidatos_apurados = ações_Usuarios(str(request.user),info_Rapida[1]).lista_candidatos(request,info_Rapida[0])
+                print(info_candidatos)
+                
+                #print(request.POST.get('Eleicao'))
+                return render(request,"Urna.html",{'x':True,'local':info_Rapida[1],'candidatos':info_candidatos,'Eleitoral':info_eleicao,'form_1':0,'formularios':formularios,'usuario_logado':usuario_logado})
             if request.method =='POST':
-                print(request.POST.get('Eleicao'))
-                print('\n\n',request.POST.get('Form1'),request.POST.get('Form2'))
+                #print(request.POST.get('Eleicao'))
+                #print('\n\n',request.POST.get('Form1'),request.POST.get('Form2'))
                 form = 0
                 if request.POST.get('Form1') != None:
                     form = 1
                 else:
                     form = 0
-                print(form)
-                return render(request,"Urna.html",{'x':True,'local':info_Rapida[1],'Eleitoral':info_eleicao,'form_1':0,'formularios':formularios,'usuario_logado':usuario_logado})
+                #print(form)
+                return render(request,"Urna.html",{'x':True,'local':info_Rapida[1],'candidatos':info_candidatos,'Eleitoral':info_eleicao,'form_1':0,'formularios':formularios,'usuario_logado':usuario_logado})
                 
         except:
-            print(formularios.Form1)
-            return render(request,"Urna.html",{'x':True,'local':info_Rapida[1],'Eleitoral':info_eleicao,'form_1':0,'formularios':formularios,'usuario_logado':usuario_logado})
+            #print(formularios.Form1)
+            return render(request,"Urna.html",{'x':True,'local':info_Rapida[1],'candidatos':info_candidatos,'Eleitoral':info_eleicao,'form_1':0,'formularios':formularios,'usuario_logado':usuario_logado})
 
 
 def gerarumaeleicao(request):
@@ -580,7 +585,8 @@ class ações_Usuarios():
         for info in eleitores.values():##Informando o Ultimo ID de todos elementos da Eleição
             print([info['N_Eleicao_id'],info['Candidatos'],info[ 'N_Candidato'],info['Votos']])
             info_more.append([info['N_Eleicao_id'],info['Candidatos'],info[ 'N_Candidato'],info['Votos']])
-            info_see.append([info['Candidatos'],info[ 'N_Candidato']])
+            if info['Candidatos'] != 'Null':
+                info_see.append([info['Candidatos'],info[ 'N_Candidato']])
         print(info_see)
            
         #id_end =  int(re.sub('[^0-9]',' ', str(id_end)))

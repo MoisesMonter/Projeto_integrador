@@ -34,21 +34,23 @@
         </ul>
         <!--TABELA DE CANDIDATOS-->
         <table border="1">
+
+
             <tr>
                 <td>Candidatos</td>
                 <td>Número Eleitoral</td>
 
             </tr>
+
+            {%  for Linhas in candidatos %}
             <tr>
-                <td>Ted</td>
-                <td>22</td>
+                {% for Coluna in Linhas%}
+                    <td>{{Coluna}}</td>
+                {% endfor %}
 
             </tr>
-            <tr>
-                <td>Ralf</td>
-                <td>265</td>
+            {% endfor %}
 
-            </tr>
         </table>
 
         <form action="{% url 'Urna' %}" name="form_primary" id="form_primary" method="post" autocomplete="off">{%csrf_token%}
