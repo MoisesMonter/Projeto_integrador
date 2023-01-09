@@ -24,7 +24,29 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+
+          {% for linhas in TheList %}
+            <tr>
+              
+                {%for colunas in linhas %}
+                  {% if colunas == 'Ativo'%}
+                    <td><a style="color:greenyellow">{{colunas}}</a></td>
+                  {% elif colunas == 'Inativo' %}
+                    <td><a style="color:rgb(255, 47, 47)">{{colunas}}</a></td>
+                  {% elif colunas == 'Link' %}
+                    <td><a href="../Urna/#{{linhas.0}}">Acesse aqui</a></td>
+
+
+                  {%else%}
+                  <td><p>{{colunas}}</p></td>
+                  {%endif%}
+                  
+                {% endfor%}
+
+            </tr>
+
+          {% endfor %}
+          <!--<tr>
             <th><p>1.</p></th>
             <td><p>#1111</p></td>
             <td><p>Jessica Tes</p></td>
@@ -64,7 +86,7 @@
             <td><a>Resultado</a></td>
           </tr>
         </tbody>
-        <!--<tfoot class="table-dark">
+        <tfoot class="table-dark">
           <tr>
             <th>#id</th>
             <th>First</th>

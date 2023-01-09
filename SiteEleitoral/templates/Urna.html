@@ -1,0 +1,153 @@
+{% extends 'corpo.html' %}
+
+{%load static%}
+
+{%block info1%}
+<link href="{% static 'css/config.css' %" rel="stylesheet">
+
+
+<div id="breadcrumb">
+    <p href="../">SEFIV/<a href="">Urna Nº0000</a></p>
+
+    </div>
+{% if form_1 != 1 %}
+<div id="UrnaEleicao"> 
+
+    <nav style="font-size:20px; text-align: center;">
+            <ul>
+                    <li><h1 >ELEIÇÃO Nº0000</h1></li>  
+                    <li><h4>TITULO DA ELEIÇÃO</h4></li><br>
+                    <li><a href="../" style="font-size:15px; color:brown;">Voltar para o início</a></li><br>
+                    <li><p>path('',views.Register,name='register'),
+                        path('home/',views.Home, name='home'),
+                        path('about_us/',views.About_us,name='about_us'),
+                        path('lista_eleicoes/',views.ListaEleicoes,name='lista_eleicoes'),
+                        path('login/',views.Login,name='login'),
+                        path('register/',views.Register,name='register'),
+                        path('suport_site/',views.Suport,name='suport'),
+                        path('configuração/',views.Config,name='config'),
+                        path('alterarpassword/',views.configkey,name='configkey'),
+                        path('deletarconta/',views.configdel,name='configdel'),
+                        path('logout/',views.Logout,name='Logout'),
+                    </p></li>
+            </ul>
+    </nav>
+    <nav style="font-size:20px; text-align: center; align-items: center; display: flex; flex-direction: column; flex-wrap: wrap; justify-content: center;">
+        <ul>
+            <li><h1>Tabela de candidatos</h1></li>
+        </ul>
+        <!--TABELA DE CANDIDATOS-->
+        <table border="1">
+            <tr>
+                <td>Candidatos</td>
+                <td>Número Eleitoral</td>
+
+            </tr>
+            <tr>
+                <td>Ted</td>
+                <td>22</td>
+
+            </tr>
+            <tr>
+                <td>Ralf</td>
+                <td>265</td>
+
+            </tr>
+        </table>
+
+        <form action="{% url 'Urna' %}" name="form_primary" id="form_primary" method="post" autocomplete="off">{%csrf_token%}
+            <table>{{formularios.Form1}}</table>
+            <table><input type="submit" value="Registrar seu voto!" ></table><br>
+
+
+        </form>
+    </nav>
+
+
+
+
+
+</div>
+
+{% elif form_1 == 1 %}
+
+<div id="UrnaEleicao"> 
+
+    <nav style="font-size:20px; text-align: center; align-items: center; display: flex; flex-direction: column; flex-wrap: wrap; justify-content: center;">
+        <ul>
+            <li><h1>Urna Eletrônica</h1></li>
+        </ul>
+        <!--TABELA DE CANDIDATOS-->
+        <table border="0" id="Urna">
+            <tr>
+
+                <td style="display:hidden;"><p>Nº:<p></td>
+                <td ><p class="lcd" style="width: 150px; height:30px;">_____</p></td>
+
+            </tr>
+            <tr>
+
+                <td style="display:hidden;"><p>Nome:<p></td>
+                <td ><p></p></td>
+
+            </tr>
+            <tr>
+
+            </tr>
+            <tr>
+                <td><button class='normal'>7</button></td>
+                <td><button class='normal'>8</button></td>
+                <td><button class='normal'>9</button></td>
+
+            </tr>
+            <tr>
+                <td><button class='normal'>4</button></td>
+                <td><button class='normal'>5</button></td>
+                <td><button class='normal'>6</button></td>
+
+            </tr>
+            <tr>
+                <td><button class='normal'>1</button></td>
+                <td><button class='normal'>2</button></td>
+                <td><button class='normal'>3</button></td>
+
+            </tr>
+            <tr>
+                <td><button class='normal' style="display:none;">-</button></td>
+                <td><button class='normal'>0</button></td>
+                <td><button class='normal' style="display:none;">-</button></td>
+
+            </tr>
+            <tr>
+                <td><button  class='action1'>Null</button></td>
+                <td><button  class='action2'>Cancelar</button></td>
+                <td><button class='action3'>Votar</button></td>
+
+            </tr>
+
+        </table>
+    </nav>
+
+    <form action="{% url 'Urna' %}"  method="post" autocomplete="off">{%csrf_token%}
+        <table>
+        <table>{{formularios.Form2}}</table>
+        <input type="submit" value="Voltar"></table>
+    </table>
+    </form>
+
+</div>
+
+{% endif %}
+
+
+
+{%endblock%}
+
+
+{%block info%}
+<div style="margin:10%; display: flex; flex-direction:column; justify-content:center; align-items: center; flex-wrap: wrap;">
+    <h1 style="font-size: 50px;">PAGINA NÃO ENCONTRADA</h1>
+    <h3 style="font-size: 25px; ">Você precisa estar logado para acessar o conteúdo dessa pagina</h3>
+    <a style="font-size: 20px; color:brown;" href="../login">Clique aqui para voltar logar na sua conta</a>
+    </div>
+{%endblock%}

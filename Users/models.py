@@ -66,6 +66,7 @@ class Activity_User(models.Model):
 class Data_Election(models.Model):
     N_Eleicao = models.ForeignKey(Election,on_delete=models.CASCADE,unique=False)
     Candidatos = models.CharField(max_length=50,unique=True)
+    N_Candidato = models.IntegerField()
     Votos = models.IntegerField(null = False)
 
     def __str__(self):
