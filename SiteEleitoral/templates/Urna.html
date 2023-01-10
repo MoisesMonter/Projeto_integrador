@@ -16,14 +16,21 @@
         <a href="">Urna Nº{{Eleitoral.N_Eleicao}}</a></p>
 
     </div>
-{% if form_1 != 1 %}
+
 <div id="UrnaEleicao"> 
 
     <nav style="font-size:20px; text-align: center;">
             <ul>
                     <li><h1 >ELEIÇÃO Nº {{Eleitoral.N_Eleicao}}</h1></li>  
                     <li><h4>{{Eleitoral.Titulo}}</h4></li><br>
-                    <li><a href="../{{local}}" style="font-size:15px; color:brown;">Voltar para o início</a></li><br>
+                    <li>
+                        {% if local == 'lista_eleicoes' %}
+                        <a href="../lista_eleicoes/" style="font-size:15px; color:brown;">Voltar para o início</a></li><br>
+                        {% else %}
+                        <a href="../lista_eleicoes" style="font-size:15px; color:brown;">Voltar para o início</a></li><br>
+                        {{local}}
+                        {% endif %}
+
                     <li>
                     <p class="descrição">{{Eleitoral.Descricao}}</p></li>
 
@@ -55,8 +62,7 @@
         </table>
 
         <form action="{% url 'Urna' %}" method="post" autocomplete="off">{%csrf_token%}
-            <table>{{formularios.Form1}}</table>
-            <table><input type="submit" value="Registrar seu voto!" ></table><br>
+            <a href="../Urna/Registrar_Voto/">Registrar seu voto!</a>
 
 
         </form>
@@ -68,107 +74,6 @@
 
 </div>
 
-{% elif form_1 == 1 %}
-
-<div id="UrnaEletronica"> 
-
-    <nav >
-        <ul>
-            <li><h1>Urna Eletrônica</h1></li>
-        </ul>
-        <!--TABELA DE CANDIDATOS-->
-        <table border="0" id="Urna">
-            <tr>
-
-                <td ><p class="lcd" >Nº:<p></td>
-                <td ><p class="lcd" >_____</p></td>
-
-            </tr>
-            <tr>
-                
-
-                <td ><p class="lcd" >_____</p></td>
-
-            </tr>
-            <tr>
-
-            </tr>
-            <tr>
-                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
-                    {{botoes_urna.b7}}
-                    <input  type="submit" value="7">
-                <form></td>
-                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
-                    {{botoes_urna.b8}}
-                    <input class='normal' type="submit" value="8">
-                <form></td>
-                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
-                    {{botoes_urna.b9}}
-                    <input class='normal' type="submit" value="9">
-                <form></td>
-
-            </tr>
-            <tr>
-                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
-                    {{botoes_urna.b4}}
-                    <input class='normal' type="submit" value="4">
-                <form></td>
-                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
-                    {{botoes_urna.b5}}
-                    <input class='normal' type="submit" value="5">
-                <form></td>
-                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
-                    {{botoes_urna.b6}}
-                    <input class='normal' type="submit" value="6">
-                <form></td>
-
-            </tr>
-            <tr>
-                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
-                    {{botoes_urna.b1}}
-                    <input class='normal' type="submit" value="1">
-                <form></td>
-                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
-                    {{botoes_urna.b2}}
-                    <input class='normal' type="submit" value="2">
-                <form></td>
-                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
-                    {{botoes_urna.b3}}
-                    <input class='normal' type="submit" value="3">
-                <form></td>
-
-            </tr>
-            <tr>
-                <td><input class='hiden' type="submit" value="  "></td>
-                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
-                    {{botoes_urna.b0}}
-                    <input class='normal' type="submit" value="0">
-                <form></td
-                <td><input class='hiden' type="submit" value="  "></td>
-
-            </tr>
-            <tr><td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
-                {{botoes_urna.Null}}
-                <input class='action1' type="submit" value="Null">
-                <form></td>
-                <td><input class='action2' type="submit" value="Cancelar"></td>
-                <td><input class='action3' type="submit" value="Votar"></td>
-
-            </tr>
-
-        </table>
-    </nav>
-
-    <form action="{% url 'Urna' %}"  method="post" autocomplete="off">{%csrf_token%}
-        <table>
-        <table>{{formularios.Form2}}</table>
-        <input type="submit" value="Voltar"></table>
-    </table>
-    </form>
-
-</div>
-
-{% endif %}
 
 
 

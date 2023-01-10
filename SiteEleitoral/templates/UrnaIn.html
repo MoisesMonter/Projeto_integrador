@@ -1,0 +1,112 @@
+{% extends 'corpo.html' %}
+
+{%load static%}
+
+{%block info1%}
+<div id="UrnaEletronica"> 
+
+    <nav >
+        <ul>
+            <li><h1>Urna Eletrônica</h1></li>
+        </ul>
+        <!--TABELA DE CANDIDATOS-->
+        <table border="0" id="Urna">
+            <tr>
+
+                <td ><p class="lcd" >Nº:<p></td>
+                <td ><p class="lcd" >_____</p></td>
+
+            </tr>
+            <tr>
+                
+
+                <td ><p class="lcd" >_____</p></td>
+
+            </tr>
+            <tr>
+
+            </tr>
+            <tr>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b7}}
+                    <input  class='normal' type="submit" value="7">
+                <form></td>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b8}}
+                    <input class='normal' type="submit" value="8">
+                <form></td>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b9}}
+                    <input class='normal' type="submit" value="9">
+                <form></td>
+
+            </tr>
+            <tr>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b4}}
+                    <input class='normal' type="submit" value="4">
+                <form></td>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b5}}
+                    <input class='normal' type="submit" value="5">
+                <form></td>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b6}}
+                    <input class='normal' type="submit" value="6">
+                <form></td>
+
+            </tr>
+            <tr>
+                <td><form class='normal' action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b1}}
+                    <input class='normal' type="submit" value="1">
+                <form></td>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b2}}
+                    <input class='normal' type="submit" value="2">
+                <form></td>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b3}}
+                    <input class='normal' type="submit" value="3">
+                <form></td>
+
+            </tr>
+            <tr>
+                <td><input class='hiden' type="submit" value="  "></td>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b0}}
+                    <input class='normal' type="submit" value="0">
+                <form>
+                <td><input class='hiden' type="submit" value="  "></td>
+
+            </tr>
+            <tr><td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                {{botoes_urna.Null}}
+                <input class='action1' type="submit" value="Null">
+                <form></td>
+                <td><input class='action2' type="submit" value="Cancelar"></td>
+                <td><input class='action3' type="submit" value="Votar"></td>
+
+            </tr>
+
+        </table>
+    </nav>
+
+    <form action="{% url 'Urna' %}"  method="post" autocomplete="off">{%csrf_token%}
+        <table>
+        <table>{{formularios.Form2}}</table>
+        <input type="submit" value="Voltar"></table>
+    </table>
+    </form>
+
+</div>
+{%endblock%}
+
+
+{%block info%}
+<div style="margin:10%; display: flex; flex-direction:column; justify-content:center; align-items: center; flex-wrap: wrap;">
+    <h1 style="font-size: 50px;">PAGINA NÃO ENCONTRADA</h1>
+    <h3 style="font-size: 25px; ">Você precisa estar logado para acessar o conteúdo dessa pagina</h3>
+    <a style="font-size: 20px; color:brown;" href="../login">Clique aqui para voltar logar na sua conta</a>
+    </div>
+{%endblock%}

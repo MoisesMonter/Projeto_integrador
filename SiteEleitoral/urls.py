@@ -19,7 +19,8 @@ urlpatterns = [
 
     path('gerarumaeleicao/',views.gerarumaeleicao, name='gerarumaeleicao'),
 
-    path('Urna/', views.Urna, name='Urna')
+    path('Urna/', views.Urna, name='Urna'),
+    path('Urna/Registrar_Voto/',views.UrnaIn,name='UrnaIn'),
 ]
 if settings.DEBUG:     
      urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
