@@ -33,7 +33,7 @@ div#configuracao img{
     height: 15ex;
 
 }
-input#id_Foto{
+div#configuracao input#id_Foto{
 
     background-color: #232323;
     color: #23232300;

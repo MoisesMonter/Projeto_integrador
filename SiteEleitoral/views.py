@@ -8,10 +8,11 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from .forms import FormUser,FormLogin,FormImagem,Formulario_part1,Formulario_part2,Formularios_Para_Votar,Select_day
 from Users.models import User as Usuario
-from Users.models import Election,Data_Election
+from Users.models import Election,Data_Election,Interaction_User
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm  
 # Create your views here.
+import pickle
 import datetime,re
 
 def Logout(request):
@@ -122,6 +123,17 @@ def ListaEleicoes(request):
             aux = ações_Usuarios(str(request.user),'sim').global_list_urna(request,aux2,'Lista_Eleicoes',True)
 
         print(aux2)        
+        if request.method == 'GET':
+            return render(request,"lista_eleicoes.html",{'x':False,'TheList':info,'Urna':enviar_para_Urna})
+
+        if request.method =='POST':
+            aux = request.POST.get('Form2')
+            aux2 = request.POST.get('local_urna')
+            if aux2 !=None:
+                print(aux,aux2)
+                ações_Usuarios(str(request.user),'sim').global_list_urna(request,aux2,'lista_eleicoes',True)
+                return Urna(request)
+
         return render(request,"lista_eleicoes.html",{'x':False,'TheList':info,'Urna':enviar_para_Urna})
     else:
         usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
@@ -164,28 +176,26 @@ def Urna(request):
         info_eleicao = Election.objects.get(N_Eleicao = info_Rapida[0])
         
         info_candidatos,info_candidatos_apurados = ações_Usuarios(str(request.user),info_Rapida[1]).lista_candidatos(request,info_Rapida[0])
-        print(info_candidatos)
+        #print(info_candidatos)
         form = 0
+        interacao_usuario=[]
         if request.POST.get('Form1') != None:
             form = 1
+            interacao_usuario = Interaction_User.objects.all().filter(Usuario = usuario_logado,N_Eleicao =info_eleicao).values_list()
+            
         else:
             form = 0
-        print(form)
         
-        #print(request.POST.get('Eleicao'))
+        print('aqui...',info_candidatos)
+        print("eleicao..",info_eleicao)
+        if len(interacao_usuario) != 0:
+            print('achado!!!!!')
+            form = 0
+            messages.success(request,f"Você Não pode Participar duas vezes")
         try:
             
   
             if request.method =='GET':
-
-
-                
-                print(info_Rapida)
-
-                info_candidatos,info_candidatos_apurados = ações_Usuarios(str(request.user),info_Rapida[1]).lista_candidatos(request,info_Rapida[0])
-                print(info_candidatos)
-                
-                #print(request.POST.get('Eleicao'))
                 return render(request,"Urna.html",{'x':True,'local':info_Rapida[1],'candidatos':info_candidatos,'Eleitoral':info_eleicao,'form_1':form,'formularios':formularios,'usuario_logado':usuario_logado})
             if request.method =='POST':
                 pass

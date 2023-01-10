@@ -24,8 +24,9 @@
                     <li><h1 >ELEIÇÃO Nº {{Eleitoral.N_Eleicao}}</h1></li>  
                     <li><h4>{{Eleitoral.Titulo}}</h4></li><br>
                     <li><a href="../{{local}}" style="font-size:15px; color:brown;">Voltar para o início</a></li><br>
-                    <li><p>{{Eleitoral.Descricao}}
-                    </p></li>
+                    <li>
+                    <p class="descrição">{{Eleitoral.Descricao}}</p></li>
+
             </ul>
     </nav>
     <nav style="font-size:20px; text-align: center; align-items: center; display: flex; flex-direction: column; flex-wrap: wrap; justify-content: center;">
@@ -69,9 +70,9 @@
 
 {% elif form_1 == 1 %}
 
-<div id="UrnaEleicao"> 
+<div id="UrnaEletronica"> 
 
-    <nav style="font-size:20px; text-align: center; align-items: center; display: flex; flex-direction: column; flex-wrap: wrap; justify-content: center;">
+    <nav >
         <ul>
             <li><h1>Urna Eletrônica</h1></li>
         </ul>
@@ -79,47 +80,47 @@
         <table border="0" id="Urna">
             <tr>
 
-                <td style="display:hidden;"><p>Nº:<p></td>
-                <td ><p class="lcd" style="width: 150px; height:30px;">_____</p></td>
+                <td ><p class="lcd" >Nº:<p></td>
+                <td ><p class="lcd" >_____</p></td>
+
+            </tr>
+            <tr>
+                
+
+                <td ><p class="lcd" >_____</p></td>
 
             </tr>
             <tr>
 
-                <td style="display:hidden;"><p>Nome:<p></td>
-                <td ><p></p></td>
+            </tr>
+            <tr>
+                <td><input class='normal' type="submit" value="7"></td>
+                <td><input class='normal' type="submit" value="8"></td>
+                <td><input class='normal' type="submit" value="9"></td>
 
             </tr>
             <tr>
+                <td><input class='normal' type="submit" value="4"></td>
+                <td><input class='normal' type="submit" value="5"></td>
+                <td><input class='normal' type="submit" value="6"></td>
 
             </tr>
             <tr>
-                <td><button class='normal'>7</button></td>
-                <td><button class='normal'>8</button></td>
-                <td><button class='normal'>9</button></td>
+                <td><input  class='normal'type="submit" value="1"></td>
+                <td><input  class='normal'type="submit" value="2"></td>
+                <td><input class='normal' type="submit" value="3"></td>
 
             </tr>
             <tr>
-                <td><button class='normal'>4</button></td>
-                <td><button class='normal'>5</button></td>
-                <td><button class='normal'>6</button></td>
+                <td><input class='hiden' type="submit" value="  "></td>
+                <td><input class='normal' type="submit" value="0"></td>
+                <td><input class='hiden' type="submit" value="  "></td>
 
             </tr>
             <tr>
-                <td><button class='normal'>1</button></td>
-                <td><button class='normal'>2</button></td>
-                <td><button class='normal'>3</button></td>
-
-            </tr>
-            <tr>
-                <td><button class='normal' style="display:none;">-</button></td>
-                <td><button class='normal'>0</button></td>
-                <td><button class='normal' style="display:none;">-</button></td>
-
-            </tr>
-            <tr>
-                <td><button  class='action1'>Null</button></td>
-                <td><button  class='action2'>Cancelar</button></td>
-                <td><button class='action3'>Votar</button></td>
+                <td><input class='action1' type="submit" value="Null"></td>
+                <td><input class='action2' type="submit" value="Cancelar"></td>
+                <td><input class='action3' type="submit" value="Votar"></td>
 
             </tr>
 

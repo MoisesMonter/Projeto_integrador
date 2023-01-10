@@ -83,7 +83,7 @@
                         <input type="text" class="form-control" autocomplete="on" placeholder="Titulo da Eleição" name="Formulario1" id="Formulario1" value = '{{form1_2.0}}'><br>
                         {% endif %}
                         {% if form1_2.1 > 1 %}
-                        <textarea type="textarea" rows="5" placeholder='Resuma em 300 linhas' data-ls-module="charCounter"  name="Formulario2" id="Formulario2"></textarea>
+                        <textarea type="textarea" rows="5" max-lenght="300" placeholder='Resuma em 300 linhas' data-ls-module="charCounter"  name="Formulario2" id="Formulario2"></textarea>
                         {% else %}
                         <textarea type="textarea" rows="5" placeholder='Resuma em 300 linhas' data-ls-module="charCounter"  name="Formulario2" id="Formulario2">{{form1_2.1}}</textarea>
                         {% endif %}

@@ -1,7 +1,27 @@
-.formR li{
-    color:red;
+.register_main{
+    padding-left: 5ex;
+    padding-right: 5ex;
+    font-size: 15px;
+    box-shadow: 2px 2px 10px 5px rgb(0, 0, 0);  
+}
+.register_user_info ul li{
+    list-style-type: none;
+    margin:1px;
 
 }
+div.cabeçalho{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    text-align: center;
+
+}
+div.cabeçalho img{
+
+    width: 10ex; 
+    }
 /*Tela Grande*/
 @media (min-width: 1143px){
     #user_register{
@@ -14,6 +34,7 @@
         flex-direction:row;
         justify-items: auto;
         align-items: center;
+        margin-left: 100px;
     }
     
     .register_main{
@@ -25,11 +46,15 @@
         height: 300px;
         height: auto;
         background-color:#232323;
-        border-radius: 10px;
 
-        margin: 10%;
+
+        margin: 0% 10% 10% 25%;
         padding-top: 5%;
         padding-bottom: 8%;
+        background-color:#232323;
+        border-radius: 10px;
+        border: solid gray 2px ;
+        
     
     }
     
@@ -44,19 +69,14 @@
     
     }
     
-    div.register_logo img{
-        padding-top: 100px ;
-        width: 90px;
-        height: 110px;
-    
-    }
+
 }
 
 
 /*Tela Pequena*/
 @media (max-width: 1144px){
     div.register_division li{
-        display:none;
+
         list-style-type: none;
     }
     
@@ -79,7 +99,7 @@
         width: 1300px;
         height: 400px;
         height: auto;
-        background-color:#232323;
+        background-color:#000000;
         border-radius: 10px;
 
         margin: 10%;

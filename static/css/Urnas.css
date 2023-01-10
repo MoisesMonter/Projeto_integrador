@@ -1,65 +1,223 @@
+div#UrnaEleicao table{
+    border-collapse: collapse;
+    color: #FFFF;
+    font-size: 15px;
+    box-shadow: 2px 2px 10px 5px rgb(0, 0, 0); 
 
-div#UrnaEleicao{
 
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content:center;
-    align-items: center;
-    width: 1000px;
-    height: 400px;
-    height: auto;
-    background-color:#232323;
+}
+div#UrnaEleicao tr{ 
+    margin: 25px;
+}
+div#UrnaEleicao td{
+    padding: 25px;
+}
+
+
+
+
+#Urna input.hiden{
+    display: none;
+    
+}
+
+
+@media (max-width:1143px){
+    div#UrnaEleicao tr{ 
+        margin: 10px;
+    }
+    div#UrnaEleicao td{padding: 10px;}
+
+
+    div#UrnaEleicao{
+        list-style-type: none;
+        height: auto;
+        background-color:#000000;
+        
+        width: 700px;
+        height: auto;
+        border: #ffffff;
+        border-color: aliceblue;
+        box-shadow: 2px 2px 10px 5px rgb(0, 0, 0);  
+        
+    }
+
+
+
+    div#UrnaEletronica{
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content:center;
+        align-items: center;
+        margin: 0px;
+        height: auto;
+        background-color:#000000;
+        
+        width: 700px;
+        height: auto;
+        border: #ffffff;
+        border-color: aliceblue;
+        box-shadow: 2px 2px 5px 5px rgb(0, 0, 0);  
+        margin-bottom: 5px;
+        
+    }
+
+    div#UrnaEletronica nav tr{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    table#Urna{
+        box-shadow: 2px 2px 3px 5px rgb(155, 154, 154);  
+        padding-bottom: 5px;
+        width: 500px;
+    }
+    div#UrnaEleicao ul li{
+    list-style-type: none;
+    }
+    div#UrnaEletronica ul li{
+        text-align: center;
+        list-style-type: none;
+        }
+    #UrnaEleicao .descrição{
+        padding-left: 5ex;
+        padding-right: 8ex;
+
+        word-break: break-all;
+    }
+    
     
 
-    border-radius: 5px;
-    border: #ffffff;
-    border-color: aliceblue;
-    margin-left: 15%;
-    margin-bottom: 5%;
-    padding-bottom: 8%;
+    #Urna .lcd{
+        font-size: 5px;
+        background-color: #474646;
+        color: #232323;
+        border-radius: 3px;
+        padding:5px;
+
+    }
+
+}
+
+@media (min-width:1144px){
+    div#UrnaEleicao td{padding: 10px;}
+
+
+    div#UrnaEleicao{
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content:center;
+        align-items: center;
+
+        height: auto;
+        background-color:#232323;
+        
+        width: 700px;
+        height: auto;
+        border: #ffffff;
+        border-color: aliceblue;
+        box-shadow: 2px 2px 10px 5px rgb(0, 0, 0);  
+        
+    }
+
+    div#UrnaEletronica td{
+        padding: 0px;
+        
+    }
+
+    div#UrnaEletronica{
+        list-style-type: none;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content:center;
+        align-items: center;
+        margin: 0px;
+        height: auto;
+        background-color:#232323;
+        
+        width: 700px;
+        height: auto;
+        border: #ffffff;
+        border-color: aliceblue;
+        box-shadow: 2px 2px 5px 5px rgb(0, 0, 0);  
+
+    }
+
+    div#UrnaEletronica nav tr{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    table#Urna{
+        box-shadow: 2px 2px 3px 5px rgb(155, 154, 154);  
+        padding-bottom: 5px;
+        width: 500px;
+        margin-bottom: 5px;
+    }
+    div#UrnaEleicao ul li{
+        list-style-type: none;
+    }
+    div#UrnaEletronica ul li{
+        text-align: center;
+        list-style-type: none;
+    }
+    #UrnaEleicao .descrição{
+        padding-left: 5ex;
+        padding-right: 8ex;
+        word-break: break-all;
+    }
     
+    #Urna .lcd{
+        font-size: 10px;
+        background-color: #474646;
+        color: #232323;
+        border-radius: 5px;
+
+    }
+
+
+
+
 }
 
 
-div#UrnaEleicao ul li{
-list-style-type: none;
-}
 
-
-
-div#li_conf{
-display: flex;
-flex-direction: row;
-gap: 5px;
-
-}
-#Urna button{
+#Urna input.normal{
     text-transform: uppercase;
     border:none;
-    padding:10px;
+    padding:5px;
     cursor:pointer;
     display: inline-block;
-    font-weight: 700;
-    width:8ex; 
+    font-size: 20px;
+    font-weight: 900;
+    width:10ex; 
     height: 5ex;
-    box-shadow:0 5px 0 #4a4a4a;
+    box-shadow:0 5px 0 #2b2a2a;
     margin:1ex;
-    border:solid;
+    border:solid;   
     border-radius: 10px;
-    border-color: #4a4a4a;
-    border
+    border-color: #2b2a2a;
 }
 
-#Urna button.action1{
+
+#Urna input.action1{
     width:14ex;
     height: 5ex;
-    background-color: azure;
+    background-color: rgb(31, 241, 241);
     box-shadow:0 5px 0 #1a1a1a;
     border-radius: 10px;
     border-color: #1a1a1a;
 }
-#Urna button.action2{
+#Urna input.action2{
     width:14ex;
     height: 5ex;
     background-color: red;
@@ -67,7 +225,7 @@ gap: 5px;
     border-radius: 10px;
     border-color: #4d0000;
 }
-#Urna button.action3{
+#Urna input.action3{
     width:14ex;
     height: 5ex;
     background-color: rgb(3, 189, 3);
@@ -75,19 +233,27 @@ gap: 5px;
     border-radius: 10px;
     border-color: rgb(2, 52, 2);
 }
-#Urna button.action1:active{
-    background:rgb(112, 112, 112);
+#Urna input.normal:active{
+    background:rgb(173, 173, 173);
+    border-color: #2b2a2a;
 
 }
-#Urna button.action2:active{
+#Urna input.action1:active{
+    background:rgb(31, 190, 190);
+    border-color: #2b2a2a;
+
+}
+#Urna input.action2:active{
     background:#700505;
+    border-color: #4d0000;
 
 }
-#Urna button.action3:active{
-    background:rgb(0, 60, 0);
-
+#Urna input.action3:active{
+    background:rgb(67, 233, 67);
+    border-color: rgb(2, 52, 2);
 }
-#Urna button:active{
+#Urna input:active{
+    border-color: #999797;
     position:relative;
     top:5px;
     box-shadow:none;
@@ -98,8 +264,9 @@ gap: 5px;
     border-radius: 5px;
 }
 #Urna .lcd{
-    
+    font-size: 30px;
     background-color: #474646;
     color: #232323;
     border-radius: 5px;
+    padding: 1ex;
 }
