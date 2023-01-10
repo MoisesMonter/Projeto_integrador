@@ -6,13 +6,12 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
-from .forms import FormUser,FormLogin,FormImagem,Formulario_part1,Formulario_part2,Formularios_Para_Votar,Select_day
+from .forms import FormUser,FormLogin,FormImagem,Formulario_part1,Formulario_part2,Formularios_Para_Votar,Select_day,Botoes_Urna
 from Users.models import User as Usuario
 from Users.models import Election,Data_Election,Interaction_User
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm  
 # Create your views here.
-import pickle
 import datetime,re
 
 def Logout(request):
@@ -119,21 +118,21 @@ def ListaEleicoes(request):
         aux = request.POST.get('Form1')
         aux2 = str(request.POST.get('local_urna'))
         if aux != None and aux2 !=None:
-            print(aux,aux2)
+            #print(aux,aux2)
             aux = ações_Usuarios(str(request.user),'sim').global_list_urna(request,aux2,'Lista_Eleicoes',True)
 
-        print(aux2)        
+        #print(aux2)        
         if request.method == 'GET':
+
             return render(request,"lista_eleicoes.html",{'x':False,'TheList':info,'Urna':enviar_para_Urna})
 
         if request.method =='POST':
             aux = request.POST.get('Form2')
             aux2 = request.POST.get('local_urna')
             if aux2 !=None:
-                print(aux,aux2)
+                #print(aux,aux2)
                 ações_Usuarios(str(request.user),'sim').global_list_urna(request,aux2,'lista_eleicoes',True)
                 return Urna(request)
-
         return render(request,"lista_eleicoes.html",{'x':False,'TheList':info,'Urna':enviar_para_Urna})
     else:
         usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
@@ -150,10 +149,10 @@ def ListaEleicoes(request):
             aux = request.POST.get('Form2')
             aux2 = request.POST.get('local_urna')
             if aux2 !=None:
-                print(aux,aux2)
+                #print(aux,aux2)
                 ações_Usuarios(str(request.user),'sim').global_list_urna(request,aux2,'lista_eleicoes',True)
                 return Urna(request)
-            print(aux)
+            #print(aux)
             usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
             
             return render(request,"lista_eleicoes.html",{'x':True,'usuario_logado':usuario_logado,'TheList':info,'Urna':enviar_para_Urna})
@@ -174,38 +173,58 @@ def Urna(request):
         formularios = Formularios_Para_Votar(request.POST)
         info_Rapida = ações_Usuarios(str(request.user),'sim').global_list_urna(request,'','',False)
         info_eleicao = Election.objects.get(N_Eleicao = info_Rapida[0])
-        
+        botoes_urna = Botoes_Urna(request.POST)
         info_candidatos,info_candidatos_apurados = ações_Usuarios(str(request.user),info_Rapida[1]).lista_candidatos(request,info_Rapida[0])
         #print(info_candidatos)
         form = 0
         interacao_usuario=[]
-        if request.POST.get('Form1') != None:
-            form = 1
-            interacao_usuario = Interaction_User.objects.all().filter(Usuario = usuario_logado,N_Eleicao =info_eleicao).values_list()
-            
-        else:
-            form = 0
-        
-        print('aqui...',info_candidatos)
-        print("eleicao..",info_eleicao)
-        if len(interacao_usuario) != 0:
-            print('achado!!!!!')
-            form = 0
-            messages.success(request,f"Você Não pode Participar duas vezes")
+        local = []
         try:
-            
-  
+
+            if request.POST.get('Form1') != None:
+                form = 1
+                interacao_usuario = Interaction_User.objects.all().filter(Usuario = usuario_logado,N_Eleicao =info_eleicao).values_list()        
+            else:
+                form = 0
+            print('aqui...',info_candidatos)
+            print("eleicao..",info_eleicao)
+            if len(interacao_usuario) != 0:
+                print('achado!!!!!')
+                form = 0
+                messages.success(request,f"Você Não pode Participar duas vezes")
             if request.method =='GET':
-                return render(request,"Urna.html",{'x':True,'local':info_Rapida[1],'candidatos':info_candidatos,'Eleitoral':info_eleicao,'form_1':form,'formularios':formularios,'usuario_logado':usuario_logado})
-            if request.method =='POST':
-                pass
-            if formularios.is_valid():
-                pass
-            return render(request,"Urna.html",{'x':True,'local':info_Rapida[1],'candidatos':info_candidatos,'Eleitoral':info_eleicao,'form_1':form,'formularios':formularios,'usuario_logado':usuario_logado})
+                if request.method =='GET':
+                    print("opa")
+                return render(request,"Urna.html",{'x':True,'local':info_Rapida[1],'candidatos':info_candidatos,'Eleitoral':info_eleicao,'form_1':1 ,'formularios':formularios,'usuario_logado':usuario_logado,'botoes_urna':botoes_urna})
+            if botoes_urna != None:
+                if request.POST['Null'] != None:
+                    print(request.POST['Null'])
+                if request.POST['b0'] != None:
+                    print(request.POST['b0'])
+                if request.POST['b1'] != None:
+                    print(request.POST['b1'])
+                if request.POST['b2'] != None:
+                    print(request.POST['b2'])
+                if request.POST['b3'] != None:
+                    print(request.POST['b3'])
+                if request.POST['b4'] != None:
+                    print(request.POST['b4'])
+                if request.POST['b5'] != None:
+                    print(request.POST['b5'])
+                if request.POST['b6'] != None:
+                    print(request.POST['b6'])
+                if request.POST['b7'] != None:
+                    print(request.POST['b7'])
+                if request.POST['b8'] != None:
+                    print(request.POST['b8'])
+                if request.POST['b9'] != None:
+                    print(request.POST['b9'])
+
+            return render(request,"Urna.html",{'x':True,'local':info_Rapida[1],'candidatos':info_candidatos,'Eleitoral':info_eleicao,'form_1':1,'formularios':formularios,'usuario_logado':usuario_logado,'botoes_urna':botoes_urna})
                 
         except:
             #print(formularios.Form1)
-            return render(request,"Urna.html",{'x':True,'local':info_Rapida[1],'candidatos':info_candidatos,'Eleitoral':info_eleicao,'form_1':form,'formularios':formularios,'usuario_logado':usuario_logado})
+            return render(request,"Urna.html",{'x':True,'local':info_Rapida[1],'candidatos':info_candidatos,'Eleitoral':info_eleicao,'form_1':form,'formularios':formularios,'usuario_logado':usuario_logado,'botoes_urna':botoes_urna})
 
 
 def gerarumaeleicao(request):

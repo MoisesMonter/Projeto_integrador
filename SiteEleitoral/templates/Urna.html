@@ -94,31 +94,63 @@
 
             </tr>
             <tr>
-                <td><input class='normal' type="submit" value="7"></td>
-                <td><input class='normal' type="submit" value="8"></td>
-                <td><input class='normal' type="submit" value="9"></td>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b7}}
+                    <input  type="submit" value="7">
+                <form></td>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b8}}
+                    <input class='normal' type="submit" value="8">
+                <form></td>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b9}}
+                    <input class='normal' type="submit" value="9">
+                <form></td>
 
             </tr>
             <tr>
-                <td><input class='normal' type="submit" value="4"></td>
-                <td><input class='normal' type="submit" value="5"></td>
-                <td><input class='normal' type="submit" value="6"></td>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b4}}
+                    <input class='normal' type="submit" value="4">
+                <form></td>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b5}}
+                    <input class='normal' type="submit" value="5">
+                <form></td>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b6}}
+                    <input class='normal' type="submit" value="6">
+                <form></td>
 
             </tr>
             <tr>
-                <td><input  class='normal'type="submit" value="1"></td>
-                <td><input  class='normal'type="submit" value="2"></td>
-                <td><input class='normal' type="submit" value="3"></td>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b1}}
+                    <input class='normal' type="submit" value="1">
+                <form></td>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b2}}
+                    <input class='normal' type="submit" value="2">
+                <form></td>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b3}}
+                    <input class='normal' type="submit" value="3">
+                <form></td>
 
             </tr>
             <tr>
                 <td><input class='hiden' type="submit" value="  "></td>
-                <td><input class='normal' type="submit" value="0"></td>
+                <td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                    {{botoes_urna.b0}}
+                    <input class='normal' type="submit" value="0">
+                <form></td
                 <td><input class='hiden' type="submit" value="  "></td>
 
             </tr>
-            <tr>
-                <td><input class='action1' type="submit" value="Null"></td>
+            <tr><td><form action ="{% url 'Urna' %}" method="post">{% csrf_token%}
+                {{botoes_urna.Null}}
+                <input class='action1' type="submit" value="Null">
+                <form></td>
                 <td><input class='action2' type="submit" value="Cancelar"></td>
                 <td><input class='action3' type="submit" value="Votar"></td>
 
