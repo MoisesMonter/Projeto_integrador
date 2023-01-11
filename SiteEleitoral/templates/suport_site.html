@@ -10,12 +10,12 @@
     <div class="main_suport">
         
         <div id="ambiente">
-            <form>
+            <form action ="{% url 'suport' %}" method="post">{% csrf_token%}
 
 
                 <div class="form-row">
                     <div class="col">
-                      <input type="text" class="form-control" placeholder="Nome">
+                      <input type="text" class="form-control" placeholder="Nome" name="">
                     </div>
                     <div class="col">
                       <input type="text" class="form-control" placeholder="Sobrenome">
