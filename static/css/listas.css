@@ -57,7 +57,10 @@
     }
 }
 @media (min-width:1144px){
-        
+    #navbar_login{
+        width: 1800px;
+        max-width: auto;
+    }
 
     div#listas_eleicoes{
 

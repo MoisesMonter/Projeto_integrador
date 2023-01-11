@@ -33,6 +33,7 @@ input{
     border-radius: 1ex;
     padding-top: 0.5ex;
     padding-bottom: 0.5ex;
+    padding-right: 0.5ex;
     border-style:outset;
     box-shadow: 1px 1px 1px #000000;
     outline-color: rgb(102, 233, 69);

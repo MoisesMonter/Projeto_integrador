@@ -1,5 +1,8 @@
 
-div#configuracao{
+
+@media (min-width: 1144px){
+
+    div#configuracao{
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
@@ -19,6 +22,8 @@ div#configuracao{
         padding-bottom: 8%;
         
 }
+
+
 div#configuracao ul li{
     list-style-type: none;
 }
@@ -39,9 +44,86 @@ div#configuracao input#id_Foto{
     color: #23232300;
 }
 
+div#configuracao input{
+    color: #232323;
+    background-color: black;
+}
+
+div#configuracao input#id_Foto.form-control{
+    border-style:none;
+    box-shadow: none;
+}
+
 div#li_conf{
     display: flex;
     flex-direction: row;
     gap: 5px;
     
+}
+
+
+}
+
+
+@media (max-width: 1143px){
+
+    div#configuracao{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content:center;
+        align-items: center;
+        width: 700px;
+        height: 400px;
+        height: auto;
+        background-color:#000000;
+        color:
+
+        border-radius: 5px;
+        border: #ffffff;
+        border-color: aliceblue;
+        margin-left: 15%;
+        margin-bottom: 5%;
+        padding-bottom: 8%;
+        
+}
+
+
+div#configuracao ul li{
+    list-style-type: none;
+}
+form#img{
+    margin-left: 100px;
+}
+div#configuracao img{
+    margin-top: 5ex;
+    margin-left: 8ex;
+    border-radius: 50%;
+    width: 15ex;
+    height: 15ex;
+
+}
+div#configuracao input#id_Foto{
+
+    background-color: #232323;
+    color: #23232300;
+}
+
+div#configuracao input{
+    color: #000000;
+    background-color: rgb(170, 170, 170);
+}
+
+div#configuracao input#id_Foto.form-control{
+    border-style:none;
+    box-shadow: none;
+background-color: #000000;
+    }
+
+div#li_conf{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    
+}
 }
