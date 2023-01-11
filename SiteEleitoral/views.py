@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth.models import User,AnonymousUser
 from django.contrib.auth import authenticate,logout
 from django.contrib.auth import login as login_django
@@ -127,12 +127,11 @@ def ListaEleicoes(request):
             return render(request,"lista_eleicoes.html",{'x':False,'TheList':info,'Urna':enviar_para_Urna})
 
         if request.method =='POST':
-            aux = request.POST.get('Form2')
             aux2 = request.POST.get('local_urna')
             if aux2 !=None:
                 #print(aux,aux2)
                 ações_Usuarios(str(request.user),'sim').global_list_urna(request,aux2,'lista_eleicoes',True)
-                return Urna(request)
+                Urna(request)
         return render(request,"lista_eleicoes.html",{'x':False,'TheList':info,'Urna':enviar_para_Urna})
     else:
         usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
@@ -151,7 +150,7 @@ def ListaEleicoes(request):
             if aux2 !=None:
                 #print(aux,aux2)
                 ações_Usuarios(str(request.user),'sim').global_list_urna(request,aux2,'lista_eleicoes',True)
-                return Urna(request)
+                return redirect('Urna')
             #print(aux)
             usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
             
@@ -177,8 +176,6 @@ def Urna(request):
         info_eleicao = Election.objects.get(N_Eleicao = info_Rapida[0])
         try:
             if request.method =='GET':
-                if request.method =='GET':
-                    print("opa")
                 return render(request,"Urna.html",{'x':True,'candidatos':info_candidatos,'Eleitoral':info_eleicao,'formularios':formularios,'usuario_logado':usuario_logado})
             return render(request,"Urna.html",{'x':True,'candidatos':info_candidatos,'Eleitoral':info_eleicao,'formularios':formularios,'usuario_logado':usuario_logado})
                 
@@ -187,38 +184,83 @@ def Urna(request):
             return render(request,"Urna.html",{'x':True,'candidatos':info_candidatos,'Eleitoral':info_eleicao,'formularios':formularios,'usuario_logado':usuario_logado})
 
 
-def UrnaIn(request):
-    x =str(request.user) == 'AnonymousUser'
-    if x == True:
-        return render(request,"UrnaIn.html",{'x':False})  
-    else:
-        usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
-        info_Rapida = ações_Usuarios(str(request.user),'sim').global_list_urna(request,'','',False)
-        info_eleicao = Election.objects.get(N_Eleicao = info_Rapida[0])
-        info_candidatos,info_candidatos_apurados = ações_Usuarios(str(request.user),info_Rapida[1]).lista_candidatos(request,info_Rapida[0])
-        interacao_usuario = Interaction_User.objects.all().filter(Usuario = usuario_logado,N_Eleicao =info_eleicao).values_list()        
-        if len(interacao_usuario) > 0:
-            print('achado!!!!!')
-            form = 0
-            messages.success(request,f"Você Não pode Participar duas vezes")
-            return Urna(request)
-        else:
-            print('opa')       
-        if request.method =='GET':
-            return render(request,"UrnaIn.html",{'x':True,'usuario_logado':usuario_logado}) 
-        return render(request,"UrnaIn.html",{'x':True,'usuario_logado':usuario_logado})  
-        
-        '''if request.POST.get('Form1') != None:
-            interacao_usuario = Interaction_User.objects.all().filter(Usuario = usuario_logado,N_Eleicao =info_eleicao).values_list()        
-            return render(request,"UrnaIn.html",{'x':False}) 
 
-        usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
-        formularios = Formularios_Para_Votar(request.POST)
-        info_Rapida = ações_Usuarios(str(request.user),'sim').global_list_urna(request,'','',False)
-        info_eleicao = Election.objects.get(N_Eleicao = info_Rapida[0])
-        botoes_urna = Botoes_Urna(request.POST)
-        info_candidatos,info_candidatos_apurados = ações_Usuarios(str(request.user),info_Rapida[1]).lista_candidatos(request,info_Rapida[0])
-        return render(request,"UrnaIn.html",{'x':True,'candidatos':info_candidatos,'Eleitoral':info_eleicao,'form_1':1,'formularios':formularios,'usuario_logado':usuario_logado,'botoes_urna':botoes_urna})'''
+
+def votar(request):
+    if str(request.user) == 'anonymousUser':
+        return render(request,"votar.html")
+    usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
+    info_Rapida = ações_Usuarios(str(request.user),'sim').global_list_urna(request,'','',False)
+    info_eleicao = Election.objects.get(N_Eleicao = info_Rapida[0])
+    interacao_usuario = Interaction_User.objects.all().filter(Usuario = usuario_logado,N_Eleicao =info_eleicao).values_list()   
+    if len(interacao_usuario) > 0:
+        print('achado!!!!!')
+        messages.success(request,f"Você Não pode Participar duas vezes")
+        return redirect('Urna')
+    else:
+        if request.method == 'POST':
+            if request.POST.get('b0') != None:
+                info = ações_Usuarios(str(request.user),'sim').Seu_Voto(request,'0',True,False)
+                print(info)
+            elif request.POST.get('b1') != None:
+                info = ações_Usuarios(str(request.user),'sim').Seu_Voto(request,'1',True,False)
+                print(info)
+            elif request.POST.get('b2') != None:
+                info = ações_Usuarios(str(request.user),'sim').Seu_Voto(request,'2',True,False)
+                print(info)
+            elif request.POST.get('b3') != None:
+                info = ações_Usuarios(str(request.user),'sim').Seu_Voto(request,'3',True,False)
+                print(info)
+            elif request.POST.get('b4') != None:
+                info = ações_Usuarios(str(request.user),'sim').Seu_Voto(request,'4',True,False)
+                print(info)
+            elif request.POST.get('b5') != None:
+                info = ações_Usuarios(str(request.user),'sim').Seu_Voto(request,'5',True,False)
+                print(info)
+            elif request.POST.get('b6') != None:
+                info = ações_Usuarios(str(request.user),'sim').Seu_Voto(request,'6',True,False)
+                print(info)
+            elif request.POST.get('b7') != None:
+                info = ações_Usuarios(str(request.user),'sim').Seu_Voto(request,'7',True,False)
+                print(info)
+            elif request.POST.get('b8') != None:
+                info = ações_Usuarios(str(request.user),'sim').Seu_Voto(request,'8',True,False)
+                print(info)
+            elif request.POST.get('b9') != None:
+                info = ações_Usuarios(str(request.user),'sim').Seu_Voto(request,'9',True,False)
+                print(info)
+            elif request.POST.get('Null') != None:
+                print('Null')
+            elif request.POST.get('Cancelar') != None:
+                info = ações_Usuarios(str(request.user),'sim').Seu_Voto(request,'0',False,True)
+                print(info)
+            elif request.POST.get('Votar') != None:
+                info = ações_Usuarios(str(request.user),'sim').Seu_Voto(request,'0',False,False)
+                info_candidatos,info_candidatos_profundo = ações_Usuarios(str(request.user),info_Rapida[1]).lista_candidatos(request,info_Rapida[0])
+                #eleitores = Data_Election.objects.filter(N_Eleicao = eleicao.pk).all()
+                ballon = False
+                for verificando in info_candidatos_profundo:
+                    print(verificando)
+                    if verificando[2] != 0:
+                        if str(info) == str(verificando[2]):
+                            voto = Data_Election.objects.filter(N_Eleicao = info_Rapida[0]).get(N_Candidato = info)
+                            voto.Votos+=1
+                            voto.save()
+                            usuario = Usuario.objects.get(Id_Academico = request.user)
+                            #Eleicao = Election.objects.get(N_eleicao = info_Rapida[0])
+                            eleitor=Interaction_User(Usuario = usuario,N_Eleicao =info_eleicao,Data = datetime.datetime.now())
+                            eleitor.save()
+                            ballon =True
+                        else:
+                            print("nada")
+                if ballon:
+                    messages.success(request,f" Voto Efetuado com sucesso com sucesso!")
+                    return redirect('Urna')
+                else:
+                    messages.success(request,f" Nem um Candidato foi encontrado...")
+                
+                
+        return render(request,"votar.html",{'x':True,'usuario_logado':usuario_logado,'Eleitoral':info_eleicao}) 
 
 
 def gerarumaeleicao(request):
@@ -498,11 +540,12 @@ class ações_Usuarios():
     gerando_lista_candidatos = {}
     gerando_informacoes_candidatura = {}
     local_atual_eleicao = {}
-    requisições={}
+    Voto ={}
     def __init__(self,login,pagina_atual):
         global gerando_lista_candidatos
         global gerando_informacoes_candidatura
         global local_atual_eleicao
+        global Voto
         self.login = login
         self.pagina_atual = pagina_atual
 
@@ -515,12 +558,16 @@ class ações_Usuarios():
     def global_info(self,request,info,info_local,manipulacao,login_end):
         if self.login not in self.gerando_lista_candidatos:
             self.gerando_lista_candidatos[self.login]=[]
+
+        
         if info != None and info != '' and len(info) >0:
             try:
                 info_local = self.gerando_lista_candidatos[self.login]
                 if manipulacao == True: #caso seja necessario apagar
                     info_local.remove(info)
                 else:#caso contrario apenas incremente
+                    if self.login in self.Voto:
+                        self.Voto.pop(self.login)
                     if info not in info_local:
                         info_local.append(info)
                         self.gerando_lista_candidatos[self.login]=info_local
@@ -538,6 +585,8 @@ class ações_Usuarios():
 
 
         if modificar == True:
+            if self.login in self.Voto:
+                self.Voto.pop(self.login)
             if titulo == None or len(titulo) <0 or titulo == '':
                 pass
             else:
@@ -591,7 +640,6 @@ class ações_Usuarios():
         return self.local_atual_eleicao[self.login]
 
     def lista_candidatos(self,request,lista_candidatos):
-        print('\n\nxxx',lista_candidatos)
         eleicao = Election.objects.get(N_Eleicao = lista_candidatos)
         #eleicao = Election.values_list(N_Eleicao = lista_candidatos)
         eleitores = Data_Election.objects.filter(N_Eleicao = eleicao.pk).all()
@@ -602,11 +650,31 @@ class ações_Usuarios():
         info_see = []
         info_more =[]
         for info in eleitores.values():##Informando o Ultimo ID de todos elementos da Eleição
-            print([info['N_Eleicao_id'],info['Candidatos'],info[ 'N_Candidato'],info['Votos']])
+            #print([info['N_Eleicao_id'],info['Candidatos'],info[ 'N_Candidato'],info['Votos']])
             info_more.append([info['N_Eleicao_id'],info['Candidatos'],info[ 'N_Candidato'],info['Votos']])
             if info['Candidatos'] != 'Null':
                 info_see.append([info['Candidatos'],info[ 'N_Candidato']])
-        print(info_see)
+        #print(info_see)
            
         #id_end =  int(re.sub('[^0-9]',' ', str(id_end)))
         return info_see,info_more
+
+    def Seu_Voto(self,request,botao,modificar,apagar):
+        if apagar == True:
+            if self.login in self.Voto:
+                self.Voto.pop(self.login)
+                return ''
+        else:
+            if modificar == True:
+                if self.login in self.gerando_lista_candidatos:
+                    self.gerando_lista_candidatos.pop(self.login)
+                if self.login in self.gerando_informacoes_candidatura:
+                    self.gerando_informacoes_candidatura.pop(self.login)
+                try:
+                    if len(self.Voto[self.login])<5:
+                        self.Voto[self.login]+=botao
+                except:
+
+                    self.Voto[self.login]=botao
+
+        return self.Voto[self.login]

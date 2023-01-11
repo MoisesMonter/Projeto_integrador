@@ -13,7 +13,9 @@ div#UrnaEleicao td{
     padding: 25px;
 }
 
-
+.irparaurna{
+    color:rgb(102, 233, 69);
+}
 
 
 #Urna input.hiden{
@@ -85,7 +87,7 @@ div#UrnaEleicao td{
         }
     #UrnaEleicao .descrição{
         padding-left: 5ex;
-        padding-right: 8ex;
+        padding-right: 5ex;
 
         word-break: break-all;
     }
@@ -172,7 +174,7 @@ div#UrnaEleicao td{
     }
     #UrnaEleicao .descrição{
         padding-left: 5ex;
-        padding-right: 8ex;
+        padding-right: 5ex;
         word-break: break-all;
     }
     

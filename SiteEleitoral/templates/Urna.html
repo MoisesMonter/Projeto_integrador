@@ -7,7 +7,7 @@
 
 
 <div id="breadcrumb">
-    <p href="../">SEFIV/<a href="../{{local}}">
+    <p href="../">SEFIV/<a href="http://localhost:8000/lista_eleicoes/">
         {% if local == 'lista_eleicoes' %}
         Lista de Eleições/
         {% else %}
@@ -23,15 +23,7 @@
             <ul>
                     <li><h1 >ELEIÇÃO Nº {{Eleitoral.N_Eleicao}}</h1></li>  
                     <li><h4>{{Eleitoral.Titulo}}</h4></li><br>
-                    <li>
-                        {% if local == 'lista_eleicoes' %}
-                        <a href="../lista_eleicoes/" style="font-size:15px; color:brown;">Voltar para o início</a></li><br>
-                        {% else %}
-                        <a href="../lista_eleicoes" style="font-size:15px; color:brown;">Voltar para o início</a></li><br>
-                        {{local}}
-                        {% endif %}
 
-                    <li>
                     <p class="descrição">{{Eleitoral.Descricao}}</p></li>
 
             </ul>
@@ -59,13 +51,12 @@
             </tr>
             {% endfor %}
 
-        </table>
+        </table><br>
 
-        <form action="{% url 'Urna' %}" method="post" autocomplete="off">{%csrf_token%}
-            <a href="../Urna/Registrar_Voto/">Registrar seu voto!</a>
+        <table><a class="irparaurna" href="../Urna/Registrar_Voto/">Registrar seu voto!</a></table><br>
 
 
-        </form>
+
     </nav>
 
 

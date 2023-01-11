@@ -54,19 +54,19 @@ class Formularios_Para_Votar(forms.Form):
 
 
 class Botoes_Urna(forms.Form):
-    Null = forms.CharField(label='Titulo',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'placeholder':'Titulo da Eleição', 'value':'Null','style':'display:None;'}))
-    Cancelar =forms.CharField(label='Titulo',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'placeholder':'Titulo da Eleição', 'value':'Cancelar','style':'display:None;'}))
-    Votar = forms.CharField(label='Titulo',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'placeholder':'Titulo da Eleição', 'value':'Votar','style':'display:None;'}))
+    Null = forms.CharField(label='bn',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'value':'Null','style':'display:None;'}))
+    Cancelar =forms.CharField(label='bc',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'value':'Cancelar','style':'display:None;'}))
+    Votar = forms.CharField(label='bv',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'value':'Votar','style':'display:None;'}))
     
-    b0 = forms.CharField(label='Titulo',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'placeholder':'Titulo da Eleição', 'value':'0','style':'display:None;'}))
-    b1 = forms.CharField(label='Titulo',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'placeholder':'Titulo da Eleição', 'value':'1','style':'display:None;'}))
-    b2 = forms.CharField(label='Titulo',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'placeholder':'Titulo da Eleição', 'value':'2','style':'display:None;'}))
-    b3 = forms.CharField(label='Titulo',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'placeholder':'Titulo da Eleição', 'value':'3','style':'display:None;'}))
-    b4 = forms.CharField(label='Titulo',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'placeholder':'Titulo da Eleição', 'value':'4','style':'display:None;'}))
-    b5 = forms.CharField(label='Titulo',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'placeholder':'Titulo da Eleição', 'value':'5','style':'display:None;'}))
-    b6 = forms.CharField(label='Titulo',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'placeholder':'Titulo da Eleição', 'value':'6','style':'display:None;'}))
-    b7 = forms.CharField(label='Titulo',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'placeholder':'Titulo da Eleição', 'value':'7','style':'display:None;'}))
-    b8 = forms.CharField(label='Titulo',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'placeholder':'Titulo da Eleição', 'value':'8','style':'display:None;'}))
-    b9 = forms.CharField(label='Titulo',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'placeholder':'Titulo da Eleição', 'value':'9','style':'display:None;'}))
+    b0 = forms.CharField(label='b0',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'value':'0','style':'display:None;'}))
+    b1 = forms.CharField(label='b1',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on','value':'1','style':'display:None;'}))
+    b2 = forms.CharField(label='b2',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'value':'2','style':'display:None;'}))
+    b3 = forms.CharField(label='b3',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'value':'3','style':'display:None;'}))
+    b4 = forms.CharField(label='b4',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on',  'value':'4','style':'display:None;'}))
+    b5 = forms.CharField(label='b5',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'value':'5','style':'display:None;'}))
+    b6 = forms.CharField(label='b6',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'value':'6','style':'display:None;'}))
+    b7 = forms.CharField(label='b7',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on',  'value':'7','style':'display:None;'}))
+    b8 = forms.CharField(label='b8',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'value':'8','style':'display:None;'}))
+    b9 = forms.CharField(label='b9',max_length=30,required=True,widget=forms.TextInput(attrs={'class':'form-control' , 'autocomplete': 'on', 'value':'9','style':'display:None;'}))
 
 
