@@ -10,7 +10,7 @@
     </div>
 
 <div id="configuracao"> 
-    <form action="{% url 'config' %}" id="autoincrement" method="post" enctype="multipart/form-data" autocomplete="off">{%csrf_token%}
+    <form style="display: flex; flex-direction: column; justify-content: center; align-items: center;"action="{% url 'config' %}" id="autoincrement" method="post" enctype="multipart/form-data" autocomplete="off">{%csrf_token%}
 
         <div>
             <img src='{{usuario_logado.Foto.url}}'>
@@ -28,7 +28,7 @@
 
     
 
-    <ul>
+    <ul style="margin-left: 150px;">
         <li>
             
             <label>Id Acadêmico<br>
@@ -42,19 +42,21 @@
             <label>E-mail<br>
             <input style='align-items: center; color: aliceblue;'type="text" value= {{usuario_logado.email}} disabled></label>
         </li>
-        <li>
-            
-            
-        </li><br>
+        <li></li><br>
+            <table>
+            {{form.Foto.label}}<br>
+            {{form.Foto}}
+        </table>
+        
     </ul>
     
     
         
             <!--{{form}}-->
 
-    <table>{{form.as_ul}}</table>
+    
         
-    <table><input type="submit" value="Salvar"></table><br>
+    <table><input style="color:rgb(255, 255, 255);" type="submit" value="Salvar"></table><br>
 
     
     </form>
