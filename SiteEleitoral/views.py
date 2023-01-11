@@ -114,17 +114,19 @@ def ListaEleicoes(request):
     if x:
 
         info = ações_Usuarios(str(request.user),'sim').global_list(request)
+        #
+        newinfo=ações_Usuarios(str(request.user),'sim').pagination_list(request,info,False,False,False,False)
+
+        #
         enviar_para_Urna = Formularios_Para_Votar(request.POST)
-        aux = request.POST.get('Form1')
-        aux2 = str(request.POST.get('local_urna'))
-        if aux != None and aux2 !=None:
-            #print(aux,aux2)
+        if request.POST.get('local_urna') != None:
+            return redirect('Urna')
             aux = ações_Usuarios(str(request.user),'sim').global_list_urna(request,aux2,'Lista_Eleicoes',True)
 
         #print(aux2)        
         if request.method == 'GET':
 
-            return render(request,"lista_eleicoes.html",{'x':False,'TheList':info,'Urna':enviar_para_Urna})
+            return render(request,"lista_eleicoes.html",{'x':False,'TheList':newinfo,'Urna':enviar_para_Urna})
 
         if request.method =='POST':
             aux2 = request.POST.get('local_urna')
@@ -132,33 +134,43 @@ def ListaEleicoes(request):
                 #print(aux,aux2)
                 ações_Usuarios(str(request.user),'sim').global_list_urna(request,aux2,'lista_eleicoes',True)
                 Urna(request)
-        return render(request,"lista_eleicoes.html",{'x':False,'TheList':info,'Urna':enviar_para_Urna})
+        return render(request,"lista_eleicoes.html",{'x':False,'TheList':newinfo,'Urna':enviar_para_Urna})
     else:
         usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
-        info = ações_Usuarios(usuario_logado.Id_Academico,'sim').global_list(request)
+        info = ações_Usuarios(str(request.user),'sim').global_list(request)
+        newinfo=ações_Usuarios(str(request.user),'sim').pagination_list(request,info,False,False,False,False)
         enviar_para_Urna = Formularios_Para_Votar(request.POST)
-
-
+        print(info)
+       
         if request.method == 'GET':
-
-            return render(request,"lista_eleicoes.html",{'x':True,'usuario_logado':usuario_logado,'TheList':info,'Urna':enviar_para_Urna})
+            
+            return render(request,"lista_eleicoes.html",{'x':True,'usuario_logado':usuario_logado,'TheList':info[0:5],'Urna':enviar_para_Urna})
         
             
         if request.method =='POST':
-            aux = request.POST.get('Form2')
-            aux2 = request.POST.get('local_urna')
-            if aux2 !=None:
-                #print(aux,aux2)
-                ações_Usuarios(str(request.user),'sim').global_list_urna(request,aux2,'lista_eleicoes',True)
+
+            
+            if request.POST.get('local_urna') != None:
+                x = request.POST.get('local_urna')
+                print(request.POST.get('Fim'))
+                ações_Usuarios(str(request.user),'sim').global_list_urna(request,x,'lista_eleicoes',True)
                 return redirect('Urna')
-            #print(aux)
-            usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
+            if request.POST.get('Inicio') != None:
+                newinfo=ações_Usuarios(str(request.user),'sim').pagination_list(request,info,True,False,False,False)
+                print(info)
+            elif request.POST.get('Anterior') != None:
+                newinfo=ações_Usuarios(str(request.user),'sim').pagination_list(request,info,False,True,False,False)
+                print(info)
+            elif request.POST.get('Proximo') != None:
+                newinfo=ações_Usuarios(str(request.user),'sim').pagination_list(request,info,False,False,True,False)
+                print(info) 
+            elif request.POST.get('Fim') != None:
+                newinfo=ações_Usuarios(str(request.user),'sim').pagination_list(request,info,False,False,False,True)
+                print(info)
+            print(newinfo)
+            return render(request,"lista_eleicoes.html",{'x':True,'usuario_logado':usuario_logado,'TheList':newinfo,'Urna':enviar_para_Urna})
             
-            return render(request,"lista_eleicoes.html",{'x':True,'usuario_logado':usuario_logado,'TheList':info,'Urna':enviar_para_Urna})
-            
-        ''' for Number in range(0,int(todas_eleicoes),1):
-        print(Number)'''
-        return render(request,"lista_eleicoes.html",{'x':True,'usuario_logado':usuario_logado,'TheList':info,'Urna':enviar_para_Urna})
+        return render(request,"lista_eleicoes.html",{'x':True,'usuario_logado':usuario_logado,'TheList':newinfo,'Urna':enviar_para_Urna})
  
 
 
@@ -540,11 +552,13 @@ class ações_Usuarios():
     gerando_lista_candidatos = {}
     gerando_informacoes_candidatura = {}
     local_atual_eleicao = {}
+    pagination={}
     Voto ={}
     def __init__(self,login,pagina_atual):
         global gerando_lista_candidatos
         global gerando_informacoes_candidatura
         global local_atual_eleicao
+        global pagination
         global Voto
         self.login = login
         self.pagina_atual = pagina_atual
@@ -606,18 +620,135 @@ class ações_Usuarios():
     def global_list(self,request):
 
         info = []
-
+        
         for location in Election.objects.all().values():
-            print(location)
             usuario = Usuario.objects.get(Id_Academico = location['Usuario_id'])
-            if location['Ativo'] == True:
-                Ativo ='Ativo'
+            if location['Ativo'] == True :
+                date= location['End_Data']
+
+                date = str(date).split('-')
+                
+                date_end=datetime.date(int(date[0]),int(date[1]),int(date[2]))
+
+                if date_end > datetime.datetime.now().date():
+                    Ativo ='Ativo'
+                
+                else:
+                    Ativo= 'Inativo'
+                    #usuario['Ativo']= False
+                    #usuario.save
             else:
                 Ativo ='Inativo'
             info.append([location['N_Eleicao'],usuario.Nome,location[ 'Titulo'],location['End_Data'],Ativo,'Link'])
             #print('\n\n\n\n',info)
         return info
 
+    def pagination_list(self,request,info,Inicio,Anterior,Proximo,Fim):
+        cont=0
+        if len(info)>=0:
+            for linha in info:
+                cont+=1
+            print(cont)
+            if self.login == "AnonymousUser":
+                if cont>=5:
+                    return info[0:5]
+                if cont<5:
+                    return info[0:len(cont)]
+            elif self.login not in self.pagination:
+                # TABELA <> Inicio   <> Anterior <> proximo <> Fim
+                if len(info)>=5:
+                    self.pagination[self.login]=[0,5]
+                    return info[0:5]
+                else:
+                    self.pagination[self.login]=[0,len(info)]
+                    return info[0:len(info)]
+                                          
+            else:
+
+                info_local= self.pagination[self.login]
+                print(len(info))
+                if len(info)<5:
+                    print(len(info))
+                    return info[0:len(info)-1]
+                else:
+                    print(info_local)
+                    if Inicio == True:#inicio
+                        if cont>=5:
+                            info_local[0]=0
+                            info_local[1]=5
+                            self.pagination[self.login]=info_local
+                            return info[0:5]
+                        if cont<5:##inicio quebrado
+                            info_local[0]=0
+                            info_local[1]=len(cont)
+                            self.pagination[self.login]=info_local
+                            return info[0:len(cont)]
+                    elif Anterior == True:#anterior
+                        if info_local[0]-5 >=0:
+                            info_local[0]-=5
+                            info_local[1]-=5
+                            if info_local[0]<0:
+                                info_local[0]=0
+                                info_local[1]=5
+                            self.pagination[self.login]=info_local
+                            return info[info_local[0]:info_local[1]]
+                        else:#anterior caso deça a casa 5 limitar
+                            info_local[0]=0
+                            info_local[1]=5
+                            self.pagination[self.login]=info_local
+                            return info[info_local[0]:info_local[1]]      
+                    elif Fim == True:
+                        if cont%5==0:
+                            info_local[0]=cont-5
+                            info_local[1]=cont
+                            self.pagination[self.login]=info_local
+                        else:
+                            
+                            end_cont = cont%5
+                            cont= cont -end_cont
+                            info_local[0]=cont
+                            info_local[1]=cont+end_cont
+                        self.pagination[self.login]=info_local
+                        return info[info_local[0]:info_local[1]]
+                    elif Proximo == True:
+                        if cont%5==0:
+                            if info_local[1]+5 <= cont:
+                                info_local[0]+=5
+                                info_local[1]+=5
+                                self.pagination[self.login]=info_local
+                                return info[info_local[0]:info_local[1]]
+                        else:
+                            
+                            end_cont = cont%5
+                            cont= cont -end_cont
+                            info_local[0]=cont
+                            info_local[1]=cont+end_cont
+                        self.pagination[self.login]=info_local
+                        return info[info_local[0]:info_local[1]]
+                    '''else:
+
+                        if Fim == True:
+                            info_local[0]=cont
+                            info_local[1]=end_cont+cont  
+                            self.pagination[self.login]=info_local                      
+                            return info[info_local[0]:info_local[1]]
+                        elif Proximo == True:
+                            if info_local[1]+5 <= cont:
+                                info_local[0]+=5
+                                info_local[1]+=5
+                                if info_local[0]>cont:
+                                    info_local[0]=cont-5
+                                    info_local[1]=cont
+                                self.pagination[self.login]=info_local
+                                return info[info_local[0]:info_local[1]]
+                            else:
+                                info_local[0]+=cont
+                                info_local[1]+=end_cont+cont  
+                                self.pagination[self.login]=info_local                      
+                                return info[info_local[0]:info_local[1]]'''
+                                
+        else:
+            return info
     def global_list_urna(self,request,eleicao,qual_lista,modificar):
         try:
             self.limpar_memoria("apagar_lista_texto")

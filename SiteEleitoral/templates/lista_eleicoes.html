@@ -57,11 +57,18 @@
       <div class="pagination-footer">
         <span class="pagination-details"></span>
         <div clas="pagination-buttons">
-          <a href="#">&laquo;</a>
-          <a href="#">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">&raquo;</a>
+          <form action ="{% url 'lista_eleicoes' %}" method="post">{% csrf_token%}
+            <input  class="pagination-footer" type="submit" name="Inicio" value="&laquo;">
+            <form>
+              <form action ="{% url 'lista_eleicoes' %}" method="post">{% csrf_token%}
+                <input class="pagination-footer"  type="submit" name="Anterior" value="&lsaquo;">
+                <form>
+                  <form action ="{% url 'lista_eleicoes' %}" method="post">{% csrf_token%}
+                    <input class="pagination-footer"  type="submit" name="Proximo" value="&rsaquo;">
+                    <form>
+                      <form action ="{% url 'lista_eleicoes' %}" method="post">{% csrf_token%}
+                        <input class="pagination-footer"  type="submit" name="Fim" value="&raquo;">
+                        <form>
 
         
         </div>
