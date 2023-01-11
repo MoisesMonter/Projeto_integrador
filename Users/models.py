@@ -15,7 +15,11 @@ Sexo_Choices = (
     ('M','Masculino'),
     ('F','Feminino'),
 )
-
+Titulo_Choices = (
+    ('1','Problema com uma eleição'),
+    ('2','Problema com Site'),
+    ('3','Problema com conta'),    
+)
 class User(models.Model):
     Id_Academico = models.CharField(max_length=15,unique=True,primary_key=True)
     Nome = models.CharField(max_length=50,null = False)
@@ -46,11 +50,12 @@ class Election(models.Model):
         return  str(self.N_Eleicao)'''
 
 class Activity_Report(models.Model):
-    Usuario = models.ForeignKey(User,on_delete=models.CASCADE)
-    ID_REPORT = models.IntegerField(unique=True,null=False)
-    Titulo = models.CharField(max_length=50)
-    Balao  = models.CharField(max_length=300,null =False)
-    Imagem = models.ImageField(upload_to="BD_User_Report/")
+    nome = models.CharField(max_length=50)
+    sobrenome = models.CharField(max_length=50)
+    email = models.EmailField(blank=True,null=True)
+    titulo =models.CharField(max_length=1,choices=Titulo_Choices)
+    balao  = models.CharField(max_length=300,null =False)
+
 
     def __str__(self) -> str:
         return super().__str__()

@@ -15,18 +15,18 @@
 
                 <div class="form-row">
                     <div class="col">
-                      <input type="text" class="form-control" placeholder="Nome" name="">
+                      <input type="text" class="form-control" placeholder="Nome" name="Nome" id="Nome">
                     </div>
                     <div class="col">
-                      <input type="text" class="form-control" placeholder="Sobrenome">
+                      <input type="text" class="form-control" placeholder="Sobrenome" name="Sobrenome">
                     </div>
                     <div class="col">
                         <label for="exampleFormControlInput1"></label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nome@exemplo.com">
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nome@exemplo.com" name="Email">
                       </div>
                   </div>
                   <div class="form-group">
-                    <select class="custom-select" required>
+                    <select class="custom-select" name="Problem" required>
                       <option value="">Abra este menu select</option>
                       <option value="1">Problema com uma eleição</option>
                       <option value="2">Problema com Site</option>
@@ -35,15 +35,15 @@
                     <div class="invalid-feedback">Exemplo de feedback invalido para o select</div>
                   </div>
                 <div class="form-group">
-                    <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+                    <input type="file" class="custom-file-input" name="File" id="File" required>
                     <label class="custom-file-label" for="validatedCustomFile"></label>
                     <div class="invalid-feedback">Caso necessite:Pdf,Jpg,Jpeg</div>
                   </div>
                 <div class="form-group">
                   <label for="">Exemplo de textarea</label><br>
-                  <textarea display='block'cols='45'placeholder="Eleição #0000 existe isso.. isso e aquilo.." maxlength="900"class="form-control" id="exampleFormControlTextarea1" rows="20"></textarea>
+                  <textarea display='block'cols='45'placeholder="Eleição #0000 existe isso.. isso e aquilo.." maxlength="900"class="form-control" id="exampleFormControlTextarea1" rows="20" name="texto"></textarea>
                 </div>
-                <button>Enviar</button>
+                <input type="submit" value="Enviar">
               </form>
 
 
@@ -65,23 +65,23 @@
     <div class="main_suport">
         
         <div id="ambiente">
-            <form>
+            <form action ="{% url 'suport' %}" method="post">{% csrf_token%}
 
 
                 <div class="form-row">
                     <div class="col">
-                      <input type="text" class="form-control" placeholder="Nome">
+                      <input type="text" class="form-control" placeholder="Nome" name="Nome" id="Nome" required>
                     </div>
                     <div class="col">
-                      <input type="text" class="form-control" placeholder="Sobrenome">
+                      <input type="text" class="form-control" placeholder="Sobrenome" name="Sobrenome" id="Sobrenome" required>
                     </div>
                     <div class="col">
                         <label for="exampleFormControlInput1"></label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nome@exemplo.com">
+                        <input type="email" class="form-control"  placeholder="nome@exemplo.com" name="Email" id="Email" required>
                       </div>
                   </div>
                   <div class="form-group">
-                    <select class="custom-select" required>
+                    <select class="custom-select" name="Problem" id="Problem" required>
                       <option value="">Abra este menu select</option>
                       <option value="1">Problema com uma eleição</option>
                       <option value="2">Problema com Site</option>
@@ -90,21 +90,17 @@
                     <div class="invalid-feedback">Exemplo de feedback invalido para o select</div>
                   </div>
                 <div class="form-group">
-                    <input type="file" class="custom-file-input" id="validatedCustomFile" required>
-                    <label class="custom-file-label" for="validatedCustomFile"></label>
-                    <div class="invalid-feedback">Caso necessite:Pdf,Jpg,Jpeg</div>
-                  </div>
-                <div class="form-group">
                   <label for="">Exemplo de textarea</label><br>
-                  <textarea display='block'cols='45'placeholder="Eleição #0000 existe isso.. isso e aquilo.." maxlength="900"class="form-control" id="exampleFormControlTextarea1" rows="20"></textarea>
+                  <textarea display='block'cols='45'placeholder="Eleição #0000 existe isso.. isso e aquilo.." maxlength="900"class="form-control" id="exampleFormControlTextarea1" rows="20" name="texto" required></textarea>
                 </div>
-                <button>Enviar</button>
+                <input type="submit" value="Enviar">
               </form>
 
 
         </div>
 
 </div>
+
 
 
 

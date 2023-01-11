@@ -95,7 +95,7 @@
 <div id ="listas_eleicoes">
   <div class="filter_in">
     <input type="text" id="tab_filter_tex">
-    <button id="tab_filter_btn" class="active"></button>
+    <button id="tab_filter_btn" class="active">Filtrar</button>
   </div><br>
     <table border="1" class="table table-hover">
           <tr>
@@ -111,11 +111,9 @@
 
 
           {% for linhas in TheList %}
-            
             <tr>
               
                 {%for colunas in linhas %}
-
                   {% if colunas == 'Ativo'%}
                     <td><a style="color:greenyellow">{{colunas}}</a></td>
                   {% elif colunas == 'Inativo' %}
@@ -138,6 +136,25 @@
 
           {% endfor %}
       </table>
+      <div class="pagination-footer">
+        <span class="pagination-details"></span>
+        <div clas="pagination-buttons">
+          <form action ="{% url 'lista_eleicoes' %}" method="post">{% csrf_token%}
+            <input  class="pagination-footer" type="submit" name="Inicio" value="&laquo;">
+            <form>
+              <form action ="{% url 'lista_eleicoes' %}" method="post">{% csrf_token%}
+                <input class="pagination-footer"  type="submit" name="Anterior" value="&lsaquo;">
+                <form>
+                  <form action ="{% url 'lista_eleicoes' %}" method="post">{% csrf_token%}
+                    <input class="pagination-footer"  type="submit" name="Proximo" value="&rsaquo;">
+                    <form>
+                      <form action ="{% url 'lista_eleicoes' %}" method="post">{% csrf_token%}
+                        <input class="pagination-footer"  type="submit" name="Fim" value="&raquo;">
+                        <form>
+
+        
+        </div>
+      </div>
     
       <!-- Optional JavaScript -->
       <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -146,6 +163,5 @@
       <script src="./assets/js/popper.min.js"></script>
       <script src="./assets/js/bootstrap.min.js"></script>
 </div>
-
 {%endblock%}
 

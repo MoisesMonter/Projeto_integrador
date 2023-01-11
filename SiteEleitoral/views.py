@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from .forms import FormUser,FormLogin,FormImagem,Formulario_part1,Formulario_part2,Formularios_Para_Votar,Select_day
 from Users.models import User as Usuario
-from Users.models import Election,Data_Election,Interaction_User
+from Users.models import Election,Data_Election,Interaction_User,Activity_Report
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm  
 # Create your views here.
@@ -122,12 +122,12 @@ def ListaEleicoes(request):
         if request.POST.get('local_urna') != None:
             return redirect('Urna')
             aux = ações_Usuarios(str(request.user),'sim').global_list_urna(request,aux2,'Lista_Eleicoes',True)
-
+        
         #print(aux2)        
         if request.method == 'GET':
-
+            
             return render(request,"lista_eleicoes.html",{'x':False,'TheList':newinfo,'Urna':enviar_para_Urna})
-
+        return redirect('Urna')
         if request.method =='POST':
             aux2 = request.POST.get('local_urna')
             if aux2 !=None:
@@ -143,7 +143,7 @@ def ListaEleicoes(request):
         print(info)
        
         if request.method == 'GET':
-            
+
             return render(request,"lista_eleicoes.html",{'x':True,'usuario_logado':usuario_logado,'TheList':info[0:5],'Urna':enviar_para_Urna})
         
             
@@ -422,10 +422,41 @@ def gerarumaeleicao(request):
 def Suport(request):
     x =str(request.user) == 'AnonymousUser'
     if x:
-        return render(request,'suport_site.html',{'x': False})
+        name = request.POST.get('Nome')
+        print(name,name,'\n\n\n\n\n')
+        if request.method == 'GET':
+            return render(request,'suport_site.html',{'x': False})
+        if request.method == 'POST':
+
+            return render(request,'suport_site.html',{'x': False})
+
     else:
         usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
+        name = request.POST.get('Nome')
+        if request.method== 'GET':
+
+
+            return render(request,"suport_site.html",{'x':True,'usuario_logado':usuario_logado})
+        if request.method == 'POST':
+            Nome = request.POST.get('Nome')
+            if Nome != None:
+                Sobrenome = request.POST.get('Sobrenome')
+                if Sobrenome != None:
+                    Email = request.POST.get('Email')
+                    if Email != None:
+                        Problem = request.POST.get('Problem')
+                    if Problem != None:
+                        Texto = request.POST.get('texto')
+                        if Texto != None:
+
+                            Formulario = Activity_Report(nome= Nome, sobrenome = Sobrenome, email = Email,titulo = Problem,balao =Texto)
+                            Formulario.save()
+                            messages.success(request,"Formulário enviado com Sucesso")
+                            return render(request,"suport_site.html",{'x':True,'usuario_logado':usuario_logado})
+            else:   
+                messages.success(request,"Erro de autenticação")
         return render(request,"suport_site.html",{'x':True,'usuario_logado':usuario_logado})
+    
 
 
 
