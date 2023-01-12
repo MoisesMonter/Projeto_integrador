@@ -24,7 +24,7 @@
                 {% if len >= 1 %}
 
                 <form action ="{% url 'gerarumaeleicao' %}" id='candidato_Apagar'method="post">{% csrf_token%}
-                    <label for="Lista_Candidato">Candidatos</label><br>
+                    <label for="Lista_Candidato">Candidatos</label><br><br>
                     <ul>
                     {%for lc in lista_candidatos %}
                             <br><li>
@@ -47,7 +47,11 @@
                     <br>
                     <br>
                     <br>
+                    <br>    
+                    <br>
+                    <br>
                 {%else%}
+                <br>
                 <br>
                 <br>
                 <br>
@@ -75,7 +79,7 @@
             </div>
             
         </div>
-        <div class="candidato_texto">
+        <div  class="candidato_texto">
             
                 <ul>    {% if form1_2.0 > 1 %}
                         <input type="text" class="form-control" autocomplete="on" placeholder="Titulo da Eleição"  name="Formulario1" id="Formulario1"><br>
@@ -92,11 +96,11 @@
                     </form>
                     
                     <li>
-                    <form style="display:flex; flex-direction:column; align-items:center;"  action ="{% url 'gerarumaeleicao' %}" method="post"> {% csrf_token%}    
-                        {{select_day.select_day.label}}<br>
+                    <form style="display:flex; flex-direction:column; align-items:flex-start;"  action ="{% url 'gerarumaeleicao' %}" method="post"> {% csrf_token%}    
+                        {{select_day.select_day.label}}
                         {{select_day.select_day}}</li>
                     <li>
-                        <input type="submit" value="Cadastrar"></table><br>
+                        <input type="submit" value="Cadastrar"></table>
                     </li>
                 </ul>
 
