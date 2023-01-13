@@ -71,7 +71,7 @@ input[type=submit]{
     display: inline-block;
     padding-top: 0.5ex;
     padding-bottom: 0.5ex;  
-    box-shadow: 2px 2px 20px 2px rgba(34, 77, 45, 0.726);
+    box-shadow: 1px 1px 5px 1px rgba(34, 77, 45, 0.726);
     margin:1ex;
     border:solid;
     border-radius: 10px;
@@ -505,7 +505,7 @@ footer{
     flex-wrap: wrap;
     justify-content:space-around;
     background-color: #000000;
-    border-top: solid rgb(14, 12, 12) 4px;
+
     border-radius: 0px;
     max-height:3000px ;
 }
