@@ -1,4 +1,5 @@
 from django.shortcuts import render,HttpResponse,redirect
+from django.db.models import Sum, Min
 from django.contrib.auth.models import User,AnonymousUser
 from django.contrib.auth import authenticate,logout
 from django.contrib.auth import login as login_django
@@ -56,23 +57,27 @@ def Register(request):
         return render(request,'register.html',{'x': False,'form':form})
     else:
 
-        form = FormUser(request.POST)
         username = request.POST.get('Id_Academico')
+        Nome = request.POST.get('Nome')
         email = request.POST.get('email') 
-        password = request.POST.get('Senha')  
-        if request.POST.get('Senha') == request.POST.get('Senha2'):
-            if form.is_valid():
-                user = User.objects.create_user(username=username, email=email, password=password)
-                user.save()
-                form.save()       
-                messages.success(request,"Conta Criada com Sucesso")
-                return render(request,'login.html',{'x': False,'form':form})
-            else: 
-                messages.success(request,"Erro de Autenticação no Formulário")
-                return render(request,'register.html',{'x': False,'form':form})
-        else:
-            messages.success(request,"Senhas não combinam")
+        password = request.POST.get('Senha')
+        Cpf = request.POST.get('CPF')
+        Genero = request.POST.get('Genero')
+        if request.method == 'POST':
+            #form = FormUser(request.POST)
+            user = User.objects.create_user(username=username, email=email, password=password)
+            form1 = Usuario(username,Nome,Cpf,Genero,email,user.password,None)
+            '''for eleitor,n_eleitoral in zip(lista_candidatos,lista_numero):
+                formulario_aprofundado_eleicao= Data_Election(N_Eleicao = formulario_eleicao,Candidatos=eleitor,N_Candidato = n_eleitoral,Votos=0)    
+                formulario_aprofundado_eleicao.save()'''
+            user.save()
+            form1.save()
+            messages.success(request,"Conta Criada com Sucesso")
+            return redirect('login')
+        else: 
+            messages.success(request,"Erro de Autenticação no Formulário")
             return render(request,'register.html',{'x': False,'form':form})
+
 
 
 def Login(request):
@@ -92,7 +97,9 @@ def Login(request):
             if user is not None:
                 login_django(request,user)
                 usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
+                return redirect('home')
                 return render(request,"home.html",{'x':True,'usuario_logado':usuario_logado})
+            
             return render(request,"login.html",{"form":form})
 
 
@@ -127,6 +134,7 @@ def ListaEleicoes(request):
         if request.method == 'GET':
             
             return render(request,"lista_eleicoes.html",{'x':False,'TheList':newinfo,'Urna':enviar_para_Urna})
+
         return redirect('Urna')
         if request.method =='POST':
             aux2 = request.POST.get('local_urna')
@@ -140,7 +148,8 @@ def ListaEleicoes(request):
         info = ações_Usuarios(str(request.user),'sim').global_list(request)
         newinfo=ações_Usuarios(str(request.user),'sim').pagination_list(request,info,False,False,False,False)
         enviar_para_Urna = Formularios_Para_Votar(request.POST)
-        print(info)
+        #print(info)
+        #print(enviar_para_Urna)
        
         if request.method == 'GET':
 
@@ -167,7 +176,6 @@ def ListaEleicoes(request):
             elif request.POST.get('Fim') != None:
                 newinfo=ações_Usuarios(str(request.user),'sim').pagination_list(request,info,False,False,False,True)
                 print(info)
-            print(newinfo)
             return render(request,"lista_eleicoes.html",{'x':True,'usuario_logado':usuario_logado,'TheList':newinfo,'Urna':enviar_para_Urna})
             
         return render(request,"lista_eleicoes.html",{'x':True,'usuario_logado':usuario_logado,'TheList':newinfo,'Urna':enviar_para_Urna})
@@ -184,16 +192,27 @@ def Urna(request):
 
         formularios = Formularios_Para_Votar(request.POST)
         info_Rapida = ações_Usuarios(str(request.user),'sim').global_list_urna(request,'','',False)
-        info_candidatos,info_candidatos_apurados = ações_Usuarios(str(request.user),info_Rapida[1]).lista_candidatos(request,info_Rapida[0])
+        info_candidatos,info_aprofundado = ações_Usuarios(str(request.user),info_Rapida[1]).lista_candidatos(request,info_Rapida[0])
         info_eleicao = Election.objects.get(N_Eleicao = info_Rapida[0])
+        vencedor= []
+        aux = 0
+        for x in info_aprofundado:
+            if x[0] != 'Null':
+                if x[1] > aux:
+                    vencedor = [x]
+                elif x[1] == aux and aux != 0:
+                    vencedor.append(x)
+
+
+        print(vencedor,'\n\n\n\n\n')
         try:
             if request.method =='GET':
-                return render(request,"Urna.html",{'x':True,'candidatos':info_candidatos,'Eleitoral':info_eleicao,'formularios':formularios,'usuario_logado':usuario_logado})
-            return render(request,"Urna.html",{'x':True,'candidatos':info_candidatos,'Eleitoral':info_eleicao,'formularios':formularios,'usuario_logado':usuario_logado})
+                return render(request,"Urna.html",{'x':True,'candidatos':info_candidatos,'candidatosend':info_aprofundado,'Eleitoral':info_eleicao,'result':vencedor,'formularios':formularios,'usuario_logado':usuario_logado})
+            return render(request,"Urna.html",{'x':True,'candidatos':info_candidatos,'candidatosend':info_aprofundado,'Eleitoral':info_eleicao,'result':vencedor,'usuario_logado':usuario_logado})
                 
         except:
             #print(formularios.Form1)
-            return render(request,"Urna.html",{'x':True,'candidatos':info_candidatos,'Eleitoral':info_eleicao,'formularios':formularios,'usuario_logado':usuario_logado})
+            return render(request,"Urna.html",{'x':True,'candidatos':info_candidatos,'candidatosend':info_aprofundado,'Eleitoral':info_eleicao,'result':vencedor,'formularios':formularios,'usuario_logado':usuario_logado})
 
 
 
@@ -204,13 +223,21 @@ def votar(request):
     usuario_logado= Usuario.objects.get(Id_Academico = str(request.user))
     info_Rapida = ações_Usuarios(str(request.user),'sim').global_list_urna(request,'','',False)
     info_eleicao = Election.objects.get(N_Eleicao = info_Rapida[0])
-    interacao_usuario = Interaction_User.objects.all().filter(Usuario = usuario_logado,N_Eleicao =info_eleicao).values_list()   
+    interacao_usuario = Interaction_User.objects.all().filter(Usuario = usuario_logado,N_Eleicao =info_eleicao).values_list()  
+    info_candidatos,info_candidatos_profundo = ações_Usuarios(str(request.user),info_Rapida[1]).lista_candidatos(request,info_Rapida[0])
+
     if len(interacao_usuario) > 0:
         print('achado!!!!!')
         messages.success(request,f"Você Não pode Participar duas vezes")
         return redirect('Urna')
     else:
+        if request.method == 'GET':
+
+            info = ações_Usuarios(str(request.user),'sim').Seu_Voto(request,'',False,False)
+            print(info) 
+            return render(request,"votar.html",{'x':True,'usuario_logado':usuario_logado,'Eleitoral':info_eleicao,'lcd_vote':info}) 
         if request.method == 'POST':
+
             if request.POST.get('b0') != None:
                 info = ações_Usuarios(str(request.user),'sim').Seu_Voto(request,'0',True,False)
                 print(info)
@@ -245,7 +272,6 @@ def votar(request):
                 print('Null')
             elif request.POST.get('Cancelar') != None:
                 info = ações_Usuarios(str(request.user),'sim').Seu_Voto(request,'0',False,True)
-                print(info)
             elif request.POST.get('Votar') != None:
                 info = ações_Usuarios(str(request.user),'sim').Seu_Voto(request,'0',False,False)
                 info_candidatos,info_candidatos_profundo = ações_Usuarios(str(request.user),info_Rapida[1]).lista_candidatos(request,info_Rapida[0])
@@ -270,9 +296,13 @@ def votar(request):
                     return redirect('Urna')
                 else:
                     messages.success(request,f" Nem um Candidato foi encontrado...")
-                
-                
-        return render(request,"votar.html",{'x':True,'usuario_logado':usuario_logado,'Eleitoral':info_eleicao}) 
+            try:
+                info = ações_Usuarios(str(request.user),'sim').Seu_Voto(request,'0',False,False)
+                print(info)
+            except:
+                pass
+            return render(request,"votar.html",{'x':True,'usuario_logado':usuario_logado,'Eleitoral':info_eleicao,'lcd_vote':info,'lcd_candidato':info_candidatos}) 
+        return render(request,"votar.html",{'x':True,'usuario_logado':usuario_logado,'Eleitoral':info_eleicao,'lcd_candidato':info_candidatos}) 
 
 
 def gerarumaeleicao(request):
@@ -290,7 +320,9 @@ def gerarumaeleicao(request):
         lista_informacoes = ações_Usuarios(usuario_logado.Id_Academico,'sim').global_info2(request,'','',False)
         print(lista_informacoes)
         titulo = request.POST.get('Formulario1')
+        print(titulo,'\n\n\n,')
         descricao = request.POST.get('Formulario2')
+        lista_informacoes = ações_Usuarios(usuario_logado.Id_Academico,'sim').global_info2(request,titulo,descricao,True)
         if request.method =='GET':
             try:
                 
@@ -309,15 +341,22 @@ def gerarumaeleicao(request):
 
                 #form1 =  Formulario_part1(request.POST)
             if Select_day(request.POST).is_valid(): 
-
-                
+                titulo = request.POST.get('Formulario1')
+                descricao = request.POST.get('Formulario2')
+                try:
+                    if len(titulo) <0 or len(descricao) <0:
+                        titulo = lista_informacoes[0]
+                        descricao=lista_informacoes[1]
+                except:#problemas com nonetype
+                        titulo = lista_informacoes[0]
+                        descricao=lista_informacoes[1]
                 lista_informacoes = ações_Usuarios(usuario_logado.Id_Academico,'sim').global_info2(request,titulo,descricao,False)
                 lista_candidatos = ações_Usuarios(usuario_logado.Id_Academico,'sim').global_info(request,'',[],True,False)
-                titulo = lista_informacoes[0]
-                descricao=lista_informacoes[1]
+
                 dias = datetime.timedelta(int(request.POST.get('select_day')))
                 data = datetime.datetime.now()
-
+                
+                print(titulo)
 
                 
                 if len(titulo) >0:
@@ -347,9 +386,7 @@ def gerarumaeleicao(request):
                             for x in range (0,len(lista_numero),1):
                                 formulario_deep = Data_Election(N_Eleicao = formulario_eleicao,Candidatos=lista_candidatos[x],N_Candidato=lista_numero[x],Votos=0)
                                 formulario_deep.save()
-                            '''for eleitor,n_eleitoral in zip(lista_candidatos,lista_numero):
-                                formulario_aprofundado_eleicao= Data_Election(N_Eleicao = formulario_eleicao,Candidatos=eleitor,N_Candidato = n_eleitoral,Votos=0)    
-                                formulario_aprofundado_eleicao.save()'''
+
                             messages.success(request,f"{titulo} Criada com sucesso!")
                         except:
                             for eleitor,n_eleitoral in zip(lista_candidatos,lista_numero):
@@ -654,22 +691,22 @@ class ações_Usuarios():
         
         for location in Election.objects.all().values():
             usuario = Usuario.objects.get(Id_Academico = location['Usuario_id'])
-            if location['Ativo'] == True :
-                date= location['End_Data']
 
-                date = str(date).split('-')
-                
-                date_end=datetime.date(int(date[0]),int(date[1]),int(date[2]))
+            date= location['End_Data']
 
-                if date_end > datetime.datetime.now().date():
-                    Ativo ='Ativo'
+            date = str(date).split('-')
                 
-                else:
-                    Ativo= 'Inativo'
-                    #usuario['Ativo']= False
-                    #usuario.save
+            date_end=datetime.date(int(date[0]),int(date[1]),int(date[2]))
+
+            if date_end > datetime.datetime.now().date():
+                Ativo ='Ativo'
+                
             else:
-                Ativo ='Inativo'
+                Ativo= 'Inativo'
+                if location['Ativo'] == True:
+                    info2 = Election.objects.get(N_Eleicao = location['N_Eleicao'])
+                    info2.Ativo= 0
+                    info2.save()
             info.append([location['N_Eleicao'],usuario.Nome,location[ 'Titulo'],location['End_Data'],Ativo,'Link'])
             #print('\n\n\n\n',info)
         return info
@@ -806,14 +843,17 @@ class ações_Usuarios():
         #eleicao = Election.values_list(N_Eleicao = lista_candidatos)
         eleitores = Data_Election.objects.filter(N_Eleicao = eleicao.pk).all()
         #print(dir(eleitores),'xxxxx\n\n\n')
-
+        cont= Data_Election.objects.filter(N_Eleicao_id = eleicao.pk).aggregate(Sum('Votos'))
+        print(cont)
         #print(dir(Election))
         #print(dir(x))
         info_see = []
         info_more =[]
         for info in eleitores.values():##Informando o Ultimo ID de todos elementos da Eleição
-            #print([info['N_Eleicao_id'],info['Candidatos'],info[ 'N_Candidato'],info['Votos']])
-            info_more.append([info['N_Eleicao_id'],info['Candidatos'],info[ 'N_Candidato'],info['Votos']])
+            try:
+                info_more.append([info['Candidatos'],info['Votos'],str(int((info['Votos'])/int(cont['Votos__sum']))*100)+'%'])
+            except:
+                info_more.append([info['Candidatos'],info['Votos'],str(int(0))+'%'])
             if info['Candidatos'] != 'Null':
                 info_see.append([info['Candidatos'],info[ 'N_Candidato']])
         #print(info_see)
@@ -822,6 +862,9 @@ class ações_Usuarios():
         return info_see,info_more
 
     def Seu_Voto(self,request,botao,modificar,apagar):
+        if self.login not in self.Voto:
+            self.Voto[self.login]=''
+
         if apagar == True:
             if self.login in self.Voto:
                 self.Voto.pop(self.login)

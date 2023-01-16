@@ -1,10 +1,18 @@
 html{ background-color: #000000;}
+
 main{
-    margin: 100px;
+   display:flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 5%;
+
 }
+
 div#breadcrumb P{
     padding-top: 10px;
     margin-left: 10px;
+
     font-size: 15px;
 }
 div#breadcrumb a:hover{
@@ -93,14 +101,17 @@ input[type=submit]:active{
 
         }
         body{
+            display: flex;
             font-family: Poppins;
             color:white;
-            display:contents;
             flex-direction: row;
             flex-wrap:wrap;
             list-style-type: none;
+            align-items: center;
             margin:0px;
             margin: 0px;
+            margin-bottom: 4%;
+
         
         }
         ul{

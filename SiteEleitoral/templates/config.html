@@ -2,7 +2,7 @@
 {%extends 'corpo.html'%}
 
 {% load static %}
-<link href="{% static 'css/config.css' %" rel="stylesheet">
+<link href="{% static 'css/config.css' %}" rel="stylesheet">
 {%block info1%}
 
 <div id="breadcrumb">
@@ -10,10 +10,18 @@
     </div>
 
 <div id="configuracao"> 
-    <form style="display: flex; flex-direction: column; justify-content: center; align-items: center;"action="{% url 'config' %}" id="autoincrement" method="post" enctype="multipart/form-data" autocomplete="off">{%csrf_token%}
+    <form action="{% url 'config' %}" id="autoincrement" method="post" enctype="multipart/form-data" autocomplete="off">{%csrf_token%}
 
         <div>
-            <img src='{{usuario_logado.Foto.url}}'>
+            {% if usuario_logado.Foto == "" %}
+                <img src="../media/vazio/perfil.jpg">
+                
+            {% else %}
+            
+                <img src='{{usuario_logado.Foto.url}}'>
+
+                
+            {% endif %}
     </div>
     <div>
         {%if usuario_logado.Genero == 'M'%}
@@ -28,7 +36,7 @@
 
     
 
-    <ul style="margin-left: 150px;">
+    <ul >
         <li>
             
             <label>Id Acadêmico<br>

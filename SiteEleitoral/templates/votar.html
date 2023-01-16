@@ -23,14 +23,33 @@
             <tr>
 
                 <td ><p class="lcd" >Nº:<p></td>
-                <td ><p class="lcd" >_____</p></td>
-
+                    {% if lcd_vote|length == 1%}
+                    <td ><p class="lcd" >{{lcd_vote}}----</p></td>
+                    {% elif lcd_vote|length == 2%}
+                    <td ><p class="lcd" >{{lcd_vote}}---</p></td>
+                    {% elif lcd_vote|length == 3%}
+                    <td ><p class="lcd" >{{lcd_vote}}--</p></td>
+                    {% elif lcd_vote|length == 4%}
+                    <td ><p class="lcd" >{{lcd_vote}}-</p></td>
+                    {% elif lcd_vote|length == 5%}
+                    <td ><p class="lcd" >{{lcd_vote}}</p></td>
+                    
+                    {% else %}
+                    
+                    <td ><p class="lcd" >-----</p></td>
+                    {% endif %}
             </tr>
+            {{lcd_candidato}}
+            {{lcd_vote}}
             <tr>
-                
+                {% for list in lcd_candidato %}
+                    {% if list not in lcd_vote %}
+                        <td ><p class="lcd" >----</p></td>
 
-                <td ><p class="lcd" >_____</p></td>
-
+                    {% else%}
+                    <td ><p class="lcd" >{{list.0}}</p></td> 
+                    {%endif%}
+                {%endfor%}
             </tr>
             <tr>
                 <td><form action ="{% url 'votar' %}" method="post">{% csrf_token%}

@@ -1,4 +1,9 @@
-
+form#autoincrement{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 @media (min-width: 1144px){
 
@@ -17,25 +22,31 @@
         border-radius: 5px;
         border: #ffffff;
         border-color: aliceblue;
-        margin-left: 15%;
-        margin-bottom: 5%;
+
         padding-bottom: 8%;
         
 }
 
+div#configuracao ul{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 div#configuracao ul li{
+
     list-style-type: none;
+    align-items: center;
 }
 form#img{
     margin-left: 100px;
 }
 div#configuracao img{
     margin-top: 5ex;
-    margin-left: 8ex;
+
     border-radius: 50%;
-    width: 15ex;
-    height: 15ex;
+    width: 30ex;
+    height: 30ex;
 
 }
 div#configuracao input#id_Foto{
@@ -45,11 +56,16 @@ div#configuracao input#id_Foto{
 }
 
 div#configuracao input{
-    color: #232323;
-    background-color: black;
+    align-items: center;
+    color: #ffffff;
+    background-color: rgb(95, 95, 95);
 }
 
 div#configuracao input#id_Foto.form-control{
+    margin-left: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-style:none;
     box-shadow: none;
 }
@@ -70,19 +86,19 @@ div#li_conf{
     div#configuracao{
         display: flex;
         flex-direction: column;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         justify-content:center;
         align-items: center;
-        width: 700px;
-        height: 400px;
+
         height: auto;
         background-color:#000000;
-        color:
 
+        width: 700px;
+        height: 900px;
         border-radius: 5px;
         border: #ffffff;
         border-color: aliceblue;
-        margin-left: 15%;
+        padding-top: 5ex;
         margin-bottom: 5%;
         padding-bottom: 8%;
         
@@ -97,7 +113,7 @@ form#img{
 }
 div#configuracao img{
     margin-top: 5ex;
-    margin-left: 8ex;
+    margin-left: 1ex;
     border-radius: 50%;
     width: 15ex;
     height: 15ex;
