@@ -1,42 +1,99 @@
 #home{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content:center;
-  width: 500px;
-  height: 300px;
-  height: auto;
-  background-color:#232323;
+    font-size: 20px;
+    width: auto;
+    max-width: 1300px;
+    min-width: 600px;
+    height: 300px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items: center;
 
-  margin: 0% 10% 10% 25%;
-  padding-top: 5%;
-  padding-bottom: 8%;
-  background-color:#232323;
-  border-radius: 10px;
-  border: solid gray 2px ;
+    background-color:hsl(0, 0%, 14%);
+    /*color:red;*/
+    border-radius: 5px;
+    border: #ffffff;
+    border-color: aliceblue;
+    box-shadow: 2px 2px 10px 5px rgb(0, 0, 0);  
+    margin-right:60px;
+    margin-left:30px;
+}
+#home img{
+    margin:0px;
+    border-radius: 3ex;
+    box-shadow: 2px 2px 10px 5px rgb(0, 0, 0);  
+    }
+
+#home div#topo{
+
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10ex ;
+}
+#home div#topo img{
+    width: 50%;
+    height: 70%;
+    max-height: fit-content;
+    max-width: fit-content;
+    margin: 5px;
+
+    }
+#home div#topo div{
+        padding: 5px;
+        margin: 5px;
+    
+        }
+#home div.corpo{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+}
+#home div#lado1 div{
+    padding: 5px;
+    margin: 5px;
+
+    }
+#home  div#lado1{
+    flex-direction: row;
+    margin-bottom: 10ex ;
 }
 
+#home div#lado2 div{
+    padding: 5px;
+    margin: 5px;
 
-.login_user_info ul li{
-  list-style-type: none;
-  margin:1px;
-
+    }
+#home  div#lado2{
+    flex-direction: row-reverse;
+    text-align: end;
+    margin-bottom: 10ex ;
 }
-div.cabeçalho{
-  display:flex;
-  justify-content: center;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-items: center;
-  text-align: center;
-
+#home  div#lado2 img{
+    margin: 3px;
+    width: 30ex;
+}
+#home  div#lado1 img{
+    margin: 3px;
+    width: 30ex;
+}
+#home div.corpo div{
+    padding: 0%;
+    margin: 0%;
 }
 
-
-@media (min-width: 1144px){
-  
-   
+#home div.txt{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0% ;
 }
 
-
-
+#home div.txt p{
+    
+    padding: 0%;
+    margin: 0% 0% 1% 1%;
+}

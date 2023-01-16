@@ -588,9 +588,9 @@ def configdel(request):
                     if str(confirm) == 'on':
                         messages.success(request,"Conta apagada")
                         Super_User = User.objects.get(username= str(request.user))
-                        #usuario_logado.delete()
-                        #Super_User.delete()
-                        return render(request,'login.html')
+                        usuario_logado.delete()
+                        Super_User.delete()
+                        return redirect('logout')
                         
                     else:
                         messages.success(request,"Checkbox não autenticado")
