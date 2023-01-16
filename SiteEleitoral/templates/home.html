@@ -2,77 +2,105 @@
 
 {%load static%}
 
-{%block info%}
-<div id="breadcrumb">
-    <p>SEFIV/<a>Home</a></p>
-    </div>
-
-<div id="home"></div>
-
-    <div class="menu_container"> 
-        <h1 class="lista1">Seja Bem vindo</h1>
-        <div class="lista">
-          
-          <!--   Group 1 -->
-          
-          <div class="eleitoral_group" id="24h_group-1">
-
-            <div class="media-element">
-              <img
-                src="https://images.unsplash.com/photo-1641353989082-9b15fa661805?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MzM5ODcyOA&ixlib=rb-1.2.1&q=80&w=400"
-                alt="">
-            </div>
-            <div class="media-element">
-              <img
-                src="https://images.unsplash.com/photo-1642190672487-22bde32965f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MzM5ODcyOA&ixlib=rb-1.2.1&q=80&w=400"
-                alt="">
-            </div>
-            <div class="media-element">
-              <img
-                src="https://images.unsplash.com/photo-1641841344411-49dbd02896f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MzM5ODcyOA&ixlib=rb-1.2.1&q=80&w=400"
-                alt="">
-            </div>
-
-
-  
-    </div>
-  
-
-
-
-{%endblock%}
 {%block info1%}
 <div id="breadcrumb">
-    <p>SEFIV/<a>Home</a></p>
-    </div>
-    <div id="home"></div>
+    <p href="../">SEFIV/<a href="">home</a>
 
-    <div class="menu_container"> 
-        <h1 class="lista1">Seja Bem vindo</h1>
-        <div class="lista">
-          
-          <!--   Group 1 -->
-          
-          <div class="eleitoral_group" id="24h_group-1">
-
-            <div class="media-element">
-              <img
-                src="https://images.unsplash.com/photo-1641353989082-9b15fa661805?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MzM5ODcyOA&ixlib=rb-1.2.1&q=80&w=400"
-                alt="">
-            </div>
-            <div class="media-element">
-              <img
-                src="https://images.unsplash.com/photo-1642190672487-22bde32965f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MzM5ODcyOA&ixlib=rb-1.2.1&q=80&w=400"
-                alt="">
-            </div>
-            <div class="media-element">
-              <img
-                src="https://images.unsplash.com/photo-1641841344411-49dbd02896f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MzM5ODcyOA&ixlib=rb-1.2.1&q=80&w=400"
-                alt="">
-            </div>
-
-
-  
     </div>
 
+    <link href="home.css" rel="stylesheet">
+    <div id="home">
+    
+        <div id="topo" class="corpo">
+            <div>
+                <img  src="{% static "img\home\01.bmp" %}">
+            </div>
+            <div class="txt"> 
+                <p>Sistema eleitoral do Brasil refere-se ao conjunto de meios utilizados para escolha de representantes e governantes integrantes do Estado brasileiro. O atual sistema é definido pela Constituição de 1988 e pelo Código Eleitoral, além de ser regulado pelo Tribunal Superior Eleitoral no que lhe for delegado </p>
+            </div>
+        </div>
+    
+        <div id="lado1" class="corpo">
+            <div>
+                <img src="{% static "img\home\02.bmp" %}">
+            </div>
+            <div class="txt">
+                
+                <div>
+                    <h3>Voto tem Branco?</h3>
+                </div>
+                <div>
+                    <p>É importante que o eleitor tenha consciência de que, votando nulo, não obterá nenhum efeito diferente da desconsideração de seu voto. Isso mesmo: os votos nulos e brancos não entram no cômputo dos votos, servindo, quando muito, para fins de estatística. Do mesmo modo, o voto branco. Antigamente, quando o voto era marcado em cédulas e posteriormente contabilizado pela junta eleitoral, a informação sobre a possibilidade de o voto em branco ser remetido a outro candidato poderia fazer algum sentido. Isso porque, ao realizar a contabilização, eventualmente e em virtude de fraude, cédulas em branco poderiam ser preenchidas com o nome de outro candidato. Mas isso em virtude de fraude, não em decorrência do regular processo de apuração.</p>
+                </div>
+            
+            
+            
+            </div>
+
+            
+        </div>
+        <div id="lado2" class="corpo">
+            <div>
+                <img src="{% static "img\home\03.bmp" %}">
+            </div>
+            <div class="txt">
+                <div>
+                    <h3>Nossa Proposta</h3>
+                </div>
+                <div>
+                <p>Sistema eleitoral do do Campus IFRN, </p>
+                </div>
+            </div>
+        </div>
+        <div id='foot' class="corpo">
+            <p></p>
+        </div>
+    
+    </div>
+{%endblock%}
+
+{%block info%}
+<div id="breadcrumb">
+    <p href="../">SEFIV/<a href="">home</a>
+
+    </div>
+
+    <link href="home.css" rel="stylesheet">
+    <div id="home">
+    
+        <div id="topo" class="corpo">
+            <div>
+                <img  src="{% static "img\home\01.bmp" %}">
+            </div>
+            <div class="txt"> 
+                <p>Sistema eleitoral do Brasil refere-se ao conjunto de meios utilizados para escolha de representantes e governantes integrantes do Estado brasileiro. O atual sistema é definido pela Constituição de 1988 e pelo Código Eleitoral, além de ser regulado pelo Tribunal Superior Eleitoral no que lhe for delegado </p>
+            </div>
+        </div>
+    
+        <div id="lado1" class="corpo">
+            <div>
+                <img src="{% static "img\home\02.bmp" %}">
+            </div>
+            <div class="txt">
+                <p>É importante que o eleitor tenha consciência de que, votando nulo, não obterá nenhum efeito diferente da desconsideração de seu voto. Isso mesmo: os votos nulos e brancos não entram no cômputo dos votos, servindo, quando muito, para fins de estatística. Do mesmo modo, o voto branco. Antigamente, quando o voto era marcado em cédulas e posteriormente contabilizado pela junta eleitoral, a informação sobre a possibilidade de o voto em branco ser remetido a outro candidato poderia fazer algum sentido. Isso porque, ao realizar a contabilização, eventualmente e em virtude de fraude, cédulas em branco poderiam ser preenchidas com o nome de outro candidato. Mas isso em virtude de fraude, não em decorrência do regular processo de apuração.</p>
+            </div>
+        </div>
+        <div id="lado2" class="corpo">
+            <div>
+                <img src="{% static "img\home\03.bmp" %}">
+            </div>
+            <div class="txt">
+                    <div>
+                            <h3>Voto tem Branco?</h3>
+                    </div>
+                    <div>
+                    <p>Sistema eleitoral do Brasil refere-se ao conjunto de meios utilizados para escolha de representantes e governantes integrantes do Estado brasileiro. O atual sistema é definido pela Constituição de 1988 e pelo Código Eleitoral, além de ser regulado pelo Tribunal Superior Eleitoral no que lhe for delegado </p>
+                    </div>
+            </div>
+        </div>
+        <div id='foot' class="corpo">
+            <p></p>
+        </div>
+    
+    </div>
 {%endblock%}
