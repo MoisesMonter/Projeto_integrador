@@ -855,7 +855,7 @@ class ações_Usuarios():
             except:
                 info_more.append([info['Candidatos'],info['Votos'],str(int(0))+'%'])
             if info['Candidatos'] != 'Null':
-                info_see.append([info['Candidatos'],info[ 'N_Candidato']])
+                info_see.append([info['Candidatos'],str(info[ 'N_Candidato'])])
         #print(info_see)
            
         #id_end =  int(re.sub('[^0-9]',' ', str(id_end)))

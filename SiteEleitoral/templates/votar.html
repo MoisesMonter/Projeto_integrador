@@ -39,17 +39,16 @@
                     <td ><p class="lcd" >-----</p></td>
                     {% endif %}
             </tr>
-            {{lcd_candidato}}
-            {{lcd_vote}}
+
+
             <tr>
                 {% for list in lcd_candidato %}
-                    {% if list not in lcd_vote %}
-                        <td ><p class="lcd" >----</p></td>
-
-                    {% else%}
-                    <td ><p class="lcd" >{{list.0}}</p></td> 
+                    {% if list.1 == lcd_vote%}
+                    <td ><p class="lcd" >{{list.0}}</p></td>
+                    {%else%}
+                    <td style="margin-top:11%; margin-bottom: 11%;"></td><br>
                     {%endif%}
-                {%endfor%}
+                {% endfor %}
             </tr>
             <tr>
                 <td><form action ="{% url 'votar' %}" method="post">{% csrf_token%}
