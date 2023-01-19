@@ -9,6 +9,7 @@ urlpatterns = [
     path('home/',views.Home, name='home'),
     path('about_us/',views.About_us,name='about_us'),
     path('lista_eleicoes/',views.ListaEleicoes,name='lista_eleicoes'),
+    path('participando/', views.participando, name='participando'),
     path('login/',views.Login,name='login'),
     path('register/',views.Register,name='register'),
     path('suport_site/',views.Suport,name='suport'),
@@ -18,7 +19,7 @@ urlpatterns = [
     path('logout/',views.Logout,name='Logout'),
 
     path('gerarumaeleicao/',views.gerarumaeleicao, name='gerarumaeleicao'),
-
+    
     path('Urna/', views.Urna, name='Urna'),
     path('Urna/Registrar_Voto/',views.votar,name='votar'),
 ]

@@ -17,7 +17,7 @@ form#autoincrement{
         height: 400px;
         height: auto;
         background-color:#232323;
-        
+        box-shadow: 1px 1px 1px #000000;
 
         border-radius: 5px;
         border: #ffffff;
@@ -101,6 +101,7 @@ div#li_conf{
         padding-top: 5ex;
         margin-bottom: 5%;
         padding-bottom: 8%;
+        box-shadow: 1px 1px 1px #000000;
         
 }
 

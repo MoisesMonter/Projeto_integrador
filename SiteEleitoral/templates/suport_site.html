@@ -4,53 +4,49 @@
 {%block info%}
 
 <div id="breadcrumb">
-    <p>SEFIV/<a>Suport</a></p>
-    </div>
+  <p>SEFIV/<a>Suport</a></p>
+  </div>
 
-    <div class="main_suport">
-        
-        <div id="ambiente">
-            <form action ="{% url 'suport' %}" method="post">{% csrf_token%}
+  <div class="main_suport">
+      
+      <div id="ambiente">
+          <form action ="{% url 'suport' %}" method="post">{% csrf_token%}
 
 
-                <div class="form-row">
-                    <div class="col">
-                      <input type="text" class="form-control" placeholder="Nome" name="Nome" id="Nome">
-                    </div>
-                    <div class="col">
-                      <input type="text" class="form-control" placeholder="Sobrenome" name="Sobrenome">
-                    </div>
-                    <div class="col">
-                        <label for="exampleFormControlInput1"></label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nome@exemplo.com" name="Email">
-                      </div>
-                  </div>
-                  <div class="form-group">
-                    <select class="custom-select" name="Problem" required>
-                      <option value="">Abra este menu select</option>
-                      <option value="1">Problema com uma eleição</option>
-                      <option value="2">Problema com Site</option>
-                      <option value="3">Problema com conta</option>
-                    </select>
-                    <div class="invalid-feedback">Exemplo de feedback invalido para o select</div>
-                  </div>
-                <div class="form-group">
-                    <input type="file" class="custom-file-input" name="File" id="File" required>
-                    <label class="custom-file-label" for="validatedCustomFile"></label>
-                    <div class="invalid-feedback">Caso necessite:Pdf,Jpg,Jpeg</div>
-                  </div>
-                <div class="form-group">
-                  <label for="">Exemplo de textarea</label><br>
-                  <textarea display='block'cols='45'placeholder="Eleição #0000 existe isso.. isso e aquilo.." maxlength="900"class="form-control" id="exampleFormControlTextarea1" rows="20" name="texto"></textarea>
+              <div class="form-row">
+                <div class="col">
+                  <label for="exampleFormControlInput1">Nome: </label><br>  
+                  <input type="text" class="form-control" placeholder="Nome" name="Nome" id="Nome" required>
                 </div>
-                <input type="submit" value="Enviar">
-              </form>
+                <div class="col">
+                  
+                </div>
+                <div class="col">
+                    <label for="exampleFormControlInput1">Email: </label><br>  
+                    <input type="email" class="form-control"  placeholder="nome@exemplo.com" name="Email" id="Email" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Selecione um Título: </label><br>  
+                  <select class="custom-select" name="Problem" id="Problem" required>
+                    <option value="">Abra este menu select</option>
+                    <option value="1">Problema com uma eleição</option>
+                    <option value="2">Problema com Site</option>
+                    <option value="3">Problema com conta</option>
+                  </select>
+                  <div class="invalid-feedback">Exemplo de feedback invalido para o select</div>
+                </div>
+              <div class="form-group">
+                <label for="">Balão de texto:</label><br>
+                <textarea display='block'cols='45'placeholder="Eleição #0000 existe isso.. isso e aquilo.." maxlength="900"class="form-control" id="exampleFormControlTextarea1" rows="20" name="texto" required></textarea>
+              </div>
+              <input type="submit" value="Enviar">
+            </form>
 
 
-        </div>
+      </div>
 
 </div>
-
 
 
 
@@ -59,49 +55,49 @@
 {%block info1%}
 
 <div id="breadcrumb">
-    <p>SEFIV/<a>Suport</a></p>
-    </div>
+  <p>SEFIV/<a>Suport</a></p>
+  </div>
 
-    <div class="main_suport">
-        
-        <div id="ambiente">
-            <form action ="{% url 'suport' %}" method="post">{% csrf_token%}
+  <div class="main_suport">
+      
+      <div id="ambiente">
+          <form action ="{% url 'suport' %}" method="post">{% csrf_token%}
 
 
-                <div class="form-row">
-                    <div class="col">
-                      <input type="text" class="form-control" placeholder="Nome" name="Nome" id="Nome" required>
-                    </div>
-                    <div class="col">
-                      <input type="text" class="form-control" placeholder="Sobrenome" name="Sobrenome" id="Sobrenome" required>
-                    </div>
-                    <div class="col">
-                        <label for="exampleFormControlInput1"></label>
-                        <input type="email" class="form-control"  placeholder="nome@exemplo.com" name="Email" id="Email" required>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                    <select class="custom-select" name="Problem" id="Problem" required>
-                      <option value="">Abra este menu select</option>
-                      <option value="1">Problema com uma eleição</option>
-                      <option value="2">Problema com Site</option>
-                      <option value="3">Problema com conta</option>
-                    </select>
-                    <div class="invalid-feedback">Exemplo de feedback invalido para o select</div>
-                  </div>
-                <div class="form-group">
-                  <label for="">Exemplo de textarea</label><br>
-                  <textarea display='block'cols='45'placeholder="Eleição #0000 existe isso.. isso e aquilo.." maxlength="900"class="form-control" id="exampleFormControlTextarea1" rows="20" name="texto" required></textarea>
+              <div class="form-row">
+                <!--<div class="col">
+                  <label for="exampleFormControlInput1">Nome: </label><br>  
+                  <input type="text" class="form-control" placeholder="Nome" name="Nome" id="Nome" required>
                 </div>
-                <input type="submit" value="Enviar">
-              </form>
+                <div class="col">
+                  
+                </div>
+                <div class="col">
+                    <label for="exampleFormControlInput1">Email: </label><br>  
+                    <input type="email" class="form-control"  placeholder="nome@exemplo.com" name="Email" id="Email" required>
+                  </div>  -->
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Selecione um Título: </label><br>  
+                  <select class="custom-select" name="Problem" id="Problem" required>
+                    <option value="">Abra este menu select</option>
+                    <option value="1">Problema com uma eleição</option>
+                    <option value="2">Problema com Site</option>
+                    <option value="3">Problema com conta</option>
+                  </select>
+                  <div class="invalid-feedback">Exemplo de feedback invalido para o select</div>
+                </div>
+              <div class="form-group">
+                <label for="">Balão de texto:</label><br>
+                <textarea display='block'cols='45'placeholder="Eleição #0000 existe isso.. isso e aquilo.." maxlength="900"class="form-control" id="exampleFormControlTextarea1" rows="20" name="texto" required></textarea>
+              </div>
+              <input type="submit" value="Enviar">
+            </form>
 
 
-        </div>
+      </div>
 
 </div>
-
-
 
 
 

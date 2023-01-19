@@ -12,8 +12,16 @@
 
 <div id ="listas_eleicoes">
   <div class="filter_in">
-    <input type="text" id="tab_filter_tex">
-    <button id="tab_filter_btn" class="active">Filtrar</button>
+    <form action ="{% url 'lista_eleicoes' %}" method="post">{% csrf_token%}
+      {% if y  == None %}
+        <input type="submit" value="Ativos" name="LA">
+      {% elif y == 'Ativos' %}
+        <input type="submit" value="All" name="LA">
+      {% else %}
+      <input type="submit" value="Ativos" name="LA">
+      {% endif %}
+      </form>
+
   </div><br>
     <table border="1" class="table table-hover">
           <tr>
@@ -90,12 +98,21 @@
 <div id="breadcrumb">
   <p>SEFIV/<a>Lista de Eleições</a></p>
   </div>
-
+  <div>
+    <h2 style="font-size:20px;color:red">Trial Version</h2>
+  </div>
 
 <div id ="listas_eleicoes">
   <div class="filter_in">
-    <input type="text" id="tab_filter_tex">
-    <button id="tab_filter_btn" class="active">Filtrar</button>
+    <form action ="{% url 'lista_eleicoes' %}" method="post">{% csrf_token%}
+      {% if y  == None %}
+        <input type="submit" value="Ativos" name="LA">
+      {% elif y == 'Ativos' %}
+        <input type="submit" value="All" name="LA">
+      {% else %}
+      <input type="submit" value="Ativos" name="LA">
+      {% endif %}
+      </form>
   </div><br>
     <table border="1" class="table table-hover">
           <tr>

@@ -41,7 +41,7 @@ class Election(models.Model):
     End_Data = models.DateField(null= True)
     Descricao = models.CharField(max_length=150,null = True)
     Ativo = models.BooleanField()
-    Disponibilizar= models.BooleanField()
+    
 
     def __str__(self) -> str:
         return super().__str__()
@@ -51,7 +51,6 @@ class Election(models.Model):
 
 class Activity_Report(models.Model):
     nome = models.CharField(max_length=50)
-    sobrenome = models.CharField(max_length=50)
     email = models.EmailField(blank=True,null=True)
     titulo =models.CharField(max_length=1,choices=Titulo_Choices)
     balao  = models.CharField(max_length=300,null =False)

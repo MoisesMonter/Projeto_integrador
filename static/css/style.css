@@ -5,7 +5,9 @@ main{
    flex-direction: column;
    justify-content: center;
    align-items: center;
+   flex-wrap: nowrap;
    margin-bottom: 5%;
+   min-width: 1200px;
 
 }
 

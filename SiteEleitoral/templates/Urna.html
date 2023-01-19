@@ -51,9 +51,11 @@
                 {% endfor %}
 
             </table><br>
-
-            <table><a class="irparaurna" href="../Urna/Registrar_Voto/">Registrar seu voto!</a></table><br>
-
+            {%if votar == 0 %}
+                <table><a class="irparaurna" href="../Urna/Registrar_Voto/">Registrar seu voto!</a></table><br>
+            {% else%}
+            <table><a class="irparaurna" style="color:orange; "href="">Voto já Registrado</a></table><br>
+            {%endif%}
 
 
         </nav>
@@ -103,20 +105,20 @@
                 <tr>
                     <td>Candidatos</td>
                     <td>Total de votos</td>
-                    <td>Porcentagem</td>
+                    <!--<td>Porcentagem</td>-->
                 </tr>
 
                 {%  for Linhas in candidatosend %}
                 <tr>
                     <td>{{Linhas.0}}</td>
-                    <td>{{Linhas.1}}</td>
                     <td>{{Linhas.2}}</td>
+                    <!--<td>{{Linhas.3}}</td>-->
                 </tr>
                 {% endfor %}
 
             </table><br>
 
-            <table><a class="irparaurna" style="color:red;" href="">Votos encerrados</a></table><br>   
+            <table><a class="irparaurna" style="color:red;" href="http://localhost:8000/lista_eleicoes/">Votos encerrados</a></table><br>   
 
 
 

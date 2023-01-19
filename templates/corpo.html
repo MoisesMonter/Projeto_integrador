@@ -77,7 +77,7 @@
                         <li class="More_head"><button id="Moore" ><a>More</a></button></li>
                         <li class="More"><a href="http://localhost:8000/home">Home</a><br>
                                         <a href="http://localhost:8000/lista_eleicoes">Lista de Eleições</a><br>
-                                        <a href="http://localhost:8000/lista_eleicoes">Participando</a><br>
+                                        <a href="http://localhost:8000/participando">Participando</a><br>
                                         <a href="http://localhost:8000/gerarumaeleicao">Gerar uma Eleição</a><br>
                                         <a href="http://localhost:8000/about_us">Sobre Nós</a><br>
                                         <a href="http://localhost:8000/configuração"> Configurações</a><br>
@@ -106,7 +106,7 @@
                         <a href="http://localhost:8000/home">Home</a></div>
                     </li>
                     <li class="list_login"><a href="http://localhost:8000/lista_eleicoes">Lista de Eleições</a></li>
-                    <li class="list_login"><a href="http://localhost:8000/lista_eleicoes">Participando</a></li>
+                    <li class="list_login"><a href="http://localhost:8000/participando">Participando</a></li>
                     <li class="list_login"><a href="http://localhost:8000/gerarumaeleicao">Gerar uma Eleição</a></li>
                     <a> <li class="list_login" ><a  href="http://localhost:8000/about_us" >Sobre Nós</a></li></a>
 
@@ -232,7 +232,7 @@
                         <li class="More_head"><button id="Moore" ><a>More</a></button></li>
                         <li class="More"><a href="http://localhost:8000/home">Home</a><br>
                                         <a href="http://localhost:8000/lista_eleicoes">Lista de Eleições</a><br>
-                                        <a href="http://localhost:8000/login">Participando</a><br>
+                                        <a href="http://localhost:8000/participando">Participando</a><br>
                                         <a href="http://localhost:8000/gerarumaeleicao">Gerar uma Eleição</a><br>
                                         <a href="http://localhost:8000/about_us">Sobre Nós</a><br>
                                         <a href="http://localhost:8000/login">Log in</a><br>
@@ -262,7 +262,7 @@
                         <a href="http://localhost:8000/home">Home</a></div>
                     </li>
                     <li class="list_login"><a href="http://localhost:8000/lista_eleicoes">Lista de Eleições</a></li>
-                    <li class="list_login"><a href="http://localhost:8000/login">Participando</a></li>
+                    <li class="list_login"><a href="http://localhost:8000/participando">Participando</a></li>
                     <li class="list_login"><a href="http://localhost:8000/gerarumaeleicao">Gerar uma Eleição</a></li>
                     <a> <li class="list_login" ><a  href="http://localhost:8000/about_us" >Sobre Nós</a></li></a>
 
@@ -349,10 +349,16 @@
 {%endif%}
 
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+
 <script>
         {% for information in messages %}
-        alertify.set('notifier','position', 'top-right');
-        alertify.success('{{information}}');
+            alertify.set('notifier','position', 'top-center');
+            {% if messagem == 0 %}
+                alertify.error('{{information}}');
+            {% elif messagem != 0 %} 
+                alertify.success('{{information}}');
+            {%endif%}
         {% endfor %}
 </script>
 
